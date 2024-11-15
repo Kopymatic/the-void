@@ -46,5 +46,7 @@ export const actions = {
 	}
 } satisfies Actions;
 
-const categoryRegex = /^\S*$/;
+//TODO: come up with better regexes
+// currently they're both too restrictive. Maybe allow numbers?
+const categoryRegex = /^[a-z]*$/;
 const urlRegex = /^[a-z]*$/;
