@@ -3,4 +3,9 @@
 	let { children } = $props();
 </script>
 
-{@render children()}
+<svelte:head>
+	<title>The Void</title>
+	<meta name="description" content="Silly little thoughts from my silly little head" />
+</svelte:head>
+
+<div class="prose prose-invert">{@render children()}</div>

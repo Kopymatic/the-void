@@ -21,6 +21,7 @@
 		"prettier": "^3.3.2",
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.6.5",
+		"prisma": "^5.22.0",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^3.4.9",
@@ -28,6 +29,8 @@
 		"vite": "^5.0.3"
 	},
 	"dependencies": {
-		"@tailwindcss/typography": "^0.5.15"
+		"@prisma/client": "5.22.0",
+		"@tailwindcss/typography": "^0.5.15",
+		"svelte-markdown": "^0.4.1"
 	}
 }
