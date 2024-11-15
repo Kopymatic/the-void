@@ -8,7 +8,9 @@
 <h2 class="mb-2">
 	<a href={`/posts/${data.category}/${data.url}`}>/posts/{data.category}/{data.url}</a>
 </h2>
-<p class="my-2">{data.description}</p>
+{#if data.description}
+	<p class="my-2">{data.description}</p>
+{/if}
 <hr class="my-2" />
 <SvelteMarkdown source={data.body}></SvelteMarkdown>
 <hr class="my-2" />
