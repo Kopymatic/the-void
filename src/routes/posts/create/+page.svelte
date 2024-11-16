@@ -1,42 +1,137 @@
 <script lang="ts">
+	import { applyAction, enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
+	import { CreateFormError } from '$lib';
 	import type { PageData, ActionData } from './$types';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
+
+	let selectedCategory: string = $state('uncategorized');
+	let customCategory: string | undefined = $state(undefined);
+	let finalCategory = $derived(customCategory || selectedCategory);
+	let url = $state('');
+	let completeUrl = $derived(finalCategory + '/' + url);
+	let error: CreateFormError | undefined = $state(form?.error);
+
+	const categoryRegex = /^[a-z\-0-9]+$/;
+	const urlRegex = /^[a-z\-0-9]+$/;
 </script>
 
-<form method="POST" action="?/post">
-	{#if form && form.error}<p class="text-red-500">{form.message}</p>{/if}
-	<label>
-		Desired URL for the post
-		<br />
-		<input name="url" type="text" required={true} />
-	</label>
-	<br />
+<form
+	method="POST"
+	action="?/post"
+	class=" w-full max-w-xl"
+	use:enhance={({ formData, cancel }) => {
+		let url = formData.get('url')?.toString();
+		let selectedCategory = formData.get('selectedCategory')?.toString();
+		let customCategory = formData.get('customCategory')?.toString();
+		let body = formData.get('body')?.toString();
+		let category = customCategory || selectedCategory;
+
+		// Filter out all the required params
+		if (!url) {
+			error = CreateFormError.missingUrl;
+			cancel();
+			return;
+		}
+		if (!body) {
+			error = CreateFormError.missingBody;
+			cancel();
+			return;
+		}
+		if (!category) {
+			error = CreateFormError.missingCategory;
+			cancel();
+			return;
+		}
+
+		// filter out incorrect formatting
+		if (!categoryRegex.test(category)) {
+			error = CreateFormError.invalidCategory;
+			cancel();
+			return;
+		}
+		if (!urlRegex.test(url)) {
+			error = CreateFormError.invalidUrl;
+			cancel();
+			return;
+		}
+
+		return async ({ result }) => {
+			// `result` is an `ActionResult` object
+			if (result.type === 'redirect') {
+				goto(result.location);
+			} else {
+				await applyAction(result);
+			}
+		};
+	}}
+>
 	<label>
 		Category
 		<br />
-		<input name="category" type="text" required={false} value="uncategorized" />
+		<select name="selectedCategory" bind:value={selectedCategory}>
+			<option value="uncategorized">uncategorized</option>
+			<option value="tech">tech</option>
+			<option value="vent">vent</option>
+			<option value="idea">idea</option>
+			<option value="custom">custom</option>
+		</select>
 	</label>
 	<br />
+	{#if selectedCategory === 'custom'}
+		<label>
+			Custom Category
+			<br />
+			<input name="customCategory" bind:value={customCategory} />
+			{#if error === CreateFormError.invalidCategory || error === CreateFormError.missingCategory}
+				<p class="error">{error}</p>
+			{/if}
+		</label>
+		<br />
+	{/if}
+	<label>
+		Desired URL for the post
+		<br />
+		<input name="url" type="text" required={true} bind:value={url} />
+		{#if error === CreateFormError.invalidUrl || error === CreateFormError.missingUrl}
+			<p class="error">{error}</p>
+		{/if}
+	</label>
+	<br />
+	<p>your post will be at {completeUrl}</p>
 	<label>
 		Breif Description
 		<br />
-		<input name="description" type="text" required={false} />
+		<input name="description" type="text" maxlength={128} required={false} />
 	</label>
 	<br />
 	<label>
 		Body
 		<br />
 		<textarea name="body" required={true}></textarea>
-	</label>
-	<br />
-	<label>
-		Password
-		<br />
-		yes i made you need a password to post. fuck off.
-		<br />
-		<input name="password" required={true} type="password" />
+		{#if error === CreateFormError.missingBody || error === CreateFormError.missingUrl}
+			<p class="error">{error}</p>
+		{/if}
 	</label>
 	<br />
 	<button>Post!</button>
+	{#if error === CreateFormError.databaseError}
+		<p class="error">{error}</p>
+	{/if}
 </form>
+
+<style>
+	/* * {
+		@apply w-full;
+	} */
+	label,
+	input,
+	br,
+	textarea {
+		@apply w-full;
+	}
+	.error {
+		@apply m-0 p-0 text-sm text-red-500;
+	}
+</style>

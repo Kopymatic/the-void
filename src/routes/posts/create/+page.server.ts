@@ -1,42 +1,76 @@
-import { checkPassword } from '$lib/server/passwordChecker';
 import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
-import { Prisma } from '@prisma/client';
 import { prisma } from '$lib/server/database/database';
+import type { PageServerLoad } from './$types';
+import { env } from '$env/dynamic/private';
+import { CreateFormError } from '$lib';
+
+export const load: PageServerLoad = async ({ locals }) => {
+	const session = await locals.auth();
+	if (session && session.user?.id === env.ADMIN_DISCORD_ID) {
+		return;
+	}
+	error(401);
+};
 
 export const actions = {
 	post: async ({ request }) => {
+		console.log('recieved post request');
 		let formData = await request.formData();
 		let url = formData.get('url')?.toString();
-		let category = formData.get('category')?.toString();
 		let description = formData.get('description')?.toString();
 		let body = formData.get('body')?.toString();
-		let password = formData.get('password')?.toString();
+		let selectedCategory = formData.get('selectedCategory')?.toString();
+		let customCategory = formData.get('customCategory')?.toString();
+		let category = customCategory || selectedCategory;
 
-		// Filter out incorrect passwords
-		if (!password || !checkPassword(password)) {
-			return fail(401, { error: true, passwordIncorrect: true, message: 'Incorrect password' });
-		}
+		let reconstructedData = {
+			url,
+			category,
+			description,
+			body
+		};
 
 		// Filter out all the required params
 		if (!url)
-			return fail(400, { error: true, missing: true, message: 'Must fill in the URL field' });
+			return fail(400, {
+				error: CreateFormError.missingUrl,
+				message: 'Must fill in the URL',
+				reconstructedData
+			});
 		if (!body)
-			return fail(400, { error: true, missing: true, message: 'Must fill in the body field' });
+			return fail(400, {
+				error: CreateFormError.missingBody,
+				message: 'Must fill in the body',
+				reconstructedData
+			});
+		if (!category) {
+			return fail(400, {
+				error: CreateFormError.missingCategory,
+				message: 'Must fill in the category',
+				reconstructedData
+			});
+		}
 
 		// filter out incorrect formatting
-		if (category && !categoryRegex.test(category)) {
-			return fail(400, { error: true, invalid: true, message: 'Category has invalid format' });
+		if (!categoryRegex.test(category)) {
+			return fail(400, {
+				error: CreateFormError.invalidCategory,
+				message: 'Category has invalid format',
+				reconstructedData
+			});
 		}
 		if (!urlRegex.test(url)) {
-			return fail(400, { error: true, invalid: true, message: 'Url has invalid format' });
+			return fail(400, {
+				error: CreateFormError.invalidUrl,
+				reconstructedData
+			});
 		}
 
 		const post = await prisma.post.create({ data: { body, url, category, description } });
 		if (!post) {
 			return fail(500, {
-				error: true,
-				postCreate: true,
+				error: CreateFormError.databaseError,
 				message: 'Unknown error with the database.'
 			});
 		}
@@ -48,5 +82,5 @@ export const actions = {
 
 //TODO: come up with better regexes
 // currently they're both too restrictive. Maybe allow numbers?
-const categoryRegex = /^[a-z]*$/;
-const urlRegex = /^[a-z]*$/;
+const categoryRegex = /^[a-z\-0-9]+$/;
+const urlRegex = /^[a-z\-0-9]+$/;
