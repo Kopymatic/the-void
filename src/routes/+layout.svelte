@@ -1,6 +1,9 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import '../app.css';
-	let { children, data } = $props();
+	import type { PageData } from './$types';
+	// let props = $props()
+	let { children, data }: { children: Snippet<[]>; data: PageData } = $props();
 </script>
 
 <svelte:head>
@@ -13,7 +16,10 @@
 	<br />
 	<footer>
 		{#if data.session?.user}
-			You're signed in as {data.session.user.name}
+			You're signed in as {data.user.name}.
+			{#if data.user.isAdmin}
+				Create a post <a href="/posts/create">here</a>.
+			{/if}
 		{/if}
 		<br />
 		<a class="my-2 py-0" href="/">take me home</a>
