@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	let { children } = $props();
+	let { children, data } = $props();
 </script>
 
 <svelte:head>
@@ -8,4 +8,9 @@
 	<meta name="description" content="Silly little thoughts from my silly little head" />
 </svelte:head>
 
-<div class="prose prose-invert">{@render children()}</div>
+<div class="prose prose-invert">
+	{@render children()}
+	<footer>
+		<a class="my-2 py-0" href="/">take me home</a>
+	</footer>
+</div>
