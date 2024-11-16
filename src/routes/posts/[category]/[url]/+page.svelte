@@ -6,6 +6,8 @@
 </script>
 
 <svelte:head>
+	<title>{`${data.category}/${data.url}`}</title>
+	<meta name="description" content={data.description} />
 	<meta name="og:title" content={`${data.category}/${data.url}`} />
 	<meta name="og:site_name" content="the void" />
 	<meta name="og:description" content={data.description} />
