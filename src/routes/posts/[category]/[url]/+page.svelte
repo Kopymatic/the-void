@@ -19,7 +19,15 @@
 </h2>
 <p class="my-2">{data.description}</p>
 <p class="my-2 text-gray-400">
-	Created at {data.createdAt.toLocaleString()} - Updated at {data.updatedAt.toLocaleString()}
+	{#if data.createdAt}
+		Created at {data.createdAt.toLocaleString()}
+	{/if}
+	{#if data.createdAt && data.updatedAt}
+		-
+	{/if}
+	{#if data.updatedAt}
+		Updated at {data.updatedAt.toLocaleString()}
+	{/if}
 </p>
 <hr class="my-2" />
 <SvelteMarkdown source={data.body}></SvelteMarkdown>
