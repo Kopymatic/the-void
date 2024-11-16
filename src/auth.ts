@@ -1,4 +1,3 @@
-import type { DiscordUser } from '$lib/server/types';
 import { SvelteKitAuth } from '@auth/sveltekit';
 import Discord from '@auth/sveltekit/providers/discord';
 

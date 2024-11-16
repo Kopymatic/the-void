@@ -8,8 +8,3 @@ select,
 button {
 	@apply rounded-lg bg-gray-800 px-2 py-1 text-white;
 }
-
-/* button,
-select {
-	@apply rounded-lg px-2 py-1;
-} */

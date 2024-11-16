@@ -2,7 +2,6 @@
 	import type { Snippet } from 'svelte';
 	import '../app.css';
 	import type { PageData } from './$types';
-	// let props = $props()
 	let { children, data }: { children: Snippet<[]>; data: PageData } = $props();
 </script>
 
