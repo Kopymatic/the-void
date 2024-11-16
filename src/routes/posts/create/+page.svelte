@@ -75,6 +75,7 @@
 			<option value="tech">tech</option>
 			<option value="vent">vent</option>
 			<option value="idea">idea</option>
+			<option value="devlog">devlog</option>
 			<option value="custom">custom</option>
 		</select>
 	</label>
