@@ -29,6 +29,7 @@
 		"vite": "^5.0.3"
 	},
 	"dependencies": {
+		"@auth/sveltekit": "^1.7.3",
 		"@prisma/client": "5.22.0",
 		"@tailwindcss/typography": "^0.5.15",
 		"svelte-markdown": "^0.4.1"
