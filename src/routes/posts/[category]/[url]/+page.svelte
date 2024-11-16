@@ -18,6 +18,9 @@
 	<a href={`/posts/${data.category}/${data.url}`}>/posts/{data.category}/{data.url}</a>
 </h2>
 <p class="my-2">{data.description}</p>
+<p class="my-2 text-gray-400">
+	Created at {data.createdAt.toLocaleString()} - Updated at {data.updatedAt.toLocaleString()}
+</p>
 <hr class="my-2" />
 <SvelteMarkdown source={data.body}></SvelteMarkdown>
 <hr class="my-2" />
