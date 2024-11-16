@@ -5,8 +5,9 @@
 	import type { PageData, ActionData } from './$types';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
+	let defaultCategories = data.defaultCategories;
 
-	let selectedCategory: string = $state('uncategorized');
+	let selectedCategory: string = $state(defaultCategories[0]);
 	let customCategory: string | undefined = $state(undefined);
 	let finalCategory = $derived(customCategory || selectedCategory);
 	let url = $state('');
@@ -71,12 +72,9 @@
 		Category
 		<br />
 		<select name="selectedCategory" bind:value={selectedCategory}>
-			<option value="uncategorized">uncategorized</option>
-			<option value="tech">tech</option>
-			<option value="vent">vent</option>
-			<option value="idea">idea</option>
-			<option value="devlog">devlog</option>
-			<option value="custom">custom</option>
+			{#each defaultCategories as defaultCategory}
+				<option value={defaultCategory}>{defaultCategory}</option>
+			{/each}
 		</select>
 	</label>
 	<br />

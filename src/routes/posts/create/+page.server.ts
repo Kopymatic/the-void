@@ -4,11 +4,14 @@ import { prisma } from '$lib/server/database/database';
 import type { PageServerLoad } from './$types';
 import { env } from '$env/dynamic/private';
 import { CreateFormError } from '$lib';
+import { defaultCategories } from '$lib/defaultCategories.json';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.auth();
 	if (session && session.user?.id === env.ADMIN_DISCORD_ID) {
-		return;
+		return {
+			defaultCategories
+		};
 	}
 	error(401);
 };
