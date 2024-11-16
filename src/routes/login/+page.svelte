@@ -1,6 +1,12 @@
-<script>
+<script lang="ts">
 	import { SignIn, SignOut } from '@auth/sveltekit/components';
+
+	import type { PageData } from './$types';
+	let { data }: { data: PageData } = $props();
 </script>
 
-<SignIn provider="discord" signInPage="signin" />
-<SignOut></SignOut>
+{#if data.session}
+	<SignOut></SignOut>
+{:else}
+	<SignIn provider="discord" signInPage="signin" />
+{/if}
