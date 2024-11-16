@@ -19,4 +19,6 @@ model Post {
   description String?
   body String
   author String @default("kopymatic")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 }
