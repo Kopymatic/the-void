@@ -115,13 +115,13 @@
 	<br />
 	<br />
 	<div
-		class="box-border flex max-h-min items-center rounded border-2 border-gray-700 bg-gray-800 px-4 md:w-1/3"
+		class="border-primary bg-secondary box-border flex max-h-min items-center rounded-md border-2 px-4 md:w-1/3"
 	>
 		<input
 			id="unlisted"
 			type="checkbox"
 			name="unlisted"
-			class="h-4 w-4 rounded border-gray-600 bg-gray-700 text-blue-600 ring-offset-gray-800 focus:ring-2 focus:ring-blue-600"
+			class="text-accent focus:ring-accent h-4 w-4 rounded"
 		/>
 		<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
 	</div>
@@ -140,6 +140,6 @@
 		@apply w-full;
 	}
 	.error {
-		@apply m-0 p-0 text-sm text-red-500;
+		@apply text-error m-0 p-0 text-sm;
 	}
 </style>

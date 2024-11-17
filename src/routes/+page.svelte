@@ -23,3 +23,5 @@
 		a silly litle place for my silly little thoughts
 	{/if}
 </p>
+
+<p><a href="/list">search through the void</a></p>

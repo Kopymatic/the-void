@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Post } from '@prisma/client';
 	import SvelteMarkdown from 'svelte-markdown';
+	import MiniPost from './MiniPost.svelte';
 
 	let { post }: { post: Post } = $props();
 </script>
@@ -13,15 +14,17 @@
 	<meta name="og:description" content={post.description} />
 </svelte:head>
 
+<MiniPost {post}></MiniPost>
+
 <h2 class="mb-2">
 	{`[${post.id}]`}
 	<a href={`/posts/${post.category}/${post.url}`}>/posts/{post.category}/{post.url}</a>
 	{#if post.unlisted}
-		<i class="text-gray-500">(unlisted)</i>
+		<i class="text-secondary-text">(unlisted)</i>
 	{/if}
 </h2>
 <p class="my-2">{post.description}</p>
-<p class="my-2 text-gray-400">
+<p class="text-secondary-text my-2">
 	{#if post.createdAt}
 		Created at {post.createdAt.toLocaleString()}
 	{/if}
