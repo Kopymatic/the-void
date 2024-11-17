@@ -1,35 +1,8 @@
 <script lang="ts">
-	import SvelteMarkdown from 'svelte-markdown';
 	import type { PageData } from './$types';
+	import Post from '../../../../components/Post.svelte';
 
 	let { data }: { data: PageData } = $props();
-	console.log(data);
 </script>
 
-<svelte:head>
-	<title>{`${data.category}/${data.url}`}</title>
-	<meta name="description" content={data.description} />
-	<meta name="og:title" content={`${data.category}/${data.url}`} />
-	<meta name="og:site_name" content="the void" />
-	<meta name="og:description" content={data.description} />
-</svelte:head>
-
-<h2 class="mb-2">
-	{`[${data.id}]`}
-	<a href={`/posts/${data.category}/${data.url}`}>/posts/{data.category}/{data.url}</a>
-</h2>
-<p class="my-2">{data.description}</p>
-<p class="my-2 text-gray-400">
-	{#if data.createdAt}
-		Created at {data.createdAt.toLocaleString()}
-	{/if}
-	{#if data.createdAt && data.updatedAt}
-		-
-	{/if}
-	{#if data.updatedAt}
-		Updated at {data.updatedAt.toLocaleString()}
-	{/if}
-</p>
-<hr class="my-2" />
-<SvelteMarkdown source={data.body}></SvelteMarkdown>
-<hr class="my-2" />
+<Post post={data.post}></Post>
