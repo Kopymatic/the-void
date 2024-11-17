@@ -7,7 +7,8 @@ export const load: PageServerLoad = async ({ params }) => {
 	console.log(`Getting posts/${id}`);
 	const post = await prisma.post.findFirst({ where: { id: id } });
 
-	if (post) {
+	//if post is unlisted, dont load, so people cant find unlisted through id-spamming
+	if (post && !post.unlisted) {
 		return { post };
 	}
 

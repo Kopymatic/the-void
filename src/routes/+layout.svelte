@@ -17,7 +17,7 @@
 		{#if data.session?.user}
 			You're signed in as {data.user.name}.
 			{#if data.user.isAdmin}
-				Create a post <a href="/posts/create">here</a>.
+				Create a post <a href="/create">here</a>.
 			{/if}
 		{/if}
 		<br />

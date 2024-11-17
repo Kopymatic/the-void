@@ -97,7 +97,6 @@
 			<p class="error">{error}</p>
 		{/if}
 	</label>
-	<br />
 	<p>your post will be at {completeUrl}</p>
 	<label>
 		Breif Description
@@ -114,6 +113,19 @@
 		{/if}
 	</label>
 	<br />
+	<br />
+	<div
+		class="box-border flex max-h-min items-center rounded border-2 border-gray-700 bg-gray-800 px-4 md:w-1/3"
+	>
+		<input
+			id="unlisted"
+			type="checkbox"
+			name="unlisted"
+			class="h-4 w-4 rounded border-gray-600 bg-gray-700 text-blue-600 ring-offset-gray-800 focus:ring-2 focus:ring-blue-600"
+		/>
+		<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
+	</div>
+	<br />
 	<button>Post!</button>
 	{#if error === CreateFormError.databaseError}
 		<p class="error">{error}</p>
@@ -121,9 +133,6 @@
 </form>
 
 <style>
-	/* * {
-		@apply w-full;
-	} */
 	label,
 	input,
 	br,

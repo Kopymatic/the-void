@@ -16,6 +16,9 @@
 <h2 class="mb-2">
 	{`[${post.id}]`}
 	<a href={`/posts/${post.category}/${post.url}`}>/posts/{post.category}/{post.url}</a>
+	{#if post.unlisted}
+		<i class="text-gray-500">(unlisted)</i>
+	{/if}
 </h2>
 <p class="my-2">{post.description}</p>
 <p class="my-2 text-gray-400">
