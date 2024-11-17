@@ -8,6 +8,8 @@ export const load: PageServerLoad = async ({ params }) => {
 	console.log(`Getting posts/${category}/${url}`);
 	const post = await prisma.post.findFirst({ where: { category: category, url: url } });
 
+	console.log(post);
+
 	if (post) {
 		return post;
 	}
