@@ -7,10 +7,8 @@ export const load: PageServerLoad = async ({ params }) => {
 	console.log(`Getting posts/${id}`);
 	const post = await prisma.post.findFirst({ where: { id: id } });
 
-	console.log(post);
-
 	if (post) {
-		return post;
+		return { post };
 	}
 
 	error(404, 'Not found');

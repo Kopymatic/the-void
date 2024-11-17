@@ -77,9 +77,7 @@ export const actions = {
 				message: 'Unknown error with the database.'
 			});
 		}
-
-		console.log(post);
-		redirect(302, `/posts/${post.id}`);
+		redirect(302, `/posts/${post.category}/${post.url}`);
 	}
 } satisfies Actions;
 
