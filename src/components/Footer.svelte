@@ -3,6 +3,10 @@
 	import type { SessionUser } from '$lib/server/types';
 	let session = $page.data.session;
 	let user: SessionUser | undefined = $state($page.data.user);
+	let versions: {
+		git: string;
+		package: string;
+	} = $state($page.data.versions);
 </script>
 
 <footer>
@@ -16,4 +20,5 @@
 	{/if}
 	<br />
 	<a class="my-2 py-0" href="/">take me home</a>
+	<p class="text-sm text-secondary-text">{`Running commit ${versions.git}`}</p>
 </footer>

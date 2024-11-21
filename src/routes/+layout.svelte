@@ -13,6 +13,5 @@
 
 <div class="prose prose-invert min-w-full">
 	{@render children()}
-	<br />
 	<Footer></Footer>
 </div>
