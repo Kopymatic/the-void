@@ -99,7 +99,7 @@
 	</label>
 	<p>your post will be at {completeUrl}</p>
 	<label>
-		Breif Description
+		Brief Description
 		<br />
 		<input name="description" type="text" maxlength={128} required={false} />
 	</label>
@@ -115,13 +115,13 @@
 	<br />
 	<br />
 	<div
-		class="border-primary bg-secondary box-border flex max-h-min items-center rounded-md border-2 px-4 md:w-1/3"
+		class="box-border flex max-h-min items-center rounded-md border-2 border-primary bg-secondary px-4 md:w-1/3"
 	>
 		<input
 			id="unlisted"
 			type="checkbox"
 			name="unlisted"
-			class="text-accent focus:ring-accent h-4 w-4 rounded"
+			class="h-4 w-4 rounded text-accent focus:ring-accent"
 		/>
 		<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
 	</div>
@@ -140,6 +140,6 @@
 		@apply w-full;
 	}
 	.error {
-		@apply text-error m-0 p-0 text-sm;
+		@apply m-0 p-0 text-sm text-error;
 	}
 </style>
