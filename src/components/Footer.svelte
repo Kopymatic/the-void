@@ -1,0 +1,19 @@
+<script lang="ts">
+	import { page } from '$app/stores';
+	import type { SessionUser } from '$lib/server/types';
+	let session = $page.data.session;
+	let user: SessionUser | undefined = $state($page.data.user);
+</script>
+
+<footer>
+	{#if session && user}
+		You're signed in as {user?.name}.
+		{#if user?.isAdmin}
+			<br /> <a href="/create">Create a post.</a>
+			<br /> <a href="/list/all">List all posts</a>
+			<br /> <a href="/login">Log out</a>
+		{/if}
+	{/if}
+	<br />
+	<a class="my-2 py-0" href="/">take me home</a>
+</footer>

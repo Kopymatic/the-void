@@ -21,3 +21,11 @@ export type DiscordUser = Omit<
 	>,
 	'image' | 'name' | 'id'
 >;
+
+export type SessionUser = {
+	isAdmin: boolean;
+	id?: string;
+	name?: string | null;
+	email?: string | null;
+	image?: string | null;
+};

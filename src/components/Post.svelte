@@ -14,8 +14,6 @@
 	<meta name="og:description" content={post.description} />
 </svelte:head>
 
-<MiniPost {post}></MiniPost>
-
 <h2 class="mb-2">
 	{`[${post.id}]`}
 	<a href={`/posts/${post.category}/${post.url}`}>/posts/{post.category}/{post.url}</a>
@@ -24,7 +22,7 @@
 	{/if}
 </h2>
 <p class="my-2">{post.description}</p>
-<p class="text-secondary-text my-2">
+<p class="my-2 text-secondary-text">
 	{#if post.createdAt}
 		Created at {post.createdAt.toLocaleString()}
 	{/if}

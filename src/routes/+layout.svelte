@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import '../app.css';
 	import type { PageData } from './$types';
+	import Footer from '../components/Footer.svelte';
 	let { children, data }: { children: Snippet<[]>; data: PageData } = $props();
 </script>
 
@@ -13,14 +14,5 @@
 <div class="prose prose-invert min-w-full">
 	{@render children()}
 	<br />
-	<footer>
-		{#if data.session?.user}
-			You're signed in as {data.user.name}.
-			{#if data.user.isAdmin}
-				Create a post <a href="/create">here</a>.
-			{/if}
-		{/if}
-		<br />
-		<a class="my-2 py-0" href="/">take me home</a>
-	</footer>
+	<Footer></Footer>
 </div>

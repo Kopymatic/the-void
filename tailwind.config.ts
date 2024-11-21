@@ -5,7 +5,8 @@ import type { Config } from 'tailwindcss';
 const text = '#ffffff';
 const secondaryText = '#8c8c8c';
 const background = '#000000';
-const primary = '#574575';
+// const primary = '#574575';
+const primary = '#453a57';
 const secondary = '#272727';
 const accent = '#a559d9';
 const darkerAccent = '#6f3c91';
@@ -17,15 +18,28 @@ export default {
 	theme: {
 		extend: {
 			typography: {
-				DEFAULT: {
-					css: {
-						a: {
-							color: accent,
-							'&:hover': {
-								color: darkerAccent
+				sm: {
+					css: [
+						{
+							// This is here because the paragraph margins were too big
+							p: {
+								marginTop: '2px',
+								marginBottom: '1px'
 							}
 						}
-					}
+					]
+				},
+				DEFAULT: {
+					css: [
+						{
+							a: {
+								color: accent,
+								'&:hover': {
+									color: darkerAccent
+								}
+							}
+						}
+					]
 				}
 			},
 			colors: {

@@ -1,20 +1,22 @@
 <script lang="ts">
 	import type { Post } from '@prisma/client';
 	import SvelteMarkdown from 'svelte-markdown';
-	import MiniPost from './MiniPost.svelte';
 	import ContentBox from './ContentBox.svelte';
 
-	let { post, className }: { post: Post; className?: string } = $props();
+	let { post }: { post: Post } = $props();
 
 	let { category, url, description, author, body, createdAt, id } = post;
 
 	let fullUrl = category && url ? `/posts/${category}/${url}` : undefined;
 </script>
 
-<ContentBox url={`/posts/${category}/${url}`}>
+<ContentBox prose small>
 	<b>{`[${id}] `}<a href={fullUrl}>{category}/{url}</a></b>
-	<p class="line-clamp-1">{description}</p>
-	<div class="line-clamp-3">
+	{#if post.unlisted}
+		<i class="text-secondary-text">(unlisted)</i>
+	{/if}
+	<p class="line-clamp-1 text-lg font-bold">{description}</p>
+	<div class="not-prose line-clamp-3">
 		<SvelteMarkdown source={post.body}></SvelteMarkdown>
 	</div>
 </ContentBox>
@@ -23,4 +25,7 @@
 	p {
 		@apply my-1;
 	}
+	/* .mini-prose {
+		@apply box-border list-disc border-4 border-red-700;
+	} */
 </style>
