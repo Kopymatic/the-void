@@ -21,9 +21,9 @@
 	<br />
 	<a class="my-2 py-0" href="/">take me home</a>
 	<p class="text-sm text-secondary-text">
-		Running Commit <a
-			target="_blank"
-			href={`https://github.com/Kopymatic/the-void/commit/${versions.git}`}>{`${versions.git}`}</a
+		Running V{`${versions.package}`} - Commit
+		<a target="_blank" href={`https://github.com/Kopymatic/the-void/commit/${versions.git}`}
+			>{`${versions.git}`}</a
 		>
 	</p>
 </footer>
