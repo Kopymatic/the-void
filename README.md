@@ -12,13 +12,16 @@ DATABASE_URL="file:./../data/dev.db" # change to prod.db in production
 # Discord id for who can manage posts and stuff
 ADMIN_DISCORD_ID="<DISCORD ID HERE>"
 
+# AUTH STUFF
 # you should use npx auth to create this (or bunx auth if you're super cool)
 AUTH_SECRET="<TOP SECRET>"
 AUTH_DISCORD_ID="<DISCORD APPLICATION ID HERE>"
 AUTH_DISCORD_SECRET="<DISCORD OAUTH SECRET HERE>"
 
-# In production, trust the host
+# Only for production
 AUTH_TRUST_HOST=true
+ORIGIN="<origin>"
+NEXTAUTH_URL="<next auth url>"
 
 # For automatic backups.
 DO_BACKUPS=true
