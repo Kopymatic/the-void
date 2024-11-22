@@ -1,38 +1,26 @@
-# sv
+# the void
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+My personal little blogging/ranting/testing/learning/whatever platform
 
-## Creating a project
+Here im going to put notes (mostly for me to use later)
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Example .env
 
 ```bash
-npm run dev
+DATABASE_URL="file:./../data/dev.db" # change to prod.db in production
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# Discord id for who can manage posts and stuff
+ADMIN_DISCORD_ID="<DISCORD ID HERE>"
+
+# you should use npx auth to create this (or bunx auth if you're super cool)
+AUTH_SECRET="<TOP SECRET>"
+AUTH_DISCORD_ID="<DISCORD APPLICATION ID HERE>"
+AUTH_DISCORD_SECRET="<DISCORD OAUTH SECRET HERE>"
+
+# In production, trust the host
+AUTH_TRUST_HOST=true
+
+# For automatic backups.
+DO_BACKUPS=true
+BACKUP_INTERVAL=43200000
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
