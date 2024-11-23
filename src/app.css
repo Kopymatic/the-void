@@ -2,6 +2,9 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
+
 input,
 textarea,
 select,
@@ -13,4 +16,19 @@ a {
 }
 * {
 	@apply box-border;
+}
+h1 {
+	@apply font-gaegu;
+}
+
+.rock-salt-regular {
+	font-family: 'Rock Salt', cursive;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.gaegu-regular {
+	font-family: 'Gaegu', serif;
+	font-weight: 400;
+	font-style: normal;
 }

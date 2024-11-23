@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { beforeNavigate } from '$app/navigation';
+	import Article from '../components/Article.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -12,16 +14,22 @@
 	};
 
 	randomizeSlogan();
-	setInterval(randomizeSlogan, 5000);
+	let interval = setInterval(randomizeSlogan, 5000);
+
+	beforeNavigate(() => {
+		clearInterval(interval);
+	});
 </script>
 
-<h3>welcome to the void</h3>
-<p>
-	{#if slogan}
-		{slogan}
-	{:else}
-		a silly litle place for my silly little thoughts
-	{/if}
-</p>
+<Article>
+	<h3>welcome to the void</h3>
+	<p>
+		{#if slogan}
+			{slogan}
+		{:else}
+			a silly litle place for my silly little thoughts
+		{/if}
+	</p>
 
-<p><a href="/list">search through the void</a></p>
+	<p><a href="/list">search through the void</a></p>
+</Article>

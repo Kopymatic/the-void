@@ -3,6 +3,7 @@
 	import '../app.css';
 	import type { PageData } from './$types';
 	import Footer from '../components/Footer.svelte';
+	import Header from '../components/Header.svelte';
 	let { children, data }: { children: Snippet<[]>; data: PageData } = $props();
 </script>
 
@@ -11,7 +12,8 @@
 	<meta name="description" content="Silly little thoughts from my silly little head" />
 </svelte:head>
 
-<div class="prose prose-invert min-w-full">
+<div class="prose prose-invert mx-auto max-w-6xl">
+	<Header></Header>
 	{@render children()}
 	<Footer></Footer>
 </div>

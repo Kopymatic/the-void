@@ -50,6 +50,10 @@ export default {
 				secondary: secondary,
 				accent: accent,
 				error: error
+			},
+			fontFamily: {
+				'rock-salt': ['Rock Salt', 'cursive'],
+				gaegu: ['Gaegu', 'serif']
 			}
 		}
 	},
