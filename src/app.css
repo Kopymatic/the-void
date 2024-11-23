@@ -18,7 +18,10 @@ a {
 	@apply box-border;
 }
 h1 {
-	@apply font-gaegu;
+	@apply font-gaegu text-4xl;
+}
+h2 {
+	@apply text-3xl;
 }
 
 .rock-salt-regular {

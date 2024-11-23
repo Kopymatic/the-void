@@ -87,7 +87,5 @@ export const actions = {
 	}
 } satisfies Actions;
 
-//TODO: come up with better regexes
-// currently they're both too restrictive. Maybe allow numbers?
 const categoryRegex = /^[a-z\-0-9]+$/;
 const urlRegex = /^[a-z\-0-9]+$/;
