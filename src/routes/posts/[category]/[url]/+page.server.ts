@@ -42,7 +42,7 @@ export const actions = {
 				error(500, 'Database error');
 			})
 			.then(() => {
-				redirect(302, '/');
+				redirect(302, '/list');
 			});
 	},
 	edit: async ({ request, params }) => {
