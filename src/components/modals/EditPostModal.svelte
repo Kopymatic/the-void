@@ -6,6 +6,8 @@
 	import { defaultCategories } from '$lib/defaultCategories';
 	import { validateCreateFormClient } from '$lib/formValidation';
 	import type { Post } from '@prisma/client';
+	import { invalidate, invalidateAll } from '$app/navigation';
+	import { onMount } from 'svelte';
 
 	let {
 		currentPost,
@@ -29,10 +31,22 @@
 
 	let completeUrl = $derived(finalCategory + '/' + url);
 	let error: CreateFormError | undefined = $state(form?.error);
+	let success = $state(form?.success);
 
-	if (currentPost) {
-		url = currentPost.url;
-	}
+	onMount(() => {
+		const interval = setInterval(() => {
+			if (success) invalidateAll();
+		}, 1000);
+
+		return () => {
+			clearInterval(interval);
+		};
+	});
+
+	// $effect(() => {
+	// 	console.log(success);
+	// 	if (success) invalidateAll();
+	// });
 </script>
 
 <BaseModal bind:showModal>

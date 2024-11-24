@@ -85,6 +85,12 @@ export const actions = {
 				message: 'Unknown error with the database.'
 			});
 		}
-		redirect(302, `/posts/${post.category}/${post.url}`);
+
+		const previousFullUrl = toEdit.category + '/' + toEdit.url;
+		const newFullUrl = post.category + '/' + post.url;
+
+		if (previousFullUrl === newFullUrl) {
+			return { success: true };
+		} else redirect(302, `/posts/${post.category}/${post.url}`);
 	}
 } satisfies Actions;
