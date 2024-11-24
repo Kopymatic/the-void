@@ -11,7 +11,6 @@ export const load: LayoutServerLoad = async (event) => {
 	let gitHash = execSync('git rev-parse --short HEAD').toString().trim();
 	const packageVersion = packagejson.version;
 	const versions = { git: gitHash, package: packageVersion };
-	console.log(versions);
 
 	return {
 		user,

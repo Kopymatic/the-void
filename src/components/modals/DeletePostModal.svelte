@@ -1,12 +1,7 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import BaseModal from './BaseModal.svelte';
 
 	let { showModal = $bindable() }: { showModal: boolean } = $props();
-
-	const deletePost = () => {};
-
-	let dialog: HTMLDialogElement | undefined = $state(); // HTMLDialogElement
 </script>
 
 <BaseModal bind:showModal>
@@ -14,7 +9,7 @@
 		<h2 class="my-2">Are you sure you want to <b>permanently</b> delete this post?</h2>
 		This cannot be undone.
 		<hr />
-		<button class="bg-warn-red">Confirm Deletion</button>
+		<button class="border-0 border-transparent bg-warn-red">Confirm Deletion</button>
 		<button type="button" onclick={() => (showModal = false)}>Cancel</button>
 	</form>
 </BaseModal>

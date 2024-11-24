@@ -27,8 +27,7 @@
 		bind:this={dialog}
 		onclose={() => (showModal = false)}
 		onclick={(e) => {
-			showModal = false;
-			// if (e.target === dialog) dialog.close();
+			if (e.target === dialog) showModal = false;
 		}}
 		class=""
 	>
@@ -40,7 +39,7 @@
 
 <style>
 	dialog {
-		@apply bg-secondary-bg max-w-lg rounded-lg border-4 border-primary p-0 text-white backdrop-blur-xl backdrop:bg-black/50;
+		@apply w-full rounded-lg border-4 border-primary bg-secondary-bg p-0 text-white backdrop-blur-xl backdrop:bg-black/50 md:max-w-3xl;
 		/* transition-all duration-1000 open:h-min */
 	}
 	/* dialog {

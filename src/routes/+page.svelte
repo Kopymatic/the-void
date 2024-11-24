@@ -1,20 +1,13 @@
 <script lang="ts">
 	import { beforeNavigate } from '$app/navigation';
 	import Article from '../components/Article.svelte';
-	import type { PageData } from './$types';
+	import { getRandomSlogan } from '$lib/homepageSlogans';
 
-	let { data }: { data: PageData } = $props();
+	let slogan: string = $state(getRandomSlogan());
 
-	let slogan: string = $state(data.slogans[0]);
-
-	const randomizeSlogan = () => {
-		if (Math.random() >= 0.7) {
-			slogan = data.slogans[Math.floor(Math.random() * data.slogans.length)];
-		}
-	};
-
-	randomizeSlogan();
-	let interval = setInterval(randomizeSlogan, 5000);
+	let interval = setInterval(() => {
+		slogan = getRandomSlogan();
+	}, 10000);
 
 	beforeNavigate(() => {
 		clearInterval(interval);

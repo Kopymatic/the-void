@@ -5,5 +5,9 @@ export enum CreateFormError {
 	missingCategory = 'Must fill in the category field',
 	invalidCategory = 'Category format is invalid',
 	invalidUrl = 'URL format is invalid',
-	databaseError = 'Unknown error with the database.'
+	databaseError = 'Unknown error with the database.',
+	internalError = 'Uh oh! Something went wrong on our end.'
 }
+
+export const categoryRegex = /^[a-z\-0-9]+$/;
+export const urlRegex = /^[a-z\-0-9]+$/;

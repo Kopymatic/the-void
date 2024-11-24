@@ -4,7 +4,7 @@
 	import type { PageData } from './$types';
 	import Footer from '../components/Footer.svelte';
 	import Header from '../components/Header.svelte';
-	let { children, data }: { children: Snippet<[]>; data: PageData } = $props();
+	let { children }: { children: Snippet<[]> } = $props();
 </script>
 
 <svelte:head>

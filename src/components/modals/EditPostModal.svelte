@@ -1,30 +1,52 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { CreateFormError } from '$lib';
+	import type { ActionData } from '../../routes/posts/[category]/[url]/$types';
+	import BaseModal from './BaseModal.svelte';
+	import { defaultCategories } from '$lib/defaultCategories';
 	import { validateCreateFormClient } from '$lib/formValidation';
-	import Article from '../../components/Article.svelte';
-	import type { PageData, ActionData } from './$types';
+	import type { Post } from '@prisma/client';
 
-	let { data, form }: { data: PageData; form: ActionData } = $props();
-	let defaultCategories = data.defaultCategories;
+	let {
+		currentPost,
+		showModal = $bindable(),
+		form
+	}: { showModal: boolean; form?: ActionData; currentPost: Post } = $props();
 
-	let selectedCategory: string = $state(defaultCategories[0]);
-	let customCategory: string | undefined = $state(undefined);
+	// let category: string | undefined = $state(undefined);
+	// let url = $state('');
+
+	let { body, category, url, description, unlisted } = $state(currentPost);
+	let selectedCategory = $state(defaultCategories[0]);
+	let customCategory: string | undefined = $state();
 	let finalCategory = $derived(customCategory || selectedCategory);
-	let url = $state('');
+
+	if (defaultCategories.includes(category)) selectedCategory = category;
+	else {
+		selectedCategory = 'custom';
+		customCategory = category;
+	}
+
 	let completeUrl = $derived(finalCategory + '/' + url);
 	let error: CreateFormError | undefined = $state(form?.error);
+
+	if (currentPost) {
+		url = currentPost.url;
+	}
 </script>
 
-<Article>
+<BaseModal bind:showModal>
 	<form
 		method="POST"
-		action="?/post"
-		class=" w-full"
+		action="?/edit"
+		class="w-full"
 		use:enhance={({ formData, cancel }) => {
 			const validation = validateCreateFormClient(formData, cancel);
 			if (validation.error) error = validation.error;
-			else return validation.submit;
+			else {
+				showModal = false;
+				return validation.submit;
+			}
 		}}
 	>
 		<label>
@@ -60,13 +82,19 @@
 		<label>
 			Brief Description
 			<br />
-			<input name="description" type="text" maxlength={128} required={false} />
+			<input
+				name="description"
+				type="text"
+				maxlength={128}
+				required={false}
+				bind:value={description}
+			/>
 		</label>
 		<br />
 		<label>
 			Body
 			<br />
-			<textarea name="body" required={true}></textarea>
+			<textarea name="body" required={true} bind:value={body}></textarea>
 			{#if error === CreateFormError.missingBody || error === CreateFormError.missingUrl}
 				<p class="error">{error}</p>
 			{/if}
@@ -81,25 +109,22 @@
 				type="checkbox"
 				name="unlisted"
 				class="h-4 w-4 rounded text-accent focus:ring-accent"
+				bind:checked={unlisted}
 			/>
 			<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
 		</div>
 		<br />
-		<button>Post!</button>
+		<button type="submit">Post!</button>
 		{#if error === CreateFormError.databaseError}
 			<p class="error">{error}</p>
 		{/if}
 	</form>
-</Article>
+</BaseModal>
 
 <style>
-	label,
 	input,
-	br,
-	textarea {
+	textarea,
+	button {
 		@apply w-full;
-	}
-	.error {
-		@apply m-0 p-0 text-sm text-error;
 	}
 </style>

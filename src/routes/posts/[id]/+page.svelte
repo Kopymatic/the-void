@@ -5,4 +5,5 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
-<Post post={data.post}></Post>
+<!-- todo: make it so you can edit posts at their id url -->
+<Post editable={false} post={data.post}></Post>

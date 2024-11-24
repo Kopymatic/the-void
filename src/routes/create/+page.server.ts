@@ -4,7 +4,8 @@ import { prisma } from '$lib/server/database/database';
 import type { PageServerLoad } from './$types';
 import { env } from '$env/dynamic/private';
 import { CreateFormError } from '$lib';
-import { defaultCategories } from '$lib/defaultCategories.json';
+import { defaultCategories } from '$lib/defaultCategories';
+import { validateCreateFormServer } from '$lib/server/serverFormValidation';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.auth();
@@ -21,57 +22,21 @@ export const actions = {
 		console.log('recieved post request');
 		let formData = await request.formData();
 
-		let url = formData.get('url')?.toString();
-		let description = formData.get('description')?.toString();
-		let body = formData.get('body')?.toString();
-		let unlisted = formData.get('unlisted') ? true : false;
-
-		let selectedCategory = formData.get('selectedCategory')?.toString();
-		let customCategory = formData.get('customCategory')?.toString();
-		let category = customCategory || selectedCategory;
-
-		let reconstructedData = {
-			url,
-			category,
-			description,
-			body,
-			unlisted
-		};
-
-		// Filter out all the required params
-		if (!url)
-			return fail(400, {
-				error: CreateFormError.missingUrl,
-				message: 'Must fill in the URL',
-				reconstructedData
-			});
-		if (!body)
-			return fail(400, {
-				error: CreateFormError.missingBody,
-				message: 'Must fill in the body',
-				reconstructedData
-			});
-		if (!category) {
-			return fail(400, {
-				error: CreateFormError.missingCategory,
-				message: 'Must fill in the category',
-				reconstructedData
+		const result = validateCreateFormServer(formData);
+		if (result.status || result.error) {
+			fail(result.status, {
+				error: result.error,
+				reconstructedData: result.data
 			});
 		}
 
-		// filter out incorrect formatting
-		if (!categoryRegex.test(category)) {
-			return fail(400, {
-				error: CreateFormError.invalidCategory,
-				message: 'Category has invalid format',
-				reconstructedData
+		const { body, category, description, unlisted, url } = result.data;
+		if (!url || !body) {
+			console.log('The server validation function fucked up');
+			fail(500, {
+				error: CreateFormError.internalError
 			});
-		}
-		if (!urlRegex.test(url)) {
-			return fail(400, {
-				error: CreateFormError.invalidUrl,
-				reconstructedData
-			});
+			return;
 		}
 
 		const post = await prisma.post.create({
@@ -86,6 +51,3 @@ export const actions = {
 		redirect(302, `/posts/${post.category}/${post.url}`);
 	}
 } satisfies Actions;
-
-const categoryRegex = /^[a-z\-0-9]+$/;
-const urlRegex = /^[a-z\-0-9]+$/;

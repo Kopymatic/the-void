@@ -1,8 +1,9 @@
-import { error, redirect, type Actions } from '@sveltejs/kit';
+import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { prisma } from '$lib/server/database/database';
 import { env } from '$env/dynamic/private';
-import TodoistProvider from '@auth/sveltekit/providers/todoist';
+import { CreateFormError } from '$lib';
+import { validateCreateFormServer } from '$lib/server/serverFormValidation';
 
 export const load: PageServerLoad = async ({ params }) => {
 	let category = params.category;
@@ -43,5 +44,47 @@ export const actions = {
 			.then(() => {
 				redirect(302, '/');
 			});
+	},
+	edit: async ({ request, params }) => {
+		console.log('recieved edit request');
+		let formData = await request.formData();
+
+		const result = validateCreateFormServer(formData);
+		if (result.status || result.error) {
+			fail(result.status, {
+				error: result.error,
+				reconstructedData: result.data
+			});
+		}
+
+		const { body, category, description, unlisted, url } = result.data;
+		if (!url || !body) {
+			console.log('The server validation function fucked up');
+			fail(500, {
+				error: CreateFormError.internalError
+			});
+			return;
+		}
+		const currentCategory = params.category;
+		const currentUrl = params.url;
+
+		if (!currentCategory || !currentUrl) error(400, 'Invalid request');
+
+		const toEdit = await prisma.post.findFirst({
+			where: { category: currentCategory, url: currentUrl }
+		});
+		if (!toEdit) error(404, 'Not found');
+
+		const post = await prisma.post.update({
+			where: { id: toEdit.id },
+			data: { body, url, category, description, unlisted }
+		});
+		if (!post) {
+			return fail(500, {
+				error: CreateFormError.databaseError,
+				message: 'Unknown error with the database.'
+			});
+		}
+		redirect(302, `/posts/${post.category}/${post.url}`);
 	}
 } satisfies Actions;

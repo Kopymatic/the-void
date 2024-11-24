@@ -3,17 +3,16 @@
 	import type { Post } from '@prisma/client';
 	import SvelteMarkdown from 'svelte-markdown';
 	import Article from './Article.svelte';
-	import Modal from './modals/BaseModal.svelte';
 	import type { SessionUser } from '$lib/server/types';
 	import DeletePostModal from './modals/DeletePostModal.svelte';
+	import EditPostModal from './modals/EditPostModal.svelte';
 
 	let user: SessionUser | undefined = $state($page.data.user);
 
-	let { post }: { post: Post } = $props();
+	let { post, editable = true }: { post: Post; editable?: boolean } = $props();
 
 	let showDeleteModal = $state(false);
-
-	const deletePost = () => {};
+	let showEditModal = $state(false);
 </script>
 
 <svelte:head>
@@ -33,11 +32,18 @@
 				<i class="text-secondary-text">(unlisted)</i>
 			{/if}
 		</h2>
-		{#if user?.isAdmin}
+		{#if user?.isAdmin && editable}
 			<div>
-				<button class="max-h-min"> Edit </button>
 				<button
-					class="hover:bg-warn-red max-h-min duration-300"
+					class="max-h-min"
+					onclick={() => {
+						showEditModal = true;
+					}}
+				>
+					Edit
+				</button>
+				<button
+					class="max-h-min duration-300 hover:bg-warn-red"
 					onclick={() => {
 						showDeleteModal = true;
 					}}
@@ -65,3 +71,4 @@
 </Article>
 
 <DeletePostModal bind:showModal={showDeleteModal}></DeletePostModal>
+<EditPostModal currentPost={post} bind:showModal={showEditModal}></EditPostModal>

@@ -1,0 +1,14 @@
+const slogans = [
+	'a silly litle place for my silly little thoughts',
+	'my little hellscape',
+	't h o u g h t s',
+	'a silly little place for a silly little person to share their silly little thoughts',
+	'happy pride month (every month is now pride month because i said so)',
+	"you're cool",
+	"you're swagalicious",
+	'Run. Now. While you still can.'
+];
+
+export const getRandomSlogan = () => {
+	return slogans[Math.floor(Math.random() * slogans.length)];
+};
