@@ -10,3 +10,6 @@ console.log(
 	`${doBackups ? `Doing backups with an interval of ${intervalHours} hours (${interval}ms)` : 'Not doing backups. Be careful!'}`
 );
 if (doBackups) initAutoBackups(interval);
+
+//Not sure where else to put this
+import '../discordBot/bot';

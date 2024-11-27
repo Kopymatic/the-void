@@ -6,6 +6,7 @@ import { env } from '$env/dynamic/private';
 import { CreateFormError } from '$lib';
 import { defaultCategories } from '$lib/defaultCategories';
 import { validateCreateFormServer } from '$lib/server/serverFormValidation';
+import { sendPostToChannels } from '$lib/server/discordBot/bot';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.auth();
@@ -48,6 +49,7 @@ export const actions = {
 				message: 'Unknown error with the database.'
 			});
 		}
+		sendPostToChannels(post);
 		redirect(302, `/posts/${post.category}/${post.url}`);
 	}
 } satisfies Actions;
