@@ -44,7 +44,7 @@ export const sendPostToChannels = async (post: Post) => {
 
 	const title = post.description ? post.description : undefined;
 	const fullPostUrl = `https://thevoid.kopymatic.com/posts/${post.category}/${post.url}`;
-	const message = `Babe wake up new void post just dropped\n${fullPostUrl}`;
+	const message = `Babe wake up new void post just dropped`;
 
 	const embed: APIEmbed = {
 		title: title,
