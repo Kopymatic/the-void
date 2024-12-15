@@ -1,5 +1,13 @@
 import type { Post, Prisma } from '@prisma/client';
-import { Client, GatewayIntentBits, TextChannel, type APIEmbed, type Channel } from 'discord.js';
+import {
+	Client,
+	Embed,
+	GatewayIntentBits,
+	TextChannel,
+	type APIEmbed,
+	type Channel,
+	type EmbedData
+} from 'discord.js';
 
 const client = new Client({
 	intents: [
