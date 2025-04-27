@@ -12,17 +12,15 @@
 <footer class="mx-auto w-full justify-items-center text-center">
 	<div>
 		{#if session && user}
-			You're signed in as {user?.name}.
+			you're signed in as {user?.name} - <a href="/login">log out</a> <br />
 			{#if user?.isAdmin}
-				<br /> <a href="/blog/create">Create a post.</a>
-				<br /> <a href="/blog/list/all">List all posts</a>
-				<br /> <a href="/login">Log out</a>
+				<a href="/blog/create">create a post</a> - <a href="/blog/list/all">list all posts</a>
 			{/if}
 		{/if}
 		<br />
 		<a class="my-2 py-0" href="/">take me home</a>
 		<p class="text-secondary-text text-sm">
-			Running V{`${versions.package}`} - Commit
+			v{`${versions.package}`} - commit
 			<a target="_blank" href={`https://github.com/Kopymatic/the-void/commit/${versions.git}`}
 				>{`${versions.git}`}</a
 			>
