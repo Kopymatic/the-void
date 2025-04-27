@@ -1,30 +1,63 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
 
-input,
-textarea,
-select,
-button {
-	@apply rounded-md border-2 border-primary bg-secondary px-2 py-1 text-text;
-}
-a {
-	@apply text-accent;
-}
-* {
-	@apply box-border;
-}
-h1 {
-	@apply font-gaegu text-4xl;
-}
-h2 {
-	@apply text-3xl;
+@import 'tailwindcss';
+@config '../tailwind.config.ts';
+
+/*
+The default border color has changed to `currentcolor` in Tailwind CSS v4,
+so we've added these compatibility styles to make sure everything still
+looks the same as it did with Tailwind CSS v3.
+
+If we ever want to remove these styles, we need to add an explicit border
+color utility to any element that depends on these defaults.
+*/
+/*
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
+} */
+
+@theme {
+	--color-white-text: #ffffff;
+	--color-secondary-text: #8c8c8c;
+	--color-primary-background: #000000;
+	--color-secondary-background: #121212;
+	--color-primary: #453a57;
+	--color-secondary: #272727;
+	--color-accent: #a559d9;
+	--color-darker-accent: #6f3c91;
+	--color-error: #ff4040;
+	--color-warn: #991b1b;
+
+	--font-gaegu: 'Gaegu', serif;
+	--font-rock-salt: 'Rock Salt', cursive;
 }
 
-.rock-salt-regular {
+@layer base {
+	input,
+	textarea,
+	select,
+	button {
+		@apply border-primary bg-secondary text-white-text rounded-md border-2 px-2 py-1;
+	}
+	a {
+		@apply text-accent;
+	}
+	h1 {
+		@apply text-4xl;
+	}
+	h2 {
+		@apply text-3xl;
+	}
+}
+
+/* .rock-salt-regular {
 	font-family: 'Rock Salt', cursive;
 	font-weight: 400;
 	font-style: normal;
@@ -34,4 +67,4 @@ h2 {
 	font-family: 'Gaegu', serif;
 	font-weight: 400;
 	font-style: normal;
-}
+} */

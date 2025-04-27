@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { CreateFormError } from '$lib';
-	import type { ActionData } from '../../routes/posts/[category]/[url]/$types';
+	import type { ActionData } from '../../routes/blog/posts/[category]/[url]/$types';
 	import BaseModal from './BaseModal.svelte';
 	import { defaultCategories } from '$lib/defaultCategories';
 	import { validateCreateFormClient } from '$lib/formValidation';
@@ -116,13 +116,13 @@
 		<br />
 		<br />
 		<div
-			class="box-border flex max-h-min items-center rounded-md border-2 border-primary bg-secondary px-4 md:w-1/3"
+			class="border-primary bg-secondary box-border flex max-h-min items-center rounded-md border-2 px-4 md:w-1/3"
 		>
 			<input
 				id="unlisted"
 				type="checkbox"
 				name="unlisted"
-				class="h-4 w-4 rounded text-accent focus:ring-accent"
+				class="text-accent focus:ring-accent h-4 w-4 rounded"
 				bind:checked={unlisted}
 			/>
 			<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>

@@ -24,5 +24,5 @@
 		{/if}
 	</p>
 
-	<p><a href="/list">search through the void</a></p>
+	<p><a href="/blog/list">search through the void</a></p>
 </Article>

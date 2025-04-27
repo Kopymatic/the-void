@@ -27,7 +27,7 @@
 	<div class="my-4 flex items-center justify-between *:self-center">
 		<h2 class="my-auto text-center">
 			{`[${post.id}]`}
-			<a href={`/posts/${post.category}/${post.url}`}>/posts/{post.category}/{post.url}</a>
+			<a href={`/blog/posts/${post.category}/${post.url}`}>/posts/{post.category}/{post.url}</a>
 			{#if post.unlisted}
 				<i class="text-secondary-text">(unlisted)</i>
 			{/if}
@@ -43,7 +43,7 @@
 					Edit
 				</button>
 				<button
-					class="max-h-min duration-300 hover:bg-warn-red"
+					class="hover:bg-warn-red max-h-min duration-300"
 					onclick={() => {
 						showDeleteModal = true;
 					}}
@@ -54,7 +54,7 @@
 		{/if}
 	</div>
 	<p class="my-2">{post.description}</p>
-	<p class="my-2 text-secondary-text">
+	<p class="text-secondary-text my-2">
 		{#if post.createdAt}
 			Created at {post.createdAt.toLocaleString()}
 		{/if}
