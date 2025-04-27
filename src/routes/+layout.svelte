@@ -14,7 +14,7 @@
 
 <div class="mx-auto box-border flex h-screen w-screen max-w-6xl flex-col md:w-2/3">
 	<Header></Header>
-	<div class="prose prose-invert flex-grow">
+	<div class=" w-full flex-grow">
 		{@render children()}
 	</div>
 	<Footer></Footer>

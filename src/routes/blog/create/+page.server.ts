@@ -48,6 +48,6 @@ export const actions = {
 				message: 'Unknown error with the database.'
 			});
 		}
-		redirect(302, `/posts/${post.category}/${post.url}`);
+		redirect(302, `/blog/posts/${post.category}/${post.url}`);
 	}
 } satisfies Actions;

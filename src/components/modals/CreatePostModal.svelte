@@ -1,31 +1,48 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { CreateFormError } from '$lib';
+	import type { ActionData } from '../../routes/blog/posts/[category]/[url]/$types';
+	import BaseModal from './BaseModal.svelte';
+	import { defaultCategories } from '$lib/defaultCategories';
 	import { validateCreateFormClient } from '$lib/formValidation';
-	import Article from '../../../components/Article.svelte';
-	import CreatePostModal from '../../../components/modals/CreatePostModal.svelte';
-	import type { PageData, ActionData } from './$types';
+	import type { Post } from '@prisma/client';
+	import { invalidate, invalidateAll } from '$app/navigation';
+	import { onMount } from 'svelte';
 
-	let { data, form }: { data: PageData; form: ActionData } = $props();
-	let defaultCategories = data.defaultCategories;
+	let { showModal = $bindable(), form }: { showModal: boolean; form?: ActionData } = $props();
 
 	let selectedCategory: string = $state(defaultCategories[0]);
 	let customCategory: string | undefined = $state(undefined);
 	let finalCategory = $derived(customCategory || selectedCategory);
 	let url = $state('');
 	let completeUrl = $derived(finalCategory + '/' + url);
+
 	let error: CreateFormError | undefined = $state(form?.error);
+	let success = $state(form?.success);
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			if (success) invalidateAll();
+		}, 1000);
+
+		return () => {
+			clearInterval(interval);
+		};
+	});
 </script>
 
-<Article>
+<BaseModal bind:showModal>
 	<form
 		method="POST"
-		action="?/post"
-		class=" w-full"
+		action="/blog/create?/post"
+		class="w-full"
 		use:enhance={({ formData, cancel }) => {
 			const validation = validateCreateFormClient(formData, cancel);
 			if (validation.error) error = validation.error;
-			else return validation.submit;
+			else {
+				showModal = false;
+				return validation.submit;
+			}
 		}}
 	>
 		<label>
@@ -91,4 +108,12 @@
 			<p class="error">{error}</p>
 		{/if}
 	</form>
-</Article>
+</BaseModal>
+
+<style>
+	input,
+	textarea,
+	button {
+		@apply w-full;
+	}
+</style>

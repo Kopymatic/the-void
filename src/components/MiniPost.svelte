@@ -11,7 +11,7 @@
 </script>
 
 <ContentBox prose small>
-	<b>{`[${id}] `}<a href={fullUrl}>{category}/{url}</a></b>
+	<b><a href={fullUrl}>{category}/{url}</a></b>
 	{#if post.unlisted}
 		<i class="text-secondary-text">(unlisted)</i>
 	{/if}

@@ -15,7 +15,7 @@
 </script>
 
 <Article>
-	<h3>welcome to the void</h3>
+	<h3 class="mt-2">welcome</h3>
 	<p>
 		{#if slogan}
 			{slogan}

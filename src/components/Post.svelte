@@ -13,6 +13,8 @@
 
 	let showDeleteModal = $state(false);
 	let showEditModal = $state(false);
+
+	let updatedAtIsDifferent = post.updatedAt.getTime() != post.createdAt.getTime();
 </script>
 
 <svelte:head>
@@ -26,7 +28,6 @@
 <Article>
 	<div class="my-4 flex items-center justify-between *:self-center">
 		<h2 class="my-auto text-center">
-			{`[${post.id}]`}
 			<a href={`/blog/posts/${post.category}/${post.url}`}>/posts/{post.category}/{post.url}</a>
 			{#if post.unlisted}
 				<i class="text-secondary-text">(unlisted)</i>
@@ -55,14 +56,21 @@
 	</div>
 	<p class="my-2">{post.description}</p>
 	<p class="text-secondary-text my-2">
+		{`[#${post.id}]`}
 		{#if post.createdAt}
-			Created at {post.createdAt.toLocaleString()}
+			- Created at {post.createdAt.toLocaleString('en-US', {
+				dateStyle: 'medium',
+				timeStyle: 'short'
+			})}
 		{/if}
-		{#if post.createdAt && post.updatedAt}
+		{#if post.createdAt && updatedAtIsDifferent}
 			-
 		{/if}
-		{#if post.updatedAt}
-			Updated at {post.updatedAt.toLocaleString()}
+		{#if post.updatedAt && updatedAtIsDifferent}
+			Updated at {post.updatedAt.toLocaleString('en-US', {
+				dateStyle: 'medium',
+				timeStyle: 'short'
+			})}
 		{/if}
 	</p>
 	<hr class="my-2" />

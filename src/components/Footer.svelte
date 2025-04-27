@@ -1,12 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import type { SessionUser } from '$lib/server/types';
+	import CreatePostModal from './modals/CreatePostModal.svelte';
 	let session = $page.data.session;
 	let user: SessionUser | undefined = $state($page.data.user);
 	let versions: {
 		git: string;
 		package: string;
 	} = $state($page.data.versions);
+
+	let showCreateModal = $state(false);
 </script>
 
 <footer class="mx-auto w-full justify-items-center text-center">
@@ -14,7 +17,13 @@
 		{#if session && user}
 			you're signed in as {user?.name} - <a href="/login">log out</a> <br />
 			{#if user?.isAdmin}
-				<a href="/blog/create">create a post</a> - <a href="/blog/list/all">list all posts</a>
+				<button
+					class="text-accent inline cursor-pointer border-0 bg-transparent p-0"
+					onclick={() => {
+						showCreateModal = true;
+					}}>create a post</button
+				>
+				- <a href="/blog/list/all">list all posts</a>
 			{/if}
 		{/if}
 		<br />
@@ -27,3 +36,4 @@
 		</p>
 	</div>
 </footer>
+<CreatePostModal bind:showModal={showCreateModal}></CreatePostModal>
