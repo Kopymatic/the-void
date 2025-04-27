@@ -1,37 +1,46 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
 
-input,
-textarea,
-select,
-button {
-	@apply rounded-md border-2 border-primary bg-secondary px-2 py-1 text-text;
-}
-a {
-	@apply text-accent;
-}
-* {
-	@apply box-border;
-}
-h1 {
-	@apply font-gaegu text-4xl;
-}
-h2 {
-	@apply text-3xl;
+@import 'tailwindcss';
+@config '../tailwind.config.ts';
+
+@theme {
+	--color-white-text: #ffffff;
+	--color-secondary-text: #8c8c8c;
+	--color-primary-background: #000000;
+	--color-secondary-background: #121212;
+	--color-primary: #453a57;
+	--color-secondary: #272727;
+	--color-accent: #a559d9;
+	--color-darker-accent: #6f3c91;
+	--color-error: #ff4040;
+	--color-warn: #991b1b;
+	--color-kopymatic: #d4031d;
+
+	--font-gaegu: 'Gaegu', serif;
+	--font-rock-salt: 'Rock Salt', cursive;
 }
 
-.rock-salt-regular {
-	font-family: 'Rock Salt', cursive;
-	font-weight: 400;
-	font-style: normal;
+@layer base {
+	input,
+	textarea,
+	select,
+	button {
+		@apply border-primary bg-secondary text-white-text rounded-md border-2 px-2 py-1;
+	}
+	a {
+		@apply text-accent;
+	}
+	h1 {
+		@apply text-4xl;
+	}
+	h2 {
+		@apply text-3xl;
+	}
 }
 
-.gaegu-regular {
-	font-family: 'Gaegu', serif;
-	font-weight: 400;
-	font-style: normal;
+@layer utilities {
+	.error {
+		@apply text-error m-0 p-0 text-sm;
+	}
 }

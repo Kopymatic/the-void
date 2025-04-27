@@ -12,8 +12,10 @@
 	<meta name="description" content="Silly little thoughts from my silly little head" />
 </svelte:head>
 
-<div class="prose prose-invert mx-auto max-w-6xl">
+<div class="mx-auto box-border flex h-screen w-screen max-w-6xl flex-col md:w-2/3">
 	<Header></Header>
-	{@render children()}
+	<div class=" w-full flex-grow">
+		{@render children()}
+	</div>
 	<Footer></Footer>
 </div>

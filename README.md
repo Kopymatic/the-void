@@ -1,4 +1,4 @@
-# the void
+# Kopymatic.com
 
 My personal little blogging/ranting/testing/learning/whatever platform
 

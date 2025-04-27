@@ -4,4 +4,4 @@
 	let { children }: { children: Snippet<[]> } = $props();
 </script>
 
-<div class="mx-auto px-2 sm:max-w-3xl sm:px-0">{@render children()}</div>
+<div class="prose prose-invert mx-auto px-2 sm:px-0">{@render children()}</div>

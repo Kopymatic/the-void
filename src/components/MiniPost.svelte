@@ -7,11 +7,11 @@
 
 	let { category, url, description, author, body, createdAt, id } = post;
 
-	let fullUrl = category && url ? `/posts/${category}/${url}` : undefined;
+	let fullUrl = category && url ? `/blog/posts/${category}/${url}` : undefined;
 </script>
 
 <ContentBox prose small>
-	<b>{`[${id}] `}<a href={fullUrl}>{category}/{url}</a></b>
+	<b><a href={fullUrl}>{category}/{url}</a></b>
 	{#if post.unlisted}
 		<i class="text-secondary-text">(unlisted)</i>
 	{/if}
@@ -20,12 +20,3 @@
 		<SvelteMarkdown source={post.body}></SvelteMarkdown>
 	</div>
 </ContentBox>
-
-<style>
-	p {
-		@apply my-1;
-	}
-	/* .mini-prose {
-		@apply box-border list-disc border-4 border-red-700;
-	} */
-</style>

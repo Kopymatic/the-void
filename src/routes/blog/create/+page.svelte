@@ -2,7 +2,8 @@
 	import { enhance } from '$app/forms';
 	import { CreateFormError } from '$lib';
 	import { validateCreateFormClient } from '$lib/formValidation';
-	import Article from '../../components/Article.svelte';
+	import Article from '../../../components/Article.svelte';
+	import CreatePostModal from '../../../components/modals/CreatePostModal.svelte';
 	import type { PageData, ActionData } from './$types';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
@@ -41,7 +42,7 @@
 			<label>
 				Custom Category
 				<br />
-				<input name="customCategory" bind:value={customCategory} />
+				<input class="w-full" name="customCategory" bind:value={customCategory} />
 				{#if error === CreateFormError.invalidCategory || error === CreateFormError.missingCategory}
 					<p class="error">{error}</p>
 				{/if}
@@ -51,7 +52,7 @@
 		<label>
 			Desired URL for the post
 			<br />
-			<input name="url" type="text" required={true} bind:value={url} />
+			<input class="w-full" name="url" type="text" required={true} bind:value={url} />
 			{#if error === CreateFormError.invalidUrl || error === CreateFormError.missingUrl}
 				<p class="error">{error}</p>
 			{/if}
@@ -60,7 +61,7 @@
 		<label>
 			Brief Description
 			<br />
-			<input name="description" type="text" maxlength={128} required={false} />
+			<input class="w-full" name="description" type="text" maxlength={128} required={false} />
 		</label>
 		<br />
 		<label>
@@ -74,13 +75,13 @@
 		<br />
 		<br />
 		<div
-			class="box-border flex max-h-min items-center rounded-md border-2 border-primary bg-secondary px-4 md:w-1/3"
+			class="border-primary bg-secondary box-border flex max-h-min items-center rounded-md border-2 px-4 md:w-1/3"
 		>
 			<input
 				id="unlisted"
 				type="checkbox"
 				name="unlisted"
-				class="h-4 w-4 rounded text-accent focus:ring-accent"
+				class="text-accent focus:ring-accent h-4 w-4 rounded-sm"
 			/>
 			<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
 		</div>
@@ -91,15 +92,3 @@
 		{/if}
 	</form>
 </Article>
-
-<style>
-	label,
-	input,
-	br,
-	textarea {
-		@apply w-full;
-	}
-	.error {
-		@apply m-0 p-0 text-sm text-error;
-	}
-</style>

@@ -9,27 +9,14 @@
 	import { invalidate, invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
 
-	let {
-		currentPost,
-		showModal = $bindable(),
-		form
-	}: { showModal: boolean; form?: ActionData; currentPost: Post } = $props();
+	let { showModal = $bindable(), form }: { showModal: boolean; form?: ActionData } = $props();
 
-	// let category: string | undefined = $state(undefined);
-	// let url = $state('');
-
-	let { body, category, url, description, unlisted } = $state(currentPost);
-	let selectedCategory = $state(defaultCategories[0]);
-	let customCategory: string | undefined = $state();
+	let selectedCategory: string = $state(defaultCategories[0]);
+	let customCategory: string | undefined = $state(undefined);
 	let finalCategory = $derived(customCategory || selectedCategory);
-
-	if (defaultCategories.includes(category)) selectedCategory = category;
-	else {
-		selectedCategory = 'custom';
-		customCategory = category;
-	}
-
+	let url = $state('');
 	let completeUrl = $derived(finalCategory + '/' + url);
+
 	let error: CreateFormError | undefined = $state(form?.error);
 	let success = $state(form?.success);
 
@@ -42,17 +29,12 @@
 			clearInterval(interval);
 		};
 	});
-
-	// $effect(() => {
-	// 	console.log(success);
-	// 	if (success) invalidateAll();
-	// });
 </script>
 
 <BaseModal bind:showModal>
 	<form
 		method="POST"
-		action="?/edit"
+		action="/blog/create?/post"
 		class="w-full"
 		use:enhance={({ formData, cancel }) => {
 			const validation = validateCreateFormClient(formData, cancel);
@@ -77,7 +59,7 @@
 			<label>
 				Custom Category
 				<br />
-				<input name="customCategory" bind:value={customCategory} />
+				<input class="w-full" name="customCategory" bind:value={customCategory} />
 				{#if error === CreateFormError.invalidCategory || error === CreateFormError.missingCategory}
 					<p class="error">{error}</p>
 				{/if}
@@ -87,7 +69,7 @@
 		<label>
 			Desired URL for the post
 			<br />
-			<input name="url" type="text" required={true} bind:value={url} />
+			<input class="w-full" name="url" type="text" required={true} bind:value={url} />
 			{#if error === CreateFormError.invalidUrl || error === CreateFormError.missingUrl}
 				<p class="error">{error}</p>
 			{/if}
@@ -96,19 +78,13 @@
 		<label>
 			Brief Description
 			<br />
-			<input
-				name="description"
-				type="text"
-				maxlength={128}
-				required={false}
-				bind:value={description}
-			/>
+			<input class="w-full" name="description" type="text" maxlength={128} required={false} />
 		</label>
 		<br />
 		<label>
 			Body
 			<br />
-			<textarea name="body" required={true} bind:value={body}></textarea>
+			<textarea name="body" required={true}></textarea>
 			{#if error === CreateFormError.missingBody || error === CreateFormError.missingUrl}
 				<p class="error">{error}</p>
 			{/if}
@@ -122,13 +98,12 @@
 				id="unlisted"
 				type="checkbox"
 				name="unlisted"
-				class="text-accent focus:ring-accent h-4 w-4 rounded"
-				bind:checked={unlisted}
+				class="text-accent focus:ring-accent h-4 w-4 rounded-sm"
 			/>
 			<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
 		</div>
 		<br />
-		<button type="submit">Post!</button>
+		<button>Post!</button>
 		{#if error === CreateFormError.databaseError}
 			<p class="error">{error}</p>
 		{/if}
