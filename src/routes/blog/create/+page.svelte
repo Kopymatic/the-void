@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { CreateFormError } from '$lib';
 	import { validateCreateFormClient } from '$lib/formValidation';
-	import Article from '../../components/Article.svelte';
+	import Article from '../../../components/Article.svelte';
 	import type { PageData, ActionData } from './$types';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
