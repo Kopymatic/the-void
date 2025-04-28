@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import '../app.css';
-	import type { PageData } from './$types';
 	import Footer from '../components/Footer.svelte';
 	import Header from '../components/Header.svelte';
 	let { children }: { children: Snippet<[]> } = $props();
@@ -12,9 +11,9 @@
 	<meta name="description" content="Silly little thoughts from my silly little head" />
 </svelte:head>
 
-<div class="mx-auto box-border flex h-screen w-screen max-w-5xl flex-col">
+<div class="mx-auto box-border flex h-screen w-screen max-w-6xl flex-col">
 	<Header></Header>
-	<div class=" w-full flex-grow">
+	<div class="flex-grow">
 		{@render children()}
 	</div>
 	<Footer></Footer>
