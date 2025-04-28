@@ -5,7 +5,9 @@
 	let { posts }: { posts: Post[] } = $props();
 </script>
 
-<div class="mx-auto grid grid-cols-1 *:mx-2 *:max-w-full sm:grid-cols-2 md:grid-cols-3">
+<div
+	class="group mx-auto grid grid-cols-1 gap-2 px-4 *:box-border *:group-hover:scale-95 *:group-hover:opacity-90 *:hover:z-10 *:hover:scale-105 *:hover:opacity-100 sm:grid-cols-2 xl:grid-cols-3"
+>
 	{#each posts as post (post.id)}
 		<MiniPost {post}></MiniPost>
 	{:else}
