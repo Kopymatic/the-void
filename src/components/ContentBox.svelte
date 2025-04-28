@@ -10,7 +10,7 @@
 	class:prose-sm={small}
 	class:prose-invert={prose}
 	class:not-prose={!prose}
-	class="my-2 min-h-min min-w-min rounded-lg border-2 border-primary bg-secondary p-4 hover:border-accent"
+	class="border-primary bg-secondary hover:border-accent rounded-lg border-2 p-4 transition-all duration-300 ease-in-out"
 >
 	{#if children}
 		{@render children()}

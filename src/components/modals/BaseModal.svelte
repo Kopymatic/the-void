@@ -29,7 +29,7 @@
 		onclick={(e) => {
 			if (e.target === dialog) showModal = false;
 		}}
-		class="border-primary bg-secondary-background w-full self-center justify-self-center rounded-lg border-4 p-0 text-white backdrop-blur-xl backdrop:bg-black/50 md:max-w-3xl"
+		class="border-primary bg-secondary-background z-30 w-full self-center justify-self-center rounded-lg border-4 p-0 text-white backdrop:bg-black/50 backdrop:backdrop-blur-sm md:max-w-3xl"
 	>
 		<div class="p-4">
 			{@render children()}
