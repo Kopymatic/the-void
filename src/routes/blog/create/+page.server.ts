@@ -6,10 +6,11 @@ import { env } from '$env/dynamic/private';
 import { CreateFormError } from '$lib';
 import { defaultCategories } from '$lib/defaultCategories';
 import { validateCreateFormServer } from '$lib/server/serverFormValidation';
+import { isAdmin } from '$lib/server/isAdmin';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.auth();
-	if (session && session.user?.id === env.ADMIN_DISCORD_ID) {
+	if (session && isAdmin(session.user?.id)) {
 		return {
 			defaultCategories
 		};

@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "../node_modules/.prisma/client"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -14,13 +14,13 @@ datasource db {
 model Post {
   // posts should be able to be pulled up with either /posts/[id]
   // or /posts/[category]/[url]
-  id Int @id @default(autoincrement())
-  url String @unique
-  category String @default("uncategorized")
+  id          Int     @id @default(autoincrement())
+  url         String  @unique
+  category    String  @default("uncategorized")
   description String?
-  body String
-  author String @default("kopymatic")
-  authorId String @default("326489320980611075")
+  body        String
+  author      String  @default("kopymatic")
+  authorId    String  @default("326489320980611075")
 
   //When unlisted is set to true the page will not show up on the list site.
   //You also wont be able to pull it up using /posts/[id], you will need the specific url
@@ -28,5 +28,15 @@ model Post {
   unlisted Boolean @default(false)
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Shortcut {
+  id String @id @default(uuid())
+
+  shortcut    String @unique
+  redirectUrl String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }

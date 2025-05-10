@@ -122,7 +122,7 @@ export const slogans = [
 	I'm relieved. Now we only have to make one decision in life.
 	But, Adam, how could they never have told us that?`,
 	'SOMEBODY ONCE TOLD ME',
-	"Millenials are killing the doorbell industry by texting'here'",
+	"Millenials are killing the doorbell industry by texting 'here'",
 	'https://thevoid.kopymatic.com/mike',
 	"im 19 years old and i've already wasted my entire life"
 ];
