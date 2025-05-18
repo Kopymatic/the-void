@@ -2,7 +2,6 @@ import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { prisma } from '$lib/server/database/database';
 import type { PageServerLoad } from './$types';
-import { env } from '$env/dynamic/private';
 import { CreateFormError } from '$lib';
 import { defaultCategories } from '$lib/defaultCategories';
 import { validateCreateFormServer } from '$lib/server/serverFormValidation';
@@ -19,7 +18,11 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions = {
-	post: async ({ request }) => {
+	post: async ({ request, locals }) => {
+		const session = await locals.auth();
+		if (!session || !isAdmin(session.user?.id)) {
+			error(401);
+		}
 		console.log('recieved post request');
 		let formData = await request.formData();
 
