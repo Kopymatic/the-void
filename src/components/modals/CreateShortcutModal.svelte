@@ -4,17 +4,15 @@
 	import type { ActionData } from '../../routes/blog/posts/[category]/[url]/$types';
 	import BaseModal from './BaseModal.svelte';
 	import { defaultCategories } from '$lib/defaultCategories';
-	import { validateCreateFormClient } from '$lib/formValidation';
+	import { validateCreateFormClient, validateShortcutFormClient } from '$lib/formValidation';
 	import { invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
 
 	let { showModal = $bindable(), form }: { showModal: boolean; form?: ActionData } = $props();
 
-	let selectedCategory: string = $state(defaultCategories[0]);
-	let customCategory: string | undefined = $state(undefined);
-	let finalCategory = $derived(customCategory || selectedCategory);
-	let url = $state('');
-	let completeUrl = $derived(finalCategory + '/' + url);
+	let shortcutName = $state('');
+	let completeUrl = $derived('kopymatic.com/quick/' + shortcutName);
+	let completeFyiUrl = $derived('kopy.fyi/' + shortcutName);
 
 	let error: CreateFormError | undefined = $state(form?.error);
 	let success = $state(form?.success);
@@ -33,10 +31,10 @@
 <BaseModal bind:showModal>
 	<form
 		method="POST"
-		action="/blog/create?/post"
+		action="/shortcut/create?/post"
 		class="w-full"
 		use:enhance={({ formData, cancel }) => {
-			const validation = validateCreateFormClient(formData, cancel);
+			const validation = validateShortcutFormClient(formData, cancel);
 			if (validation.error) error = validation.error;
 			else {
 				showModal = false;
@@ -45,64 +43,36 @@
 		}}
 	>
 		<label>
-			Category
+			Shortcut Name
 			<br />
-			<select name="selectedCategory" bind:value={selectedCategory}>
-				{#each defaultCategories as defaultCategory}
-					<option value={defaultCategory}>{defaultCategory}</option>
-				{/each}
-			</select>
-		</label>
-		<br />
-		{#if selectedCategory === 'custom'}
-			<label>
-				Custom Category
-				<br />
-				<input class="w-full" name="customCategory" bind:value={customCategory} />
-				{#if error === CreateFormError.invalidCategory || error === CreateFormError.missingCategory}
-					<p class="error">{error}</p>
-				{/if}
-			</label>
-			<br />
-		{/if}
-		<label>
-			Desired URL for the post
-			<br />
-			<input class="w-full" name="url" type="text" required={true} bind:value={url} />
+			<input
+				class="w-full"
+				name="name"
+				type="text"
+				required={true}
+				maxlength={64}
+				bind:value={shortcutName}
+			/>
 			{#if error === CreateFormError.invalidUrl || error === CreateFormError.missingUrl}
 				<p class="error">{error}</p>
 			{/if}
 		</label>
-		<p>your post will be at {completeUrl}</p>
-		<label>
-			Brief Description
-			<br />
-			<input class="w-full" name="description" type="text" maxlength={128} required={false} />
-		</label>
+		<p class="text-secondary-text">
+			Your shortcut will be at {completeUrl} <br />and {completeFyiUrl}
+		</p>
 		<br />
 		<label>
-			Body
+			Destination URL
 			<br />
-			<textarea name="body" required={true}></textarea>
-			{#if error === CreateFormError.missingBody || error === CreateFormError.missingUrl}
-				<p class="error">{error}</p>
-			{/if}
-		</label>
-		<br />
-		<br />
-		<div
-			class="border-primary bg-secondary box-border flex max-h-min items-center rounded-md border-2 px-4 md:w-1/3"
-		>
 			<input
-				id="unlisted"
-				type="checkbox"
-				name="unlisted"
-				class="text-accent focus:ring-accent h-4 w-4 rounded-sm"
+				class="w-full"
+				name="destination"
+				type="text"
+				placeholder="https://www.example.com/"
+				required={true}
 			/>
-			<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
-		</div>
-		<br />
-		<button>Post!</button>
+		</label>
+		<button class="mt-10">Post!</button>
 		{#if error === CreateFormError.databaseError}
 			<p class="error">{error}</p>
 		{/if}
@@ -111,7 +81,6 @@
 
 <style>
 	input,
-	textarea,
 	button {
 		@apply w-full;
 	}

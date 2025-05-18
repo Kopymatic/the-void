@@ -25,14 +25,15 @@
 					showPostModal = true;
 				}}>create a post</button
 			>
-			-
+			- <a href="/blog/list/all">list all posts</a>
+			<br />
 			<button
 				class="text-accent inline cursor-pointer border-0 bg-transparent p-0"
 				onclick={() => {
-					showPostModal = true;
+					showShortcutModal = true;
 				}}>create a shortcut</button
 			>
-			- <a href="/blog/list/all">list all posts</a>
+			- <a href="/shortcut/view">list all shortcuts</a>
 		{/if}
 	{/if}
 	<br />

@@ -1,5 +1,5 @@
 import { applyAction } from '$app/forms';
-import { categoryRegex, CreateFormError, urlRegex } from '$lib';
+import { categoryRegex, CreateFormError, httpRegex, urlRegex } from '$lib';
 import { goto } from '$app/navigation';
 import type { ActionResult } from '@sveltejs/kit';
 
@@ -30,6 +30,41 @@ export const validateCreateFormClient = (formData: FormData, cancel: () => void)
 		return { error: CreateFormError.invalidCategory };
 	}
 	if (!urlRegex.test(url)) {
+		cancel();
+		return { error: CreateFormError.invalidUrl };
+	}
+
+	return {
+		submit: async ({ result }: { result: ActionResult }) => {
+			// `result` is an `ActionResult` object
+			if (result.type === 'redirect') {
+				goto(result.location);
+			} else {
+				await applyAction(result);
+			}
+		}
+	};
+};
+
+export const validateShortcutFormClient = (formData: FormData, cancel: () => void) => {
+	let shortcutName = formData.get('name')?.toString();
+	let destination = formData.get('destination')?.toString();
+
+	// Filter out all the required params
+	if (!shortcutName) {
+		cancel();
+		return { error: CreateFormError.missingUrl };
+	}
+	if (!destination) {
+		cancel();
+		return { error: CreateFormError.missingBody };
+	}
+
+	if (!urlRegex.test(shortcutName)) {
+		cancel();
+		return { error: CreateFormError.invalidUrl };
+	}
+	if (!httpRegex.test(destination)) {
 		cancel();
 		return { error: CreateFormError.invalidUrl };
 	}
