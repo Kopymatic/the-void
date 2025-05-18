@@ -4,6 +4,7 @@ import { prisma } from '$lib/server/database/database';
 import { env } from '$env/dynamic/private';
 import { CreateFormError } from '$lib';
 import { validateCreateFormServer } from '$lib/server/serverFormValidation';
+import { isAdmin } from '$lib/server/isAdmin';
 
 export const load: PageServerLoad = async ({ params }) => {
 	let category = params.category;
@@ -19,9 +20,9 @@ export const load: PageServerLoad = async ({ params }) => {
 };
 
 export const actions = {
-	delete: async ({ request, locals, params }) => {
+	delete: async ({ locals, params }) => {
 		const session = await locals.auth();
-		if (!session || session.user?.id !== env.ADMIN_DISCORD_ID) {
+		if (!session || !isAdmin(session.user?.id)) {
 			error(401);
 		}
 
@@ -45,7 +46,12 @@ export const actions = {
 				redirect(302, '/blog/list');
 			});
 	},
-	edit: async ({ request, params }) => {
+	edit: async ({ request, params, locals }) => {
+		const session = await locals.auth();
+		if (!session || !isAdmin(session.user?.id)) {
+			error(401);
+		}
+
 		console.log('recieved edit request');
 		let formData = await request.formData();
 

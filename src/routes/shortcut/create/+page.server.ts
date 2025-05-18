@@ -4,18 +4,11 @@ import { prisma } from '$lib/server/database/database';
 import type { PageServerLoad } from './$types';
 import { CreateFormError } from '$lib';
 import { defaultCategories } from '$lib/defaultCategories';
-import { validateCreateFormServer } from '$lib/server/serverFormValidation';
+import {
+	validateCreateFormServer,
+	validateShortcutCreateFormServer
+} from '$lib/server/serverFormValidation';
 import { isAdmin } from '$lib/server/isAdmin';
-
-export const load: PageServerLoad = async ({ locals }) => {
-	const session = await locals.auth();
-	if (session && isAdmin(session.user?.id)) {
-		return {
-			defaultCategories
-		};
-	}
-	error(401);
-};
 
 export const actions = {
 	post: async ({ request, locals }) => {
@@ -23,10 +16,11 @@ export const actions = {
 		if (!session || !isAdmin(session.user?.id)) {
 			error(401);
 		}
+
 		console.log('recieved post request');
 		let formData = await request.formData();
 
-		const result = validateCreateFormServer(formData);
+		const result = validateShortcutCreateFormServer(formData);
 		if (result.status || result.error) {
 			fail(result.status, {
 				error: result.error,
@@ -34,8 +28,8 @@ export const actions = {
 			});
 		}
 
-		const { body, category, description, unlisted, url } = result.data;
-		if (!url || !body) {
+		const { shortcutName, destination } = result.data;
+		if (!shortcutName || !destination) {
 			console.log('The server validation function fucked up');
 			fail(500, {
 				error: CreateFormError.internalError
@@ -43,8 +37,8 @@ export const actions = {
 			return;
 		}
 
-		const post = await prisma.post.create({
-			data: { body, url, category, description, unlisted: unlisted }
+		const post = await prisma.shortcut.create({
+			data: { shortcut: shortcutName, redirectUrl: destination }
 		});
 		if (!post) {
 			return fail(500, {
@@ -52,6 +46,6 @@ export const actions = {
 				message: 'Unknown error with the database.'
 			});
 		}
-		redirect(302, `/blog/posts/${post.category}/${post.url}`);
+		redirect(302, `/shortcut/view`);
 	}
 } satisfies Actions;

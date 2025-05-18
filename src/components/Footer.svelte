@@ -3,6 +3,7 @@
 	import type { SessionUser } from '$lib/server/types';
 	import FunnyText from './FunnyText.svelte';
 	import CreatePostModal from './modals/CreatePostModal.svelte';
+	import CreateShortcutModal from './modals/CreateShortcutModal.svelte';
 	let session = $page.data.session;
 	let user: SessionUser | undefined = $state($page.data.user);
 	let versions: {
@@ -10,7 +11,8 @@
 		package: string;
 	} = $state($page.data.versions);
 
-	let showCreateModal = $state(false);
+	let showPostModal = $state(false);
+	let showShortcutModal = $state(false);
 </script>
 
 <footer class="mx-auto w-full justify-items-center text-center">
@@ -20,10 +22,18 @@
 			<button
 				class="text-accent inline cursor-pointer border-0 bg-transparent p-0"
 				onclick={() => {
-					showCreateModal = true;
+					showPostModal = true;
 				}}>create a post</button
 			>
 			- <a href="/blog/list/all">list all posts</a>
+			<br />
+			<button
+				class="text-accent inline cursor-pointer border-0 bg-transparent p-0"
+				onclick={() => {
+					showShortcutModal = true;
+				}}>create a shortcut</button
+			>
+			- <a href="/shortcut/view">list all shortcuts</a>
 		{/if}
 	{/if}
 	<br />
@@ -36,4 +46,5 @@
 		>
 	</p>
 </footer>
-<CreatePostModal bind:showModal={showCreateModal}></CreatePostModal>
+<CreatePostModal bind:showModal={showPostModal}></CreatePostModal>
+<CreateShortcutModal bind:showModal={showShortcutModal}></CreateShortcutModal>

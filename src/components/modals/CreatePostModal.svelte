@@ -5,8 +5,7 @@
 	import BaseModal from './BaseModal.svelte';
 	import { defaultCategories } from '$lib/defaultCategories';
 	import { validateCreateFormClient } from '$lib/formValidation';
-	import type { Post } from '@prisma/client';
-	import { invalidate, invalidateAll } from '$app/navigation';
+	import { invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
 
 	let { showModal = $bindable(), form }: { showModal: boolean; form?: ActionData } = $props();
