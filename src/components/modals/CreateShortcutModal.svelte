@@ -1,34 +1,23 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { CreateFormError } from '$lib';
-	import type { ActionData } from '../../routes/blog/posts/[category]/[url]/$types';
+	import { ShortcutFormError } from '$lib';
 	import BaseModal from './BaseModal.svelte';
-	import { defaultCategories } from '$lib/defaultCategories';
-	import { validateCreateFormClient, validateShortcutFormClient } from '$lib/formValidation';
+	import { validateShortcutFormClient } from '$lib/formValidation';
 	import { invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import ConfirmButton from '../buttons/ConfirmButton.svelte';
+	import CancelButton from '../buttons/CancelButton.svelte';
 
-	let { showModal = $bindable(), form }: { showModal: boolean; form?: ActionData } = $props();
+	let { showModal = $bindable() }: { showModal: boolean } = $props();
 
 	let shortcutName = $state('');
 	let completeUrl = $derived('kopymatic.com/quick/' + shortcutName);
 	let completeFyiUrl = $derived('kopy.fyi/' + shortcutName);
 
-	let error: CreateFormError | undefined = $state(form?.error);
-	let success = $state(form?.success);
-
-	onMount(() => {
-		const interval = setInterval(() => {
-			if (success) invalidateAll();
-		}, 1000);
-
-		return () => {
-			clearInterval(interval);
-		};
-	});
+	let error: ShortcutFormError | undefined = $state(undefined);
 </script>
 
-<BaseModal bind:showModal>
+<BaseModal hideWhenUnfocused={false} bind:showModal>
 	<form
 		method="POST"
 		action="/shortcut/create?/post"
@@ -53,7 +42,7 @@
 				maxlength={64}
 				bind:value={shortcutName}
 			/>
-			{#if error === CreateFormError.invalidUrl || error === CreateFormError.missingUrl}
+			{#if error === ShortcutFormError.invalidName || error === ShortcutFormError.missingName}
 				<p class="error">{error}</p>
 			{/if}
 		</label>
@@ -71,17 +60,27 @@
 				placeholder="https://www.example.com/"
 				required={true}
 			/>
+			{#if error === ShortcutFormError.invalidDestination || error === ShortcutFormError.missingDestination}
+				<p class="error">{error}</p>
+			{/if}
 		</label>
-		<button class="mt-10">Post!</button>
-		{#if error === CreateFormError.databaseError}
+		<div class="mt-5 flex flex-auto gap-2">
+			<ConfirmButton class="w-full" text="Create Shortcut"></ConfirmButton>
+			<CancelButton
+				class="w-full"
+				onclick={() => {
+					showModal = false;
+				}}
+			></CancelButton>
+		</div>
+		{#if error === ShortcutFormError.databaseError}
 			<p class="error">{error}</p>
 		{/if}
 	</form>
 </BaseModal>
 
 <style>
-	input,
-	button {
+	input {
 		@apply w-full;
 	}
 </style>

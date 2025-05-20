@@ -30,7 +30,7 @@
 	});
 </script>
 
-<BaseModal bind:showModal>
+<BaseModal hideWhenUnfocused={false} bind:showModal>
 	<form
 		method="POST"
 		action="/blog/create?/post"

@@ -1,5 +1,5 @@
 import { applyAction } from '$app/forms';
-import { categoryRegex, CreateFormError, httpRegex, urlRegex } from '$lib';
+import { categoryRegex, CreateFormError, httpRegex, ShortcutFormError, urlRegex } from '$lib';
 import { goto } from '$app/navigation';
 import type { ActionResult } from '@sveltejs/kit';
 
@@ -46,27 +46,33 @@ export const validateCreateFormClient = (formData: FormData, cancel: () => void)
 	};
 };
 
-export const validateShortcutFormClient = (formData: FormData, cancel: () => void) => {
-	let shortcutName = formData.get('name')?.toString();
-	let destination = formData.get('destination')?.toString();
+export const validateShortcutFormClient = (
+	formData: FormData,
+	cancel: () => void
+): {
+	error?: ShortcutFormError;
+	submit?: ({ result }: { result: ActionResult }) => Promise<void>;
+} => {
+	let shortcutName = formData.get('name')?.toString().trim();
+	let destination = formData.get('destination')?.toString().trim();
 
 	// Filter out all the required params
 	if (!shortcutName) {
 		cancel();
-		return { error: CreateFormError.missingUrl };
+		return { error: ShortcutFormError.missingName };
 	}
 	if (!destination) {
 		cancel();
-		return { error: CreateFormError.missingBody };
+		return { error: ShortcutFormError.missingDestination };
 	}
 
 	if (!urlRegex.test(shortcutName)) {
 		cancel();
-		return { error: CreateFormError.invalidUrl };
+		return { error: ShortcutFormError.invalidName };
 	}
 	if (!httpRegex.test(destination)) {
 		cancel();
-		return { error: CreateFormError.invalidUrl };
+		return { error: ShortcutFormError.invalidDestination };
 	}
 
 	return {
