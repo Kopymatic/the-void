@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { CreateFormError } from '$lib';
-	import type { ActionData } from '../../routes/blog/posts/[category]/[url]/$types';
+	import type { ActionData } from '../../routes/posts/[category]/[url]/$types';
 	import BaseModal from './BaseModal.svelte';
 	import { defaultCategories } from '$lib/defaultCategories';
 	import { validateCreateFormClient } from '$lib/formValidation';
 	import type { Post } from '@prisma/client';
 	import { invalidate, invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import ConfirmButton from '../buttons/ConfirmButton.svelte';
+	import CancelButton from '../buttons/CancelButton.svelte';
 
 	let {
 		currentPost,
@@ -42,14 +44,9 @@
 			clearInterval(interval);
 		};
 	});
-
-	// $effect(() => {
-	// 	console.log(success);
-	// 	if (success) invalidateAll();
-	// });
 </script>
 
-<BaseModal bind:showModal>
+<BaseModal hideWhenUnfocused={false} bind:showModal>
 	<form
 		method="POST"
 		action="?/edit"
@@ -128,7 +125,15 @@
 			<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
 		</div>
 		<br />
-		<button type="submit">Post!</button>
+		<div class="flex flex-auto gap-2">
+			<ConfirmButton class="w-full" text="Confirm Edit"></ConfirmButton>
+			<CancelButton
+				class="w-full"
+				onclick={() => {
+					showModal = false;
+				}}
+			></CancelButton>
+		</div>
 		{#if error === CreateFormError.databaseError}
 			<p class="error">{error}</p>
 		{/if}
@@ -137,8 +142,7 @@
 
 <style>
 	input,
-	textarea,
-	button {
+	textarea {
 		@apply w-full;
 	}
 </style>

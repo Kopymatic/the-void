@@ -6,6 +6,6 @@
 	<Article>
 		<h3 class="mt-2">welcome</h3>
 
-		<p><a href="/blog/list">search through the void</a></p>
+		<p><a href="/posts">search through the void</a></p>
 	</Article>
 </div>

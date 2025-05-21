@@ -25,7 +25,7 @@
 					showPostModal = true;
 				}}>create a post</button
 			>
-			- <a href="/blog/list/all">list all posts</a>
+			- <a href="/posts/all">list all posts</a>
 			<br />
 			<button
 				class="text-accent inline cursor-pointer border-0 bg-transparent p-0"

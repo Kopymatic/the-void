@@ -40,8 +40,8 @@ export const validateCreateFormServer = (formData: FormData) => {
 };
 
 export const validateShortcutCreateFormServer = (formData: FormData) => {
-	let shortcutName = formData.get('name')?.toString();
-	let destination = formData.get('destination')?.toString();
+	let shortcutName = formData.get('name')?.toString().trim();
+	let destination = formData.get('destination')?.toString().trim();
 
 	let data = {
 		shortcutName,

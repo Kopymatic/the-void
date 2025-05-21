@@ -1,16 +1,18 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { CreateFormError } from '$lib';
-	import type { ActionData } from '../../routes/blog/posts/[category]/[url]/$types';
+	import type { ActionData } from '../../routes/posts/[category]/[url]/$types';
 	import BaseModal from './BaseModal.svelte';
 	import { defaultCategories } from '$lib/defaultCategories';
 	import { validateCreateFormClient } from '$lib/formValidation';
 	import { invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import CancelButton from '../buttons/CancelButton.svelte';
+	import ConfirmButton from '../buttons/ConfirmButton.svelte';
 
 	let { showModal = $bindable(), form }: { showModal: boolean; form?: ActionData } = $props();
 
-	let selectedCategory: string = $state(defaultCategories[0]);
+	let selectedCategory: string = $state(defaultCategories[6]);
 	let customCategory: string | undefined = $state(undefined);
 	let finalCategory = $derived(customCategory || selectedCategory);
 	let url = $state('');
@@ -30,10 +32,10 @@
 	});
 </script>
 
-<BaseModal bind:showModal>
+<BaseModal hideWhenUnfocused={false} bind:showModal>
 	<form
 		method="POST"
-		action="/blog/create?/post"
+		action="/posts/create?/post"
 		class="w-full"
 		use:enhance={({ formData, cancel }) => {
 			const validation = validateCreateFormClient(formData, cancel);
@@ -102,7 +104,15 @@
 			<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
 		</div>
 		<br />
-		<button>Post!</button>
+		<div class="flex flex-auto gap-2">
+			<ConfirmButton type="submit" class="w-full" text="Post!"></ConfirmButton>
+			<CancelButton
+				class="w-full"
+				onclick={() => {
+					showModal = false;
+				}}
+			></CancelButton>
+		</div>
 		{#if error === CreateFormError.databaseError}
 			<p class="error">{error}</p>
 		{/if}
@@ -111,8 +121,7 @@
 
 <style>
 	input,
-	textarea,
-	button {
+	textarea {
 		@apply w-full;
 	}
 </style>

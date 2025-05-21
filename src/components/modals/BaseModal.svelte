@@ -4,9 +4,11 @@
 
 	let {
 		showModal = $bindable(),
+		hideWhenUnfocused = true,
 		children
 	}: {
 		showModal: boolean;
+		hideWhenUnfocused?: boolean;
 		children: Snippet<[]>;
 	} = $props();
 
@@ -27,7 +29,7 @@
 		bind:this={dialog}
 		onclose={() => (showModal = false)}
 		onclick={(e) => {
-			if (e.target === dialog) showModal = false;
+			if (e.target === dialog && hideWhenUnfocused) showModal = false;
 		}}
 		class="border-primary bg-secondary-background z-30 w-full self-center justify-self-center rounded-lg border-4 p-0 text-white backdrop:bg-black/50 backdrop:backdrop-blur-sm md:max-w-3xl"
 	>
