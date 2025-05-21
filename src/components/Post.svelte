@@ -30,7 +30,7 @@
 <Article>
 	<div class=" flex content-center items-center justify-between">
 		<h2 class="not-prose my-6 text-xl font-bold">
-			<a href={`/blog/posts/${post.category}/${post.url}`}>/posts/{post.category}/{post.url}</a>
+			<a href={`/posts/${post.category}/${post.url}`}>/posts/{post.category}/{post.url}</a>
 			<br class="md:hidden" />
 			{#if post.unlisted}
 				<i class="text-secondary-text">(unlisted)</i>

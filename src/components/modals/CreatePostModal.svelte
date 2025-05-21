@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { CreateFormError } from '$lib';
-	import type { ActionData } from '../../routes/blog/posts/[category]/[url]/$types';
+	import type { ActionData } from '../../routes/posts/[category]/[url]/$types';
 	import BaseModal from './BaseModal.svelte';
 	import { defaultCategories } from '$lib/defaultCategories';
 	import { validateCreateFormClient } from '$lib/formValidation';
@@ -35,7 +35,7 @@
 <BaseModal hideWhenUnfocused={false} bind:showModal>
 	<form
 		method="POST"
-		action="/blog/create?/post"
+		action="/posts/create?/post"
 		class="w-full"
 		use:enhance={({ formData, cancel }) => {
 			const validation = validateCreateFormClient(formData, cancel);

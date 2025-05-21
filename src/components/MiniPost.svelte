@@ -7,7 +7,7 @@
 
 	let { category, url, description, author, body, createdAt, id } = post;
 
-	let fullUrl = category && url ? `/blog/posts/${category}/${url}` : undefined;
+	let fullUrl = category && url ? `/posts/${category}/${url}` : undefined;
 </script>
 
 <ContentBox prose small>
