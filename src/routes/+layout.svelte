@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>The Void</title>
+	<title>Kopymatic</title>
 	<meta name="description" content="Silly little thoughts from my silly little head" />
 </svelte:head>
 

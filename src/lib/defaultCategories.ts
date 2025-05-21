@@ -5,6 +5,6 @@ export const defaultCategories = [
 	'idea',
 	'devlog',
 	'test',
-	'misc.',
+	'misc',
 	'custom'
 ];

@@ -7,10 +7,12 @@
 	import { validateCreateFormClient } from '$lib/formValidation';
 	import { invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import CancelButton from '../buttons/CancelButton.svelte';
+	import ConfirmButton from '../buttons/ConfirmButton.svelte';
 
 	let { showModal = $bindable(), form }: { showModal: boolean; form?: ActionData } = $props();
 
-	let selectedCategory: string = $state(defaultCategories[0]);
+	let selectedCategory: string = $state(defaultCategories[6]);
 	let customCategory: string | undefined = $state(undefined);
 	let finalCategory = $derived(customCategory || selectedCategory);
 	let url = $state('');
@@ -102,7 +104,15 @@
 			<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
 		</div>
 		<br />
-		<button>Post!</button>
+		<div class="flex flex-auto gap-2">
+			<ConfirmButton type="submit" class="w-full" text="Post!"></ConfirmButton>
+			<CancelButton
+				class="w-full"
+				onclick={() => {
+					showModal = false;
+				}}
+			></CancelButton>
+		</div>
 		{#if error === CreateFormError.databaseError}
 			<p class="error">{error}</p>
 		{/if}
@@ -111,8 +121,7 @@
 
 <style>
 	input,
-	textarea,
-	button {
+	textarea {
 		@apply w-full;
 	}
 </style>

@@ -6,6 +6,8 @@
 	import type { SessionUser } from '$lib/server/types';
 	import DeletePostModal from './modals/DeletePostModal.svelte';
 	import EditPostModal from './modals/EditPostModal.svelte';
+	import EditIcon from './icons/EditIcon.svelte';
+	import TrashIcon from './icons/TrashIcon.svelte';
 
 	let user: SessionUser | undefined = $state($page.data.user);
 
@@ -21,35 +23,36 @@
 	<title>{`${post.category}/${post.url}`}</title>
 	<meta name="description" content={post.description} />
 	<meta name="og:title" content={`${post.category}/${post.url}`} />
-	<meta name="og:site_name" content="the void" />
+	<meta name="og:site_name" content="Kopymatic.com" />
 	<meta name="og:description" content={post.description} />
 </svelte:head>
 
 <Article>
-	<div class="my-4 flex items-center justify-between *:self-center">
-		<h2 class="my-auto text-center">
+	<div class=" flex content-center items-center justify-between">
+		<h2 class="not-prose my-6 text-xl font-bold">
 			<a href={`/blog/posts/${post.category}/${post.url}`}>/posts/{post.category}/{post.url}</a>
+			<br class="md:hidden" />
 			{#if post.unlisted}
 				<i class="text-secondary-text">(unlisted)</i>
 			{/if}
 		</h2>
 		{#if user?.isAdmin && editable}
-			<div>
+			<div class="flex flex-col gap-1 md:flex-row">
 				<button
-					class="max-h-min"
+					class="flex max-h-min flex-nowrap"
 					onclick={() => {
 						showEditModal = true;
 					}}
 				>
-					Edit
+					<EditIcon /> Edit
 				</button>
 				<button
-					class="hover:bg-warn-red max-h-min duration-300"
+					class="bg-warn flex max-h-min flex-nowrap"
 					onclick={() => {
 						showDeleteModal = true;
 					}}
 				>
-					Delete
+					<TrashIcon /> Delete
 				</button>
 			</div>
 		{/if}
