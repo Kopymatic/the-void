@@ -19,7 +19,7 @@
 	let completeUrl = $derived(finalCategory + '/' + url);
 
 	let error: CreateFormError | undefined = $state(form?.error);
-	let success = $state(form?.success);
+	let success = $state(form?.message);
 
 	onMount(() => {
 		const interval = setInterval(() => {

@@ -1,7 +1,6 @@
 import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { prisma } from '$lib/server/database/database';
-import { env } from '$env/dynamic/private';
 import { CreateFormError } from '$lib';
 import { validateCreateFormServer } from '$lib/server/serverFormValidation';
 import { isAdmin } from '$lib/server/isAdmin';
@@ -61,6 +60,7 @@ export const actions = {
 				error: result.error,
 				reconstructedData: result.data
 			});
+			return;
 		}
 
 		const { body, category, description, unlisted, url } = result.data;
@@ -81,22 +81,17 @@ export const actions = {
 		});
 		if (!toEdit) error(404, 'Not found');
 
-		const post = await prisma.post.update({
+		const newPost = await prisma.post.update({
 			where: { id: toEdit.id },
 			data: { body, url, category, description, unlisted }
 		});
-		if (!post) {
+		if (!newPost) {
 			return fail(500, {
 				error: CreateFormError.databaseError,
 				message: 'Unknown error with the database.'
 			});
 		}
 
-		const previousFullUrl = toEdit.category + '/' + toEdit.url;
-		const newFullUrl = post.category + '/' + post.url;
-
-		if (previousFullUrl === newFullUrl) {
-			return { success: true };
-		} else redirect(302, `/posts/${post.category}/${post.url}`);
+		redirect(302, `/posts/${newPost.category}/${newPost.url}`);
 	}
 } satisfies Actions;

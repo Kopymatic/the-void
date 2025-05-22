@@ -1,7 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { prisma } from '$lib/server/database/database';
-import { env } from '$env/dynamic/private';
 import { isAdmin } from '$lib/server/isAdmin';
 
 export const load: PageServerLoad = async ({ locals }) => {

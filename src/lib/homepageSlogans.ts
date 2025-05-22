@@ -26,7 +26,8 @@ export const slogans = [
 	'https://kopymatic.com/mike',
 	"im 19 years old and i've already wasted my entire life",
 	'auth sucks',
-	'hey past me Doom: the dark ages was pretty awesome'
+	'hey past me Doom: the dark ages was pretty awesome',
+	'now with shortcuts'
 ];
 
 export const getRandomSlogan = () => {

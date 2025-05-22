@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { EventHandler } from 'svelte/elements';
-	import Check from '../icons/CheckIcon.svelte';
+	import EditIcon from '../icons/EditIcon.svelte';
 
 	let {
-		text = 'Confirm',
-		type = 'submit',
+		text = 'Edit',
+		type = 'button',
 		onclick = undefined,
 		iconOnly = false,
 		class: className = ''
@@ -19,7 +19,7 @@
 
 <button class={className} {onclick} {type}>
 	<div class="mx-auto flex w-min text-nowrap">
-		<Check class="stroke-white" />
+		<EditIcon class="max-h-full stroke-white" />
 		<span class:hidden={iconOnly}>{text}</span>
 	</div>
 </button>
