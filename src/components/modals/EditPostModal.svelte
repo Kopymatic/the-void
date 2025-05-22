@@ -6,7 +6,7 @@
 	import { defaultCategories } from '$lib/defaultCategories';
 	import { validateCreateFormClient } from '$lib/formValidation';
 	import type { Post } from '@prisma/client';
-	import { invalidate, invalidateAll } from '$app/navigation';
+	import { invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import ConfirmButton from '../buttons/ConfirmButton.svelte';
 	import CancelButton from '../buttons/CancelButton.svelte';
@@ -16,9 +16,6 @@
 		showModal = $bindable(),
 		form
 	}: { showModal: boolean; form?: ActionData; currentPost: Post } = $props();
-
-	// let category: string | undefined = $state(undefined);
-	// let url = $state('');
 
 	let { body, category, url, description, unlisted } = $state(currentPost);
 	let selectedCategory = $state(defaultCategories[0]);
@@ -33,7 +30,7 @@
 
 	let completeUrl = $derived(finalCategory + '/' + url);
 	let error: CreateFormError | undefined = $state(form?.error);
-	let success = $state(form?.success);
+	let success = $state(form?.message);
 
 	onMount(() => {
 		const interval = setInterval(() => {

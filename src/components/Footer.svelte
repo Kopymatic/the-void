@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import type { SessionUser } from '$lib/server/types';
 	import FunnyText from './FunnyText.svelte';
 	import CreatePostModal from './modals/CreatePostModal.svelte';
 	import CreateShortcutModal from './modals/CreateShortcutModal.svelte';
-	let session = $page.data.session;
-	let user: SessionUser | undefined = $state($page.data.user);
+	let session = page.data.session;
+	let user: SessionUser | undefined = $state(page.data.user);
 	let versions: {
 		git: string;
 		package: string;
-	} = $state($page.data.versions);
+	} = $state(page.data.versions);
 
 	let showPostModal = $state(false);
 	let showShortcutModal = $state(false);
