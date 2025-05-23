@@ -1,9 +1,9 @@
-import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
-import { prisma } from '$lib/server/database/database';
+import { error } from "@sveltejs/kit";
+import type { PageServerLoad } from "./$types";
+import { prisma } from "$lib/server/database/database";
 
 export const load: PageServerLoad = async ({ params }) => {
-	let id = parseInt(params.id);
+	const id = parseInt(params.id);
 
 	const post = await prisma.post.findFirst({ where: { id: id, unlisted: false } });
 
@@ -12,5 +12,5 @@ export const load: PageServerLoad = async ({ params }) => {
 		return { post };
 	}
 
-	error(404, 'Not found');
+	error(404, "Not found");
 };

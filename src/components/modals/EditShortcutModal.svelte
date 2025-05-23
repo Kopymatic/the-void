@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import { ShortcutFormError } from '$lib';
-	import BaseModal from './BaseModal.svelte';
-	import { validateShortcutFormClient } from '$lib/formValidation';
-	import ConfirmButton from '../buttons/ConfirmButton.svelte';
-	import CancelButton from '../buttons/CancelButton.svelte';
-	import type { Shortcut } from '@prisma/client';
-	import { invalidateAll } from '$app/navigation';
+	import { enhance } from "$app/forms";
+	import { ShortcutFormError } from "$lib";
+	import BaseModal from "./BaseModal.svelte";
+	import { validateShortcutFormClient } from "$lib/formValidation";
+	import ConfirmButton from "../buttons/ConfirmButton.svelte";
+	import CancelButton from "../buttons/CancelButton.svelte";
+	import type { Shortcut } from "@prisma/client";
+	import { invalidateAll } from "$app/navigation";
 
 	let {
 		showModal = $bindable(),
@@ -15,8 +15,8 @@
 	}: { showModal: boolean; shortcut: Shortcut; currentName: string } = $props();
 
 	let shortcutName = $state(shortcut.shortcut);
-	let completeUrl = $derived('kopymatic.com/quick/' + shortcutName);
-	let completeFyiUrl = $derived('kopy.fyi/' + shortcutName);
+	const completeUrl = $derived("kopymatic.com/quick/" + shortcutName);
+	const completeFyiUrl = $derived("kopy.fyi/" + shortcutName);
 	let redirectUrl = $state(shortcut.redirectUrl);
 
 	let error: ShortcutFormError | undefined = $state(undefined);

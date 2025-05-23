@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import { CreateFormError } from '$lib';
-	import type { ActionData } from '../../routes/posts/[category]/[url]/$types';
-	import BaseModal from './BaseModal.svelte';
-	import { defaultCategories } from '$lib/defaultCategories';
-	import { validateCreateFormClient } from '$lib/formValidation';
-	import type { Post } from '@prisma/client';
-	import { invalidateAll } from '$app/navigation';
-	import { onMount } from 'svelte';
-	import ConfirmButton from '../buttons/ConfirmButton.svelte';
-	import CancelButton from '../buttons/CancelButton.svelte';
+	import { enhance } from "$app/forms";
+	import { CreateFormError } from "$lib";
+	import type { ActionData } from "../../routes/posts/[category]/[url]/$types";
+	import BaseModal from "./BaseModal.svelte";
+	import { defaultCategories } from "$lib/defaultCategories";
+	import { validateCreateFormClient } from "$lib/formValidation";
+	import type { Post } from "@prisma/client";
+	import { invalidateAll } from "$app/navigation";
+	import { onMount } from "svelte";
+	import ConfirmButton from "../buttons/ConfirmButton.svelte";
+	import CancelButton from "../buttons/CancelButton.svelte";
 
 	let {
 		currentPost,
@@ -20,17 +20,17 @@
 	let { body, category, url, description, unlisted } = $state(currentPost);
 	let selectedCategory = $state(defaultCategories[0]);
 	let customCategory: string | undefined = $state();
-	let finalCategory = $derived(customCategory || selectedCategory);
+	const finalCategory = $derived(customCategory || selectedCategory);
 
 	if (defaultCategories.includes(category)) selectedCategory = category;
 	else {
-		selectedCategory = 'custom';
+		selectedCategory = "custom";
 		customCategory = category;
 	}
 
-	let completeUrl = $derived(finalCategory + '/' + url);
+	const completeUrl = $derived(finalCategory + "/" + url);
 	let error: CreateFormError | undefined = $state(form?.error);
-	let success = $state(form?.message);
+	const success = $state(form?.message);
 
 	onMount(() => {
 		const interval = setInterval(() => {
@@ -61,13 +61,13 @@
 			Category
 			<br />
 			<select name="selectedCategory" bind:value={selectedCategory}>
-				{#each defaultCategories as defaultCategory}
+				{#each defaultCategories as defaultCategory (defaultCategory)}
 					<option value={defaultCategory}>{defaultCategory}</option>
 				{/each}
 			</select>
 		</label>
 		<br />
-		{#if selectedCategory === 'custom'}
+		{#if selectedCategory === "custom"}
 			<label>
 				Custom Category
 				<br />

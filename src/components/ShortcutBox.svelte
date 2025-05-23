@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { Shortcut } from '@prisma/client';
-	import ContentBox from './ContentBox.svelte';
-	import IconButton from './buttons/IconButton.svelte';
-	import DeleteShortcutModal from './modals/DeleteShortcutModal.svelte';
-	import EditShortcutModal from './modals/EditShortcutModal.svelte';
+	import type { Shortcut } from "@prisma/client";
+	import ContentBox from "./ContentBox.svelte";
+	import IconButton from "./buttons/IconButton.svelte";
+	import DeleteShortcutModal from "./modals/DeleteShortcutModal.svelte";
+	import EditShortcutModal from "./modals/EditShortcutModal.svelte";
 
-	let { shortcut }: { shortcut: Shortcut } = $props();
-	let name = shortcut.shortcut;
-	let destination = shortcut.redirectUrl;
+	const { shortcut }: { shortcut: Shortcut } = $props();
+	const name = shortcut.shortcut;
+	const destination = shortcut.redirectUrl;
 
 	const url = new URL(destination);
 	const destinationTrimmed = `${url.host}${url.pathname}`;

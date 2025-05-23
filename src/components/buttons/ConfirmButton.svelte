@@ -1,16 +1,16 @@
 <script lang="ts">
-	import type { EventHandler } from 'svelte/elements';
-	import Check from '../icons/CheckIcon.svelte';
+	import type { EventHandler } from "svelte/elements";
+	import Check from "../icons/CheckIcon.svelte";
 
-	let {
-		text = 'Confirm',
-		type = 'submit',
+	const {
+		text = "Confirm",
+		type = "submit",
 		onclick = undefined,
 		iconOnly = false,
-		class: className = ''
+		class: className = ""
 	}: {
 		text?: string;
-		type?: 'button' | 'reset' | 'submit';
+		type?: "button" | "reset" | "submit";
 		onclick?: EventHandler;
 		iconOnly?: boolean;
 		class?: string;

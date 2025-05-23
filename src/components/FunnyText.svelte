@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { beforeNavigate } from '$app/navigation';
-	import { slogans } from '$lib/homepageSlogans';
-	import { fade } from 'svelte/transition';
+	import { beforeNavigate } from "$app/navigation";
+	import { slogans } from "$lib/homepageSlogans";
+	import { fade } from "svelte/transition";
 
 	const textInterval = 2000;
 	const fadeDuraction = Math.floor(textInterval * 0.4);
 
-	let sloganQueue = slogans
+	const sloganQueue = slogans
 		.slice(0) //duplicate (probably unnecessary)
 		//3 lines of sorting nonsense
 		.map((value) => ({ value, sort: Math.random() }))
@@ -19,7 +19,7 @@
 	let sloganQueuePos = 0;
 
 	let slogan = $state(sloganQueue[sloganQueuePos]);
-	let interval = setInterval(() => {
+	const interval = setInterval(() => {
 		sloganQueuePos++;
 		if (sloganQueuePos >= sloganQueue.length) sloganQueuePos = 0;
 		slogan = sloganQueue[sloganQueuePos];

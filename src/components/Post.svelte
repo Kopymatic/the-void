@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import type { Post } from '@prisma/client';
-	import SvelteMarkdown from 'svelte-markdown';
-	import Article from './Article.svelte';
-	import type { SessionUser } from '$lib/server/types';
-	import DeletePostModal from './modals/DeletePostModal.svelte';
-	import EditPostModal from './modals/EditPostModal.svelte';
-	import EditIcon from './icons/EditIcon.svelte';
-	import TrashIcon from './icons/TrashIcon.svelte';
+	import { page } from "$app/stores";
+	import type { Post } from "@prisma/client";
+	import SvelteMarkdown from "svelte-markdown";
+	import Article from "./Article.svelte";
+	import type { SessionUser } from "$lib/server/types";
+	import DeletePostModal from "./modals/DeletePostModal.svelte";
+	import EditPostModal from "./modals/EditPostModal.svelte";
+	import EditIcon from "./icons/EditIcon.svelte";
+	import TrashIcon from "./icons/TrashIcon.svelte";
 
-	let user: SessionUser | undefined = $state($page.data.user);
+	const user: SessionUser | undefined = $state($page.data.user);
 
-	let { post, editable = true }: { post: Post; editable?: boolean } = $props();
+	const { post, editable = true }: { post: Post; editable?: boolean } = $props();
 
 	let showDeleteModal = $state(false);
 	let showEditModal = $state(false);
 
-	let updatedAtIsDifferent = post.updatedAt.getTime() != post.createdAt.getTime();
+	const updatedAtIsDifferent = post.updatedAt.getTime() != post.createdAt.getTime();
 </script>
 
 <svelte:head>
@@ -61,18 +61,18 @@
 	<p class="text-secondary-text my-2">
 		{`[#${post.id}]`}
 		{#if post.createdAt}
-			- Created at {post.createdAt.toLocaleString('en-US', {
-				dateStyle: 'medium',
-				timeStyle: 'short'
+			- Created at {post.createdAt.toLocaleString("en-US", {
+				dateStyle: "medium",
+				timeStyle: "short"
 			})}
 		{/if}
 		{#if post.createdAt && updatedAtIsDifferent}
 			-
 		{/if}
 		{#if post.updatedAt && updatedAtIsDifferent}
-			Updated at {post.updatedAt.toLocaleString('en-US', {
-				dateStyle: 'medium',
-				timeStyle: 'short'
+			Updated at {post.updatedAt.toLocaleString("en-US", {
+				dateStyle: "medium",
+				timeStyle: "short"
 			})}
 		{/if}
 	</p>

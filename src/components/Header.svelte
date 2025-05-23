@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	let path = $derived(page.url);
-	let showVoidHeader = $derived(path.pathname.startsWith('/posts'));
+	import { page } from "$app/state";
+	const path = $derived(page.url);
+	const showVoidHeader = $derived(path.pathname.startsWith("/posts"));
 </script>
 
 <header class="mx-auto w-full pt-2 text-center">

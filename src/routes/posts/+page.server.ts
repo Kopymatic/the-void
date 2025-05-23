@@ -1,8 +1,8 @@
-import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
-import { prisma } from '$lib/server/database/database';
+import { error } from "@sveltejs/kit";
+import type { PageServerLoad } from "./$types";
+import { prisma } from "$lib/server/database/database";
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async () => {
 	const posts = await prisma.post.findMany({ where: { unlisted: false } });
 	if (posts) {
 		//Mapping the posts so we can remove unnecessary data and double check that they're not unlisted
@@ -30,5 +30,5 @@ export const load: PageServerLoad = async ({ params }) => {
 		return { posts: filteredPosts };
 	}
 
-	error(404, 'Not found');
+	error(404, "Not found");
 };

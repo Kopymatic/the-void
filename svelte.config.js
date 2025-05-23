@@ -1,5 +1,5 @@
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import adapter from '@sveltejs/adapter-node';
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import adapter from "@sveltejs/adapter-node";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -14,7 +14,7 @@ const config = {
 		adapter: adapter()
 	},
 
-	extensions: ['.svelte', '.svx']
+	extensions: [".svelte", ".svx"]
 };
 
 export default config;

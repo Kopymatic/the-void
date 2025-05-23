@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import type { SessionUser } from '$lib/server/types';
-	import FunnyText from './FunnyText.svelte';
-	import CreatePostModal from './modals/CreatePostModal.svelte';
-	import CreateShortcutModal from './modals/CreateShortcutModal.svelte';
-	let session = page.data.session;
-	let user: SessionUser | undefined = $state(page.data.user);
-	let versions: {
+	import { page } from "$app/state";
+	import type { SessionUser } from "$lib/server/types";
+	import FunnyText from "./FunnyText.svelte";
+	import CreatePostModal from "./modals/CreatePostModal.svelte";
+	import CreateShortcutModal from "./modals/CreateShortcutModal.svelte";
+	const session = page.data.session;
+	const user: SessionUser | undefined = $state(page.data.user);
+	const versions: {
 		git: string;
 		package: string;
 	} = $state(page.data.versions);
