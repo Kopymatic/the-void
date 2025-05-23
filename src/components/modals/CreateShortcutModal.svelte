@@ -1,25 +1,25 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import { ShortcutFormError, simpleHash } from '$lib';
-	import BaseModal from './BaseModal.svelte';
-	import { validateShortcutFormClient } from '$lib/formValidation';
-	import ConfirmButton from '../buttons/ConfirmButton.svelte';
-	import CancelButton from '../buttons/CancelButton.svelte';
-	import { invalidateAll } from '$app/navigation';
+	import { enhance } from "$app/forms";
+	import { ShortcutFormError, simpleHash } from "$lib";
+	import BaseModal from "./BaseModal.svelte";
+	import { validateShortcutFormClient } from "$lib/formValidation";
+	import ConfirmButton from "../buttons/ConfirmButton.svelte";
+	import CancelButton from "../buttons/CancelButton.svelte";
+	import { invalidateAll } from "$app/navigation";
 
 	let { showModal = $bindable() }: { showModal: boolean } = $props();
 
 	let auto = $state(false);
-	let destination = $state('');
+	let destination = $state("");
 
 	let shortcutAuto = $derived(
-		btoa(simpleHash(destination).toString()).replaceAll('=', '').toLowerCase()
+		btoa(simpleHash(destination).toString()).replaceAll("=", "").toLowerCase()
 	);
 
-	let shortcutName: string = $derived(auto ? shortcutAuto : '');
+	let shortcutName: string = $derived(auto ? shortcutAuto : "");
 
-	let completeUrl = $derived('kopymatic.com/quick/' + shortcutName);
-	let completeFyiUrl = $derived('kopy.fyi/' + shortcutName);
+	let completeUrl = $derived("kopymatic.com/quick/" + shortcutName);
+	let completeFyiUrl = $derived("kopy.fyi/" + shortcutName);
 
 	let error: ShortcutFormError | undefined = $state(undefined);
 </script>

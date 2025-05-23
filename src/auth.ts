@@ -1,11 +1,11 @@
-import { SvelteKitAuth } from '@auth/sveltekit';
-import Discord from '@auth/sveltekit/providers/discord';
+import { SvelteKitAuth } from "@auth/sveltekit";
+import Discord from "@auth/sveltekit/providers/discord";
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
 	trustHost: true,
 	providers: [
 		Discord({
-			authorization: { params: { scope: 'identify guilds email' } }
+			authorization: { params: { scope: "identify guilds email" } }
 		})
 	],
 	callbacks: {

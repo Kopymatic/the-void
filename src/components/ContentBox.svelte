@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import type { Snippet } from "svelte";
 
 	let {
 		children,
 		prose,
 		small,
-		class: className = ''
+		class: className = ""
 	}: { children?: Snippet<[]>; prose?: boolean; small?: boolean; class?: string } = $props();
 </script>
 

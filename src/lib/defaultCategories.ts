@@ -1,10 +1,10 @@
 export const defaultCategories = [
-	'uncategorized',
-	'tech',
-	'vent',
-	'idea',
-	'devlog',
-	'test',
-	'misc',
-	'custom'
+	"uncategorized",
+	"tech",
+	"vent",
+	"idea",
+	"devlog",
+	"test",
+	"misc",
+	"custom"
 ];

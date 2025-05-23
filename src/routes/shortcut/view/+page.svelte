@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ShortcutBox from '../../../components/ShortcutBox.svelte';
-	import type { PageData } from './$types';
+	import ShortcutBox from "../../../components/ShortcutBox.svelte";
+	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();
 	let shortcuts = $derived(data.shortcuts);

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import type { SessionUser } from '$lib/server/types';
-	import FunnyText from './FunnyText.svelte';
-	import CreatePostModal from './modals/CreatePostModal.svelte';
-	import CreateShortcutModal from './modals/CreateShortcutModal.svelte';
+	import { page } from "$app/state";
+	import type { SessionUser } from "$lib/server/types";
+	import FunnyText from "./FunnyText.svelte";
+	import CreatePostModal from "./modals/CreatePostModal.svelte";
+	import CreateShortcutModal from "./modals/CreateShortcutModal.svelte";
 	let session = page.data.session;
 	let user: SessionUser | undefined = $state(page.data.user);
 	let versions: {

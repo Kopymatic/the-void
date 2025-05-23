@@ -1,16 +1,16 @@
 <script lang="ts">
-	import type { EventHandler } from 'svelte/elements';
-	import EditIcon from '../icons/EditIcon.svelte';
+	import type { EventHandler } from "svelte/elements";
+	import EditIcon from "../icons/EditIcon.svelte";
 
 	let {
-		text = 'Edit',
-		type = 'button',
+		text = "Edit",
+		type = "button",
 		onclick = undefined,
 		iconOnly = false,
-		class: className = ''
+		class: className = ""
 	}: {
 		text?: string;
-		type?: 'button' | 'reset' | 'submit';
+		type?: "button" | "reset" | "submit";
 		onclick?: EventHandler;
 		iconOnly?: boolean;
 		class?: string;

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Post } from '@prisma/client';
-	import MiniPost from './MiniPost.svelte';
+	import type { Post } from "@prisma/client";
+	import MiniPost from "./MiniPost.svelte";
 
 	let { posts }: { posts: Post[] } = $props();
 </script>

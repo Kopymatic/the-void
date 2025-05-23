@@ -1,22 +1,22 @@
 // i feel like this is not the correct way to use an enum
 export enum CreateFormError {
-	missingUrl = 'Must fill in the URL field',
-	missingBody = 'Must fill in the body field',
-	missingCategory = 'Must fill in the category field',
-	invalidCategory = 'Category format is invalid',
-	invalidUrl = 'URL format is invalid',
-	databaseError = 'Unknown error with the database.',
-	internalError = 'Uh oh! Something went wrong on our end.'
+	missingUrl = "Must fill in the URL field",
+	missingBody = "Must fill in the body field",
+	missingCategory = "Must fill in the category field",
+	invalidCategory = "Category format is invalid",
+	invalidUrl = "URL format is invalid",
+	databaseError = "Unknown error with the database.",
+	internalError = "Uh oh! Something went wrong on our end."
 }
 export enum ShortcutFormError {
-	missingName = 'Must fill in the name field',
-	invalidName = 'Name format is invalid',
+	missingName = "Must fill in the name field",
+	invalidName = "Name format is invalid",
 
-	missingDestination = 'Must fill in the destination field',
-	invalidDestination = 'Destination format is invalid',
+	missingDestination = "Must fill in the destination field",
+	invalidDestination = "Destination format is invalid",
 
-	databaseError = 'Unknown error with the database.',
-	internalError = 'Uh oh! Something went wrong on our end.'
+	databaseError = "Unknown error with the database.",
+	internalError = "Uh oh! Something went wrong on our end."
 }
 
 export const categoryRegex = /^[a-z\-0-9]+$/;

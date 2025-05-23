@@ -1,10 +1,10 @@
-import sqlite3 from 'better-sqlite3';
-import fs from 'fs';
-import fsPromises from 'fs/promises';
-import crypto from 'crypto';
+import sqlite3 from "better-sqlite3";
+import fs from "fs";
+import fsPromises from "fs/promises";
+import crypto from "crypto";
 
-const dbPath = process.env.DATABASE_URL?.replace('file:./../', '')!!;
-const backupsJsonPath = 'data/backups/backups.json';
+const dbPath = process.env.DATABASE_URL?.replace("file:./../", "")!!;
+const backupsJsonPath = "data/backups/backups.json";
 
 let prevDbHash: string | undefined;
 
@@ -23,7 +23,7 @@ export const backup = async (boot: boolean = false) => {
 	const db = sqlite3(dbPath);
 	const dbHash: string = await getHash(dbPath);
 	if (dbHash === prevDbHash) {
-		console.log('Database hasnt changed since last backup, skipping!');
+		console.log("Database hasnt changed since last backup, skipping!");
 		return;
 	}
 	prevDbHash = dbHash;
@@ -36,11 +36,11 @@ export const backup = async (boot: boolean = false) => {
 	const directory = makeDir(`data/backups/${dbHash}`);
 
 	//Here i make a path for the backup, the boot portion is so that i can know which were created on a boot of the database
-	const backupPath = `${directory}/${boot ? 'boot-' : ''}${date}.db.bak`;
+	const backupPath = `${directory}/${boot ? "boot-" : ""}${date}.db.bak`;
 
 	console.log(`Creating backup at ${backupPath}`);
 	await db.backup(backupPath);
-	console.log('Success!');
+	console.log("Success!");
 
 	backups.push({
 		date,
@@ -66,15 +66,15 @@ const getSize = (path: string): number => {
 
 const getHash = (path: string): Promise<string> =>
 	new Promise((resolve, reject) => {
-		const hash = crypto.createHash('sha256');
+		const hash = crypto.createHash("sha256");
 		const rs = fs.createReadStream(path);
-		rs.on('error', reject);
-		rs.on('data', (chunk: any) => hash.update(chunk));
-		rs.on('end', () => resolve(hash.digest('hex')));
+		rs.on("error", reject);
+		rs.on("data", (chunk: any) => hash.update(chunk));
+		rs.on("end", () => resolve(hash.digest("hex")));
 	});
 
 const readBackupsJson = async () => {
-	const file = await fsPromises.readFile(backupsJsonPath, { flag: 'a+' });
+	const file = await fsPromises.readFile(backupsJsonPath, { flag: "a+" });
 	let json;
 	try {
 		json = JSON.parse(file.toString());

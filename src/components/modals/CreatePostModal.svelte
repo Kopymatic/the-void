@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import { CreateFormError } from '$lib';
-	import type { ActionData } from '../../routes/posts/[category]/[url]/$types';
-	import BaseModal from './BaseModal.svelte';
-	import { defaultCategories } from '$lib/defaultCategories';
-	import { validateCreateFormClient } from '$lib/formValidation';
-	import { invalidateAll } from '$app/navigation';
-	import { onMount } from 'svelte';
-	import CancelButton from '../buttons/CancelButton.svelte';
-	import ConfirmButton from '../buttons/ConfirmButton.svelte';
+	import { enhance } from "$app/forms";
+	import { CreateFormError } from "$lib";
+	import type { ActionData } from "../../routes/posts/[category]/[url]/$types";
+	import BaseModal from "./BaseModal.svelte";
+	import { defaultCategories } from "$lib/defaultCategories";
+	import { validateCreateFormClient } from "$lib/formValidation";
+	import { invalidateAll } from "$app/navigation";
+	import { onMount } from "svelte";
+	import CancelButton from "../buttons/CancelButton.svelte";
+	import ConfirmButton from "../buttons/ConfirmButton.svelte";
 
 	let { showModal = $bindable(), form }: { showModal: boolean; form?: ActionData } = $props();
 
 	let selectedCategory: string = $state(defaultCategories[6]);
 	let customCategory: string | undefined = $state(undefined);
 	let finalCategory = $derived(customCategory || selectedCategory);
-	let url = $state('');
-	let completeUrl = $derived(finalCategory + '/' + url);
+	let url = $state("");
+	let completeUrl = $derived(finalCategory + "/" + url);
 
 	let error: CreateFormError | undefined = $state(form?.error);
 	let success = $state(form?.message);
@@ -56,7 +56,7 @@
 			</select>
 		</label>
 		<br />
-		{#if selectedCategory === 'custom'}
+		{#if selectedCategory === "custom"}
 			<label>
 				Custom Category
 				<br />

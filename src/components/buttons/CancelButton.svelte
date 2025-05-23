@@ -1,16 +1,16 @@
 <script lang="ts">
-	import type { EventHandler } from 'svelte/elements';
-	import CancelIcon from '../icons/CancelIcon.svelte';
+	import type { EventHandler } from "svelte/elements";
+	import CancelIcon from "../icons/CancelIcon.svelte";
 
 	let {
-		text = 'Cancel',
-		type = 'reset',
+		text = "Cancel",
+		type = "reset",
 		onclick = undefined,
 		iconOnly = false,
-		class: className = ''
+		class: className = ""
 	}: {
 		text?: string;
-		type?: 'button' | 'reset' | 'submit';
+		type?: "button" | "reset" | "submit";
 		onclick?: EventHandler;
 		iconOnly?: boolean;
 		class?: string;

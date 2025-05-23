@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { Shortcut } from '@prisma/client';
-	import ContentBox from './ContentBox.svelte';
-	import IconButton from './buttons/IconButton.svelte';
-	import DeleteShortcutModal from './modals/DeleteShortcutModal.svelte';
-	import EditShortcutModal from './modals/EditShortcutModal.svelte';
+	import type { Shortcut } from "@prisma/client";
+	import ContentBox from "./ContentBox.svelte";
+	import IconButton from "./buttons/IconButton.svelte";
+	import DeleteShortcutModal from "./modals/DeleteShortcutModal.svelte";
+	import EditShortcutModal from "./modals/EditShortcutModal.svelte";
 
 	let { shortcut }: { shortcut: Shortcut } = $props();
 	let name = shortcut.shortcut;

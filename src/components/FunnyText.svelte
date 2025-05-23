@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { beforeNavigate } from '$app/navigation';
-	import { slogans } from '$lib/homepageSlogans';
-	import { fade } from 'svelte/transition';
+	import { beforeNavigate } from "$app/navigation";
+	import { slogans } from "$lib/homepageSlogans";
+	import { fade } from "svelte/transition";
 
 	const textInterval = 2000;
 	const fadeDuraction = Math.floor(textInterval * 0.4);

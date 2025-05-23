@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { applyAction, enhance } from '$app/forms';
-	import { goto, invalidateAll } from '$app/navigation';
-	import type { ActionResult } from '@sveltejs/kit';
-	import CancelButton from '../buttons/CancelButton.svelte';
-	import TrashIcon from '../icons/TrashIcon.svelte';
-	import BaseModal from './BaseModal.svelte';
+	import { applyAction, enhance } from "$app/forms";
+	import { goto, invalidateAll } from "$app/navigation";
+	import type { ActionResult } from "@sveltejs/kit";
+	import CancelButton from "../buttons/CancelButton.svelte";
+	import TrashIcon from "../icons/TrashIcon.svelte";
+	import BaseModal from "./BaseModal.svelte";
 
 	let { showModal = $bindable(), name }: { showModal: boolean; name: string } = $props();
 </script>
@@ -22,7 +22,7 @@
 			}, 1000);
 			return async ({ result }: { result: ActionResult }) => {
 				// `result` is an `ActionResult` object
-				if (result.type === 'redirect') {
+				if (result.type === "redirect") {
 					goto(result.location);
 				} else {
 					await applyAction(result);

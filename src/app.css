@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gaegu&display=swap");
 
-@import 'tailwindcss';
+@import "tailwindcss";
 @config '../tailwind.config.ts';
 
 @theme {
@@ -17,8 +17,8 @@
 	--color-warn: #991b1b;
 	--color-kopymatic: #d4031d;
 
-	--font-gaegu: 'Gaegu', serif;
-	--font-rock-salt: 'Rock Salt', cursive;
+	--font-gaegu: "Gaegu", serif;
+	--font-rock-salt: "Rock Salt", cursive;
 
 	--animate-funnytext: funnytext 10s ease-in-out infinite;
 	@keyframes funnytext {

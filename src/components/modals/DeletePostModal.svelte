@@ -1,7 +1,7 @@
 <script lang="ts">
-	import CancelButton from '../buttons/CancelButton.svelte';
-	import TrashIcon from '../icons/TrashIcon.svelte';
-	import BaseModal from './BaseModal.svelte';
+	import CancelButton from "../buttons/CancelButton.svelte";
+	import TrashIcon from "../icons/TrashIcon.svelte";
+	import BaseModal from "./BaseModal.svelte";
 
 	let { showModal = $bindable() }: { showModal: boolean } = $props();
 </script>

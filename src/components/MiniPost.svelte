@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Post } from '@prisma/client';
-	import SvelteMarkdown from 'svelte-markdown';
-	import ContentBox from './ContentBox.svelte';
+	import type { Post } from "@prisma/client";
+	import SvelteMarkdown from "svelte-markdown";
+	import ContentBox from "./ContentBox.svelte";
 
 	let { post }: { post: Post } = $props();
 

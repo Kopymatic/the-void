@@ -1,4 +1,4 @@
-import type { User } from '@auth/sveltekit';
+import type { User } from "@auth/sveltekit";
 
 // to be honest i wrote this code for a different project
 // ... about 6 months ago... lets hope it works
@@ -19,7 +19,7 @@ export type DiscordUser = Omit<
 			email: string;
 		}
 	>,
-	'image' | 'name' | 'id'
+	"image" | "name" | "id"
 >;
 
 export type SessionUser = {
