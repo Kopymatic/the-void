@@ -23,6 +23,12 @@ export default ts.config(
 		rules: { "no-undef": "off" }
 	},
 	{
+		files: ["**/*.ts", "**/*.svelte"],
+		rules: {
+			"prefer-const": "warn"
+		}
+	},
+	{
 		files: ["**/*.svelte", "**/*.svelte.ts", "**/*.svelte.js"],
 		languageOptions: {
 			parserOptions: {
@@ -32,6 +38,8 @@ export default ts.config(
 				svelteConfig
 			}
 		},
-		rules: {}
+		rules: {
+			"prefer-const": "off"
+		}
 	}
 );

@@ -3,11 +3,11 @@
 	import SvelteMarkdown from "svelte-markdown";
 	import ContentBox from "./ContentBox.svelte";
 
-	let { post }: { post: Post } = $props();
+	const { post }: { post: Post } = $props();
 
-	let { category, url, description, author, body, createdAt, id } = post;
+	const { category, url, description } = post;
 
-	let fullUrl = category && url ? `/posts/${category}/${url}` : undefined;
+	const fullUrl = category && url ? `/posts/${category}/${url}` : undefined;
 </script>
 
 <ContentBox prose small>

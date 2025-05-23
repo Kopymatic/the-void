@@ -20,7 +20,7 @@
 	let { body, category, url, description, unlisted } = $state(currentPost);
 	let selectedCategory = $state(defaultCategories[0]);
 	let customCategory: string | undefined = $state();
-	let finalCategory = $derived(customCategory || selectedCategory);
+	const finalCategory = $derived(customCategory || selectedCategory);
 
 	if (defaultCategories.includes(category)) selectedCategory = category;
 	else {
@@ -28,9 +28,9 @@
 		customCategory = category;
 	}
 
-	let completeUrl = $derived(finalCategory + "/" + url);
+	const completeUrl = $derived(finalCategory + "/" + url);
 	let error: CreateFormError | undefined = $state(form?.error);
-	let success = $state(form?.message);
+	const success = $state(form?.message);
 
 	onMount(() => {
 		const interval = setInterval(() => {
@@ -61,7 +61,7 @@
 			Category
 			<br />
 			<select name="selectedCategory" bind:value={selectedCategory}>
-				{#each defaultCategories as defaultCategory}
+				{#each defaultCategories as defaultCategory (defaultCategory)}
 					<option value={defaultCategory}>{defaultCategory}</option>
 				{/each}
 			</select>

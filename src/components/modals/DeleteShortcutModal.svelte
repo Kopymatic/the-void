@@ -14,7 +14,7 @@
 		method="POST"
 		action={`/quick/${name}?/delete`}
 		class=" w-full"
-		use:enhance={({ formData, cancel }) => {
+		use:enhance={() => {
 			showModal = false;
 			//This is jank, but it makes the page update after the form is done. Ill take it
 			setTimeout(() => {

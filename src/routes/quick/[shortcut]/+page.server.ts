@@ -6,12 +6,12 @@ import { validateShortcutCreateFormServer } from "$lib/server/serverFormValidati
 import { ShortcutFormError } from "$lib";
 
 export const load: PageServerLoad = async ({ params }) => {
-	let shortcut = params.shortcut;
+	const shortcut = params.shortcut;
 	console.log(`Getting quick/${shortcut}`);
 	const shortcutEntry = await prisma.shortcut.findFirst({ where: { shortcut: shortcut } });
 
 	if (shortcutEntry) {
-		redirect(302, shortcutEntry?.redirectUrl!!);
+		redirect(302, shortcutEntry?.redirectUrl);
 	}
 
 	error(404, "Not found");
@@ -24,7 +24,7 @@ export const actions = {
 			error(401);
 		}
 
-		let shortcut = params.shortcut;
+		const shortcut = params.shortcut;
 		console.log("Delete shortcut request received for " + shortcut);
 
 		if (!shortcut) error(400, "Invalid request");
@@ -33,7 +33,7 @@ export const actions = {
 
 		if (!toDelete) error(404, "Not found");
 
-		const deleted = await prisma.shortcut
+		await prisma.shortcut
 			.delete({ where: { id: toDelete.id } })
 			.catch((e) => {
 				console.error(e);
@@ -49,11 +49,11 @@ export const actions = {
 			error(401);
 		}
 
-		let shortcut = params.shortcut;
+		const shortcut = params.shortcut;
 		console.log("Edit shortcut request received for " + shortcut);
 		if (!shortcut) error(400, "Invalid request");
 
-		let formData = await request.formData();
+		const formData = await request.formData();
 		const result = validateShortcutCreateFormServer(formData);
 		if (result.status || result.error) {
 			fail(result.status, {

@@ -2,7 +2,7 @@
 	import type { EventHandler } from "svelte/elements";
 	import CancelIcon from "../icons/CancelIcon.svelte";
 
-	let {
+	const {
 		text = "Cancel",
 		type = "reset",
 		onclick = undefined,

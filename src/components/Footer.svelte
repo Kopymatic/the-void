@@ -4,9 +4,9 @@
 	import FunnyText from "./FunnyText.svelte";
 	import CreatePostModal from "./modals/CreatePostModal.svelte";
 	import CreateShortcutModal from "./modals/CreateShortcutModal.svelte";
-	let session = page.data.session;
-	let user: SessionUser | undefined = $state(page.data.user);
-	let versions: {
+	const session = page.data.session;
+	const user: SessionUser | undefined = $state(page.data.user);
+	const versions: {
 		git: string;
 		package: string;
 	} = $state(page.data.versions);

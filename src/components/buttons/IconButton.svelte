@@ -5,7 +5,7 @@
 	import CheckIcon from "../icons/CheckIcon.svelte";
 	import TrashIcon from "../icons/TrashIcon.svelte";
 
-	let {
+	const {
 		text,
 		type = "button",
 		icon,
@@ -19,7 +19,7 @@
 		class?: string;
 	} = $props();
 
-	let iconOnly = !text;
+	const iconOnly = !text;
 </script>
 
 <button

@@ -15,8 +15,8 @@
 	}: { showModal: boolean; shortcut: Shortcut; currentName: string } = $props();
 
 	let shortcutName = $state(shortcut.shortcut);
-	let completeUrl = $derived("kopymatic.com/quick/" + shortcutName);
-	let completeFyiUrl = $derived("kopy.fyi/" + shortcutName);
+	const completeUrl = $derived("kopymatic.com/quick/" + shortcutName);
+	const completeFyiUrl = $derived("kopy.fyi/" + shortcutName);
 	let redirectUrl = $state(shortcut.redirectUrl);
 
 	let error: ShortcutFormError | undefined = $state(undefined);

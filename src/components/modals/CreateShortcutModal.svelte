@@ -12,14 +12,14 @@
 	let auto = $state(false);
 	let destination = $state("");
 
-	let shortcutAuto = $derived(
+	const shortcutAuto = $derived(
 		btoa(simpleHash(destination).toString()).replaceAll("=", "").toLowerCase()
 	);
 
 	let shortcutName: string = $derived(auto ? shortcutAuto : "");
 
-	let completeUrl = $derived("kopymatic.com/quick/" + shortcutName);
-	let completeFyiUrl = $derived("kopy.fyi/" + shortcutName);
+	const completeUrl = $derived("kopymatic.com/quick/" + shortcutName);
+	const completeFyiUrl = $derived("kopy.fyi/" + shortcutName);
 
 	let error: ShortcutFormError | undefined = $state(undefined);
 </script>

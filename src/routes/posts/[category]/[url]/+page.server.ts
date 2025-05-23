@@ -6,8 +6,8 @@ import { validateCreateFormServer } from "$lib/server/serverFormValidation";
 import { isAdmin } from "$lib/server/isAdmin";
 
 export const load: PageServerLoad = async ({ params }) => {
-	let category = params.category;
-	let url = params.url;
+	const category = params.category;
+	const url = params.url;
 	console.log(`Getting posts/${category}/${url}`);
 	const post = await prisma.post.findFirst({ where: { category: category, url: url } });
 
@@ -36,9 +36,10 @@ export const actions = {
 
 		if (!toDelete) error(404, "Not found");
 
-		const deleted = await prisma.post
+		await prisma.post
 			.delete({ where: { id: toDelete.id } })
 			.catch((e) => {
+				console.error(e);
 				error(500, "Database error");
 			})
 			.then(() => {
@@ -52,7 +53,7 @@ export const actions = {
 		}
 
 		console.log("recieved edit request");
-		let formData = await request.formData();
+		const formData = await request.formData();
 
 		const result = validateCreateFormServer(formData);
 		if (result.status || result.error) {

@@ -3,7 +3,7 @@ import fs from "fs";
 import fsPromises from "fs/promises";
 import crypto from "crypto";
 
-const dbPath = process.env.DATABASE_URL?.replace("file:./../", "")!!;
+const dbPath = process.env.DATABASE_URL?.replace("file:./../", "");
 const backupsJsonPath = "data/backups/backups.json";
 
 let prevDbHash: string | undefined;
@@ -19,6 +19,11 @@ export const backup = async (boot: boolean = false) => {
 	//Here we load the backups.json file to allow us track backups later
 	const backupsJson = await readBackupsJson();
 	const backups = backupsJson.backups;
+
+	if (!dbPath) {
+		console.log("DB Path is undefined.. huh");
+		return;
+	}
 
 	const db = sqlite3(dbPath);
 	const dbHash: string = await getHash(dbPath);
@@ -69,7 +74,7 @@ const getHash = (path: string): Promise<string> =>
 		const hash = crypto.createHash("sha256");
 		const rs = fs.createReadStream(path);
 		rs.on("error", reject);
-		rs.on("data", (chunk: any) => hash.update(chunk));
+		rs.on("data", (chunk: crypto.BinaryLike) => hash.update(chunk));
 		rs.on("end", () => resolve(hash.digest("hex")));
 	});
 
@@ -78,7 +83,9 @@ const readBackupsJson = async () => {
 	let json;
 	try {
 		json = JSON.parse(file.toString());
-	} catch (e) {}
+	} catch (e) {
+		console.error(e);
+	}
 	if (!json) return defaultBackupsJsonFile;
 	return json as backupsJsonFile;
 };

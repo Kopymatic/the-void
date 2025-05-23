@@ -2,7 +2,7 @@
 	import type { EventHandler } from "svelte/elements";
 	import EditIcon from "../icons/EditIcon.svelte";
 
-	let {
+	const {
 		text = "Edit",
 		type = "button",
 		onclick = undefined,

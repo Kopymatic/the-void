@@ -24,7 +24,7 @@ export const actions = {
 			error(401);
 		}
 		console.log("recieved post request");
-		let formData = await request.formData();
+		const formData = await request.formData();
 
 		const result = validateCreateFormServer(formData);
 		if (result.status || result.error) {

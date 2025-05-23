@@ -3,7 +3,7 @@ import type { PageServerLoad } from "./$types";
 import { prisma } from "$lib/server/database/database";
 
 export const load: PageServerLoad = async ({ params }) => {
-	let id = parseInt(params.id);
+	const id = parseInt(params.id);
 
 	const post = await prisma.post.findFirst({ where: { id: id, unlisted: false } });
 

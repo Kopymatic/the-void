@@ -1,7 +1,7 @@
 <script lang="ts">
 	// thank you reddit
 	// https://www.reddit.com/r/sveltejs/comments/1dodc08/comment/la8za5c/
-	let { class: className = "" }: { class?: string } = $props();
+	const { class: className = "" }: { class?: string } = $props();
 </script>
 
 <xml version="1.0">

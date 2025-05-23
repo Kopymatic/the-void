@@ -2,7 +2,7 @@
 	import type { EventHandler } from "svelte/elements";
 	import Check from "../icons/CheckIcon.svelte";
 
-	let {
+	const {
 		text = "Confirm",
 		type = "submit",
 		onclick = undefined,

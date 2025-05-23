@@ -13,7 +13,7 @@ export const actions = {
 		}
 
 		console.log("recieved post request");
-		let formData = await request.formData();
+		const formData = await request.formData();
 
 		const result = validateShortcutCreateFormServer(formData);
 		if (result.status || result.error) {

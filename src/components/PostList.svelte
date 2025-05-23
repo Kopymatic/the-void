@@ -2,7 +2,7 @@
 	import type { Post } from "@prisma/client";
 	import MiniPost from "./MiniPost.svelte";
 
-	let { posts }: { posts: Post[] } = $props();
+	const { posts }: { posts: Post[] } = $props();
 </script>
 
 <div

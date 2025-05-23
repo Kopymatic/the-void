@@ -4,11 +4,11 @@ import { goto } from "$app/navigation";
 import type { ActionResult } from "@sveltejs/kit";
 
 export const validateCreateFormClient = (formData: FormData, cancel: () => void) => {
-	let url = formData.get("url")?.toString();
-	let selectedCategory = formData.get("selectedCategory")?.toString();
-	let customCategory = formData.get("customCategory")?.toString();
-	let body = formData.get("body")?.toString();
-	let category = customCategory || selectedCategory;
+	const url = formData.get("url")?.toString();
+	const selectedCategory = formData.get("selectedCategory")?.toString();
+	const customCategory = formData.get("customCategory")?.toString();
+	const body = formData.get("body")?.toString();
+	const category = customCategory || selectedCategory;
 
 	// Filter out all the required params
 	if (!url) {
@@ -53,8 +53,8 @@ export const validateShortcutFormClient = (
 	error?: ShortcutFormError;
 	submit?: ({ result }: { result: ActionResult }) => Promise<void>;
 } => {
-	let shortcutName = formData.get("name")?.toString().trim();
-	let destination = formData.get("destination")?.toString().trim();
+	const shortcutName = formData.get("name")?.toString().trim();
+	const destination = formData.get("destination")?.toString().trim();
 
 	// Filter out all the required params
 	if (!shortcutName) {

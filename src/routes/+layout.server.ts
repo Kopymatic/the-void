@@ -8,7 +8,7 @@ export const load: LayoutServerLoad = async (event) => {
 	const userIsAdmin = isAdmin(session?.user?.id);
 	const user = { ...session?.user, isAdmin: userIsAdmin };
 
-	let gitHash = execSync("git rev-parse --short HEAD").toString().trim();
+	const gitHash = execSync("git rev-parse --short HEAD").toString().trim();
 	const packageVersion = packagejson.version;
 	const versions = { git: gitHash, package: packageVersion };
 

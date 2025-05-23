@@ -9,14 +9,14 @@
 	import EditIcon from "./icons/EditIcon.svelte";
 	import TrashIcon from "./icons/TrashIcon.svelte";
 
-	let user: SessionUser | undefined = $state($page.data.user);
+	const user: SessionUser | undefined = $state($page.data.user);
 
-	let { post, editable = true }: { post: Post; editable?: boolean } = $props();
+	const { post, editable = true }: { post: Post; editable?: boolean } = $props();
 
 	let showDeleteModal = $state(false);
 	let showEditModal = $state(false);
 
-	let updatedAtIsDifferent = post.updatedAt.getTime() != post.createdAt.getTime();
+	const updatedAtIsDifferent = post.updatedAt.getTime() != post.createdAt.getTime();
 </script>
 
 <svelte:head>
