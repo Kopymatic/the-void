@@ -13,9 +13,6 @@ const stage = async (
 const s = spinner();
 
 intro(`Welcome to the updater!`);
-const gitHelp = await $`git --help`;
-console.log(gitHelp.text());
-
 if (env.DEVELOPMENT === "true") {
 	log.error("In development, exiting");
 	outro("Exited Early");
