@@ -5,7 +5,7 @@ const stage = async (
 	stage: string,
 	command: string
 ): Promise<{ output: $.ShellOutput; result: { stage: string; result: string } }> => {
-	const output = await $`${command}`.quiet();
+	const output = await $`${{ raw: command }}`.quiet(); //https://github.com/oven-sh/bun/issues/17315#issuecomment-2657986379
 	const result = { stage: stage, result: output.text() };
 	return { output, result };
 };
@@ -13,6 +13,9 @@ const stage = async (
 const s = spinner();
 
 intro(`Welcome!`);
+const gitHelp = await $`git --help`;
+console.log(gitHelp.text());
+
 if (env.DEVELOPMENT === "true") {
 	log.error("In development, exiting");
 	outro("Exited Early");
