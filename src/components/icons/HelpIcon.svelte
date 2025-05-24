@@ -1,0 +1,26 @@
+<script lang="ts">
+	// thank you reddit
+	// https://www.reddit.com/r/sveltejs/comments/1dodc08/comment/la8za5c/
+	const { class: className = "" }: { class?: string } = $props();
+</script>
+
+<xml version="1.0">
+	<svg
+		class={className}
+		fill="none"
+		height="24"
+		stroke="currentColor"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		stroke-width="2"
+		viewBox="0 0 24 24"
+		width="24"
+		xmlns="http://www.w3.org/2000/svg"
+		><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><line
+			x1="12"
+			x2="12.01"
+			y1="17"
+			y2="17"
+		/>
+	</svg>
+</xml>

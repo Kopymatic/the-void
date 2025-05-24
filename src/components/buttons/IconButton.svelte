@@ -4,6 +4,8 @@
 	import CancelIcon from "../icons/CancelIcon.svelte";
 	import CheckIcon from "../icons/CheckIcon.svelte";
 	import TrashIcon from "../icons/TrashIcon.svelte";
+	import HelpIcon from "../icons/HelpIcon.svelte";
+	import ShareIcon from "../icons/ShareIcon.svelte";
 
 	const {
 		text,
@@ -14,7 +16,7 @@
 	}: {
 		text?: string;
 		type?: "button" | "reset" | "submit";
-		icon: "edit" | "cancel" | "check" | "trash";
+		icon: "edit" | "cancel" | "check" | "trash" | "share" | "help";
 		onclick?: EventHandler;
 		class?: string;
 	} = $props();
@@ -36,6 +38,13 @@
 			<CheckIcon />
 		{:else if icon === "trash"}
 			<TrashIcon class="group-hover/icon:stroke-warn" />
+		{:else if icon === "help"}
+			<HelpIcon />
+		{:else if icon === "share"}
+			<ShareIcon />
+		{:else}
+			<!-- Using the help icon as a fallback -->
+			<HelpIcon />
 		{/if}
 		<span class:hidden={iconOnly}>{text}</span>
 	</div>
