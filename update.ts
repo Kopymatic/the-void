@@ -12,7 +12,7 @@ const stage = async (
 
 const s = spinner();
 
-intro(`Welcome!`);
+intro(`Welcome to the updater!`);
 const gitHelp = await $`git --help`;
 console.log(gitHelp.text());
 
@@ -26,30 +26,37 @@ const results: [{ stage: string; result: string }] = [{ stage: "dev", result: "N
 s.start("Pulling from git");
 const stash = await stage("stash", "git stash");
 results.push(stash.result);
+log.step("Stashed any changes...");
 const pull = await stage("pull", "git pull -s recursive -X theirs");
 results.push(pull.result);
-s.stop("Success!");
+log.step("Pulled from remote...");
+const commit = await stage("getCommit", "git rev-parse --short HEAD");
+results.push(commit.result);
+log.step(`Updating to commit ${commit.output.text().trim()}`);
+s.stop("Successfully pulled from git!");
 
 s.start("Bun installing...");
 const bunInstall = await stage("bunInstall", "bun install");
 results.push(bunInstall.result);
-s.stop("Success!");
+s.stop("Successfully installed packages!");
 
 s.start("Applying Prisma migrations...");
 const prismaMigrate = await stage("prismaMigrate", "bunx prisma migrate deploy");
 results.push(prismaMigrate.result);
+log.step("Applied any migrations...");
 const prismaGenerate = await stage("prismaGenerate", "bunx prisma generate");
 results.push(prismaGenerate.result);
-s.stop("Success!");
+log.step("Generated prisma package...");
+s.stop("Successfully applied prisma migrations!");
 
 s.start("Building...");
 const build = await stage("build", "bun run build");
 results.push(build.result);
-s.stop("Success!");
+s.stop("Successfully built!");
 
 s.start("Restarting pm2");
 const pm2Restart = await stage("pm2Restart", "pm2 restart thevoid");
 results.push(pm2Restart.result);
-s.stop("Success!");
+s.stop("Successfully restarted pm2!");
 
-outro(`You're all set!`);
+outro(`Everything should be updated!`);
