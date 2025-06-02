@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 	import "../app.css";
-	import Footer from "../components/Footer.svelte";
-	import Header from "../components/Header.svelte";
+	import Footer from "$lib/components/Footer.svelte";
+	import Header from "$lib/components/Header.svelte";
 	const { children }: { children: Snippet<[]> } = $props();
 </script>
 
