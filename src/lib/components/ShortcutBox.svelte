@@ -21,22 +21,22 @@
 		showCopiedTooltip = true;
 		setTimeout(() => (showCopiedTooltip = false), 1000);
 	};
+	const openShareMenu = () => {
+		navigator.share({ url: `https://kopy.fyi/${name}` });
+	};
 </script>
 
 <ContentBox
 	prose
 	class="mx-auto flex flex-row place-content-between duration-50 group-hover/list:scale-99 hover:scale-102 "
+	onclick={copyToClipboard}
 >
 	<span title={destination} class="max-w-full overflow-hidden overflow-ellipsis">
 		{`${name} -> `}
 		<a target="_blank" rel="noopener noreferrer" href={destination}>{destinationTrimmed}</a>
 	</span>
 	<span class="group flex flex-nowrap gap-1">
-		<IconButton
-			onclick={copyToClipboard}
-			icon="share"
-			class="group-hover:scale-90 hover:scale-110"
-		/>
+		<IconButton onclick={openShareMenu} icon="share" class="group-hover:scale-90 hover:scale-110" />
 		<!-- This looks like ass but its fine -->
 		<div
 			class:hidden={!showCopiedTooltip}

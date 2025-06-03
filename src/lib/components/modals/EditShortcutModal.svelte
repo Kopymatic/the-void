@@ -20,6 +20,10 @@
 	let redirectUrl = $state(shortcut.redirectUrl);
 
 	let error: ShortcutFormError | undefined = $state(undefined);
+
+	const copyToClipboard = () => {
+		navigator.clipboard.writeText(completeFyiUrl);
+	};
 </script>
 
 <BaseModal hideWhenUnfocused={false} bind:showModal>
@@ -34,6 +38,7 @@
 				showModal = false;
 				//This is jank, but it makes the page update after the form is done. Ill take it
 				setTimeout(() => {
+					copyToClipboard();
 					invalidateAll();
 				}, 1000);
 				return validation.submit;

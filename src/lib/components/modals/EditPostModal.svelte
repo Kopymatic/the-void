@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import { CreateFormError } from "$lib";
-	import type { ActionData } from "../../routes/posts/[category]/[url]/$types";
+	import type { ActionData } from "../../../routes/posts/[category]/[url]/$types";
 	import BaseModal from "./BaseModal.svelte";
 	import { defaultCategories } from "$lib/defaultCategories";
 	import { validateCreateFormClient } from "$lib/formValidation";
@@ -53,6 +53,10 @@
 			if (validation.error) error = validation.error;
 			else {
 				showModal = false;
+				//This is jank, but it makes the page update after the form is done. Ill take it
+				setTimeout(() => {
+					invalidateAll();
+				}, 1000);
 				return validation.submit;
 			}
 		}}

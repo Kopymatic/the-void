@@ -6,11 +6,14 @@
 	import ConfirmButton from "../buttons/ConfirmButton.svelte";
 	import CancelButton from "../buttons/CancelButton.svelte";
 	import { invalidateAll } from "$app/navigation";
+	import { page } from "$app/state";
+
+	let urlParams = page.url.searchParams.get("link");
 
 	let { showModal = $bindable() }: { showModal: boolean } = $props();
 
 	let auto = $state(false);
-	let destination = $state("");
+	let destination = $state(urlParams ? urlParams : "");
 
 	const shortcutAuto = $derived(
 		btoa(simpleHash(destination).toString()).replaceAll("=", "").toLowerCase()
@@ -22,6 +25,10 @@
 	const completeFyiUrl = $derived("kopy.fyi/" + shortcutName);
 
 	let error: ShortcutFormError | undefined = $state(undefined);
+
+	const copyToClipboard = () => {
+		navigator.clipboard.writeText(completeFyiUrl);
+	};
 </script>
 
 <BaseModal hideWhenUnfocused={false} bind:showModal>
@@ -35,6 +42,7 @@
 			else {
 				//This is jank, but it makes the page update after the form is done. Ill take it
 				setTimeout(() => {
+					copyToClipboard();
 					invalidateAll();
 				}, 1000);
 				showModal = false;

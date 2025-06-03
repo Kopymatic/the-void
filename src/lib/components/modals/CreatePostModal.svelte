@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import { CreateFormError } from "$lib";
-	import type { ActionData } from "../../routes/posts/[category]/[url]/$types";
+	import type { ActionData } from "../../../routes/posts/[category]/[url]/$types";
 	import BaseModal from "./BaseModal.svelte";
 	import { defaultCategories } from "$lib/defaultCategories";
 	import { validateCreateFormClient } from "$lib/formValidation";
