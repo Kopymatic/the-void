@@ -20,7 +20,9 @@ export default defineConfig({
 					action: "/shortcut/create",
 					method: "GET",
 					params: {
-						url: "link"
+						url: "link",
+						text: "text",
+						title: "title"
 					},
 					enctype: "application/x-www-form-urlencoded"
 				},

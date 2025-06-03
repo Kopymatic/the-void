@@ -9,6 +9,8 @@
 	import { page } from "$app/state";
 
 	let urlParams = page.url.searchParams.get("link");
+	let textParams = page.url.searchParams.get("text");
+	let titleParams = page.url.searchParams.get("title");
 
 	let { showModal = $bindable() }: { showModal: boolean } = $props();
 
@@ -32,6 +34,7 @@
 </script>
 
 <BaseModal hideWhenUnfocused={false} bind:showModal>
+	{`Link: ${urlParams} - Text: ${textParams} - Title: ${titleParams}`}
 	<form
 		method="POST"
 		action="/shortcut/create?/post"
