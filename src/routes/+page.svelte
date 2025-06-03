@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Article from "../components/Article.svelte";
+	import Article from "$lib/components/Article.svelte";
 </script>
 
 <div class="flex h-full flex-col">

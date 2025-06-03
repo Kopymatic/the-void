@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ShortcutBox from "../../../components/ShortcutBox.svelte";
+	import ShortcutBox from "$lib/components/ShortcutBox.svelte";
 	import type { PageData } from "./$types";
 
 	const { data }: { data: PageData } = $props();
