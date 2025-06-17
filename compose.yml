@@ -1,0 +1,18 @@
+services:
+  thevoid:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file: ".env"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /code
+    volumes:
+      - type: bind
+        source: /docker/thevoid/db
+        target: /app/data
+    restart: always
+volumes:
+  database:
