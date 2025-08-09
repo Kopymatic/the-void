@@ -24,3 +24,4 @@ vite.config.ts.timestamp-*
 /prisma/data
 /data/
 .vscode
+db.json
