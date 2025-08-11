@@ -47,6 +47,8 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - thevoid
+    networks:
+      - proxiable
 volumes:
   pgdata:
   database:
