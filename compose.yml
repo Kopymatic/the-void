@@ -62,7 +62,7 @@ services:
       - ./certbot/conf/:/etc/letsencrypt/:rw
 volumes:
   pgdata:
-    database:
+  database:
 
 secrets:
   env:
