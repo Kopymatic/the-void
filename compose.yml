@@ -48,6 +48,7 @@ services:
       - 443:443
       - 80:80
     volumes:
+      - certbot:/var/www/certbot/
       - letsencrypt:/etc/letsencrypt/live/:ro
       - ./nginx/conf/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
@@ -57,12 +58,14 @@ services:
   certbot:
     image: certbot/certbot:latest
     volumes:
+      - certbot:/var/www/certbot/
       - letsencrypt:/etc/letsencrypt/live/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
 volumes:
   pgdata:
   database:
   letsencrypt:
+  certbot:
 
 secrets:
   env:
