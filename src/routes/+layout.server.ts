@@ -9,7 +9,7 @@ export const load: LayoutServerLoad = async (event) => {
 
 	// const gitHash = execSync("git rev-parse --short HEAD").toString().trim();
 	const packageVersion = packagejson.version;
-	const commit = process.env.GIT_COMMIT ? process.env.GIT_COMMIT : "unknown";
+	const commit = process.env.GIT_COMMIT ? process.env.GIT_COMMIT : undefined;
 	const versions = { git: commit, package: packageVersion };
 
 	return {
