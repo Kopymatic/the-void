@@ -71,7 +71,7 @@ services:
       - type: bind
         source: /var/www/certbot/
         target: /var/www/certbot/
-    profiles: [certbot]
+    profiles: [certbot, prod]
 volumes:
   pgdata:
   database:
