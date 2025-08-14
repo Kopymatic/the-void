@@ -1,4 +1,5 @@
 # https://stackoverflow.com/a/67403701
 bunx prisma migrate deploy
 bunx prisma generate
-bun ./build
+
+GIT_COMMIT=$(git rev-parse --short HEAD) bun ./build
