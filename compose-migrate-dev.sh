@@ -1,0 +1,1 @@
+docker-compose exec -it thevoid bash -c 'bunx prisma migrate dev'
