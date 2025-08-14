@@ -51,8 +51,8 @@ services:
       - 80:80
     volumes:
       - type: bind
-        source: /etc/letsencrypt/live/
-        target: /etc/letsencrypt/live/
+        source: /etc/letsencrypt/
+        target: /etc/letsencrypt/
       - type: bind
         source: /var/www/certbot/
         target: /var/www/certbot/
@@ -67,8 +67,8 @@ services:
     image: certbot/certbot:latest
     volumes:
       - type: bind
-        source: /etc/letsencrypt/live/
-        target: /etc/letsencrypt/live/
+        source: /etc/letsencrypt/
+        target: /etc/letsencrypt/
       - type: bind
         source: /var/www/certbot/
         target: /var/www/certbot/
