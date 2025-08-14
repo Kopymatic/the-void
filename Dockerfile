@@ -36,8 +36,8 @@ COPY --from=build /app/build ./build
 COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/prisma ./prisma
-COPY --from=build /app/startup.sh ./startup.sh
+COPY --from=build /app/startup-prod.sh ./startup-prod.sh
 
 EXPOSE 3000/tcp
-RUN chmod +x ./startup.sh
+RUN chmod +x ./startup-prod.sh
 CMD ["./startup-prod.sh"]
