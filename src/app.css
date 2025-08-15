@@ -4,6 +4,9 @@
 @import "tailwindcss";
 @config '../tailwind.config.ts';
 
+/* Fixes hover not working on some laptops */
+@custom-variant hover (&:hover);
+
 @theme {
 	--color-white-text: #ffffff;
 	--color-secondary-text: #8c8c8c;
