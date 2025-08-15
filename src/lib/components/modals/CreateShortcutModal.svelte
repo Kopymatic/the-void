@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
-	import { ShortcutFormError, simpleHash } from "$lib";
+	import { ShortcutFormError, simpleHash, urlRegex } from "$lib";
 	import BaseModal from "./BaseModal.svelte";
 	import { validateShortcutFormClient } from "$lib/formValidation";
 	import ConfirmButton from "../buttons/ConfirmButton.svelte";
@@ -8,14 +8,15 @@
 	import { invalidateAll } from "$app/navigation";
 	import { page } from "$app/state";
 
-	let urlParams = page.url.searchParams.get("link");
 	let textParams = page.url.searchParams.get("text");
 	let titleParams = page.url.searchParams.get("title");
 
 	let { showModal = $bindable() }: { showModal: boolean } = $props();
 
-	let auto = $state(false);
-	let destination = $state(urlParams ? urlParams : "");
+	// These 3 lines make sharing to the PWA work
+	let textParamsIsValid = !!(textParams && urlRegex.test(textParams));
+	let destination = $state(textParamsIsValid && textParams ? textParams : "");
+	let auto = $state(textParamsIsValid);
 
 	const shortcutAuto = $derived(
 		btoa(simpleHash(destination).toString()).replaceAll("=", "").toLowerCase()
@@ -34,7 +35,7 @@
 </script>
 
 <BaseModal hideWhenUnfocused={false} bind:showModal>
-	{`Link: ${urlParams} - Text: ${textParams} - Title: ${titleParams}`}
+	{`Text: ${textParams} - Title: ${titleParams}`}
 	<form
 		method="POST"
 		action="/shortcut/create?/post"
