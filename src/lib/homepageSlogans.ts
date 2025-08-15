@@ -27,7 +27,8 @@ export const slogans = [
 	"im 19 years old and i've already wasted my entire life",
 	"auth sucks",
 	"hey past me Doom: the dark ages was pretty awesome",
-	"now with shortcuts"
+	"now with shortcuts",
+	"i have lost countless hours of my life to docker"
 ];
 
 export const getRandomSlogan = () => {

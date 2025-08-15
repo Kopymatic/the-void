@@ -4,8 +4,6 @@ services:
     container_name: db
     restart: always
     env_file: ".env.deploy"
-    # ports:
-    #   - "5432:5432"
     environment:
       PGUSER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -19,7 +17,6 @@ services:
       timeout: 60s
       retries: 5
       start_period: 80s
-    # profiles: [dev, prod]
   thevoid:
     container_name: thevoid
     build:
@@ -42,7 +39,6 @@ services:
         condition: service_healthy
     networks:
       - proxiable
-    # profiles: [dev, prod, certbot]
   nginx:
     restart: always
     image: nginx:1-alpine
@@ -61,7 +57,6 @@ services:
       - thevoid
     networks:
       - proxiable
-    # profiles: [prod]
   certbot:
     image: certbot/certbot:latest
     volumes:
@@ -71,7 +66,6 @@ services:
       - type: bind
         source: /var/www/certbot/
         target: /var/www/certbot/
-    # profiles: [certbot, prod]
 volumes:
   pgdata:
   database:
