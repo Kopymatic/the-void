@@ -8,6 +8,7 @@
 	import EditPostModal from "./modals/EditPostModal.svelte";
 	import EditIcon from "./icons/EditIcon.svelte";
 	import TrashIcon from "./icons/TrashIcon.svelte";
+	import IconButton from "./buttons/IconButton.svelte";
 
 	const user: SessionUser | undefined = $state($page.data.user);
 
@@ -17,6 +18,10 @@
 	let showEditModal = $state(false);
 
 	const updatedAtIsDifferent = post.updatedAt.getTime() != post.createdAt.getTime();
+
+	const openShareMenu = () => {
+		navigator.share({ url: $page.url.pathname });
+	};
 </script>
 
 <svelte:head>
@@ -36,8 +41,14 @@
 				<i class="text-secondary-text">(unlisted)</i>
 			{/if}
 		</h2>
-		{#if user?.isAdmin && editable}
-			<div class="flex flex-col gap-1 md:flex-row">
+
+		<div class="flex flex-col gap-1 md:flex-row">
+			<IconButton
+				onclick={openShareMenu}
+				icon="share"
+				class="group-hover:scale-90 hover:scale-110"
+			/>
+			{#if user?.isAdmin && editable}
 				<button
 					class="flex max-h-min flex-nowrap"
 					onclick={() => {
@@ -54,8 +65,8 @@
 				>
 					<TrashIcon /> Delete
 				</button>
-			</div>
-		{/if}
+			{/if}
+		</div>
 	</div>
 	<p class="my-2">{post.description}</p>
 	<p class="text-secondary-text my-2">

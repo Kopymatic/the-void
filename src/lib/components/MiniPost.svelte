@@ -11,7 +11,14 @@
 </script>
 
 <ContentBox prose small>
-	<b><a href={fullUrl}>{category}/{url}</a></b>
+	<div class="flex flex-row justify-between *:my-auto *:h-full">
+		<b class="text-center align-middle"><a href={fullUrl}>{category}/{url}</a></b>
+		<p class="text-secondary-text text-center">
+			{post.createdAt.toLocaleString("en-US", {
+				dateStyle: "short"
+			})}
+		</p>
+	</div>
 	{#if post.unlisted}
 		<i class="text-secondary-text">(unlisted)</i>
 	{/if}
