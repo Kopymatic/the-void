@@ -35,7 +35,7 @@ model Shortcut {
   id String @id @default(uuid())
 
   shortcut    String @unique
-  redirectUrl String @unique
+  redirectUrl String
   
   // Adding the ability to auto-generate shortcuts. 
   // When a shortcut is generated automatically, it will set the shortcut name automatically
