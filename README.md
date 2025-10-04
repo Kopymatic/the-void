@@ -4,6 +4,15 @@ My personal little blogging/ranting/testing/learning/whatever platform
 
 Here im going to put notes (mostly for me to use later)
 
+## How to dev
+
+for some reason i forgot this after taking a break so....
+
+to run the project without suffering _too_ much, run the db on its own `docker compose --profile dev up`
+and then just the usual `bun dev`
+
+you should also be able to use startup-dev.sh
+
 ## Example .env
 
 ```bash

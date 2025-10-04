@@ -8,8 +8,8 @@
 	import { invalidateAll } from "$app/navigation";
 	import { page } from "$app/state";
 
-	let textParams = page.url.searchParams.get("text");
-	let titleParams = page.url.searchParams.get("title");
+	let textParams = page.url.searchParams.get("text")?.trim();
+	let titleParams = page.url.searchParams.get("title")?.trim();
 
 	let { showModal = $bindable() }: { showModal: boolean } = $props();
 
@@ -35,7 +35,7 @@
 </script>
 
 <BaseModal hideWhenUnfocused={false} bind:showModal>
-	{`Text: ${textParams} - Title: ${titleParams}`}
+	{`Text: ${textParams} - Title: ${titleParams} \n${textParamsIsValid}\n${destination}\n${auto}`}
 	<form
 		method="POST"
 		action="/shortcut/create?/post"
@@ -113,6 +113,7 @@
 			<p class="error">{error}</p>
 		{/if}
 	</form>
+	{page.url.toString()}
 </BaseModal>
 
 <style>

@@ -11,6 +11,8 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - proxiable
+    ports:
+      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-d", "db_prod", "-u", "postgres"]
       interval: 30s
