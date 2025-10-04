@@ -20,7 +20,7 @@ export enum ShortcutFormError {
 }
 
 export const categoryRegex = /^[a-z\-0-9]+$/;
-export const urlRegex = /^[a-z\-0-9]+$/;
+export const internalUrlRegex = /^[a-z\-0-9]+$/;
 export const httpRegex =
 	/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/;
 export const noProtoHttpRegex =

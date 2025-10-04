@@ -1,5 +1,11 @@
 import { applyAction } from "$app/forms";
-import { categoryRegex, CreateFormError, httpRegex, ShortcutFormError, urlRegex } from "$lib";
+import {
+	categoryRegex,
+	CreateFormError,
+	httpRegex,
+	ShortcutFormError,
+	internalUrlRegex
+} from "$lib";
 import { goto } from "$app/navigation";
 import type { ActionResult } from "@sveltejs/kit";
 
@@ -29,7 +35,7 @@ export const validateCreateFormClient = (formData: FormData, cancel: () => void)
 		cancel();
 		return { error: CreateFormError.invalidCategory };
 	}
-	if (!urlRegex.test(url)) {
+	if (!internalUrlRegex.test(url)) {
 		cancel();
 		return { error: CreateFormError.invalidUrl };
 	}
@@ -66,7 +72,7 @@ export const validateShortcutFormClient = (
 		return { error: ShortcutFormError.missingDestination };
 	}
 
-	if (!urlRegex.test(shortcutName)) {
+	if (!internalUrlRegex.test(shortcutName)) {
 		cancel();
 		return { error: ShortcutFormError.invalidName };
 	}

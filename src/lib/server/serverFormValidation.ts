@@ -1,4 +1,10 @@
-import { categoryRegex, CreateFormError, httpRegex, ShortcutFormError, urlRegex } from "$lib";
+import {
+	categoryRegex,
+	CreateFormError,
+	httpRegex,
+	ShortcutFormError,
+	internalUrlRegex
+} from "$lib";
 
 export const validateCreateFormServer = (formData: FormData) => {
 	const url = formData.get("url")?.toString();
@@ -33,7 +39,7 @@ export const validateCreateFormServer = (formData: FormData) => {
 	if (!categoryRegex.test(category)) {
 		return { status: 400, error: CreateFormError.invalidCategory, data };
 	}
-	if (!urlRegex.test(url)) {
+	if (!internalUrlRegex.test(url)) {
 		return { status: 400, error: CreateFormError.invalidUrl, data };
 	}
 	return { status: undefined, error: undefined, data };
@@ -55,7 +61,7 @@ export const validateShortcutCreateFormServer = (formData: FormData) => {
 	if (!destination) return { status: 400, error: ShortcutFormError.missingDestination, data };
 
 	// filter out incorrect formatting
-	if (!urlRegex.test(shortcutName)) {
+	if (!internalUrlRegex.test(shortcutName)) {
 		return { status: 400, error: ShortcutFormError.invalidName, data };
 	}
 	if (!httpRegex.test(destination)) {
