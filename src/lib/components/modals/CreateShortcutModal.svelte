@@ -30,7 +30,7 @@
 	let error: ShortcutFormError | undefined = $state(undefined);
 
 	const copyToClipboard = () => {
-		navigator.clipboard.writeText(completeFyiUrl);
+		navigator.clipboard.writeText(`https://${completeFyiUrl}`);
 	};
 </script>
 
