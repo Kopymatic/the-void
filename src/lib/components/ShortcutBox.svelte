@@ -16,11 +16,11 @@
 	let showEditModal = $state(false);
 	let showCopiedTooltip = $state(false);
 
-	const copyToClipboard = () => {
-		navigator.clipboard.writeText(`https://kopy.fyi/${name}`);
-		showCopiedTooltip = true;
-		setTimeout(() => (showCopiedTooltip = false), 1000);
-	};
+	// const copyToClipboard = () => {
+	// 	navigator.clipboard.writeText(`https://kopy.fyi/${name}`);
+	// 	showCopiedTooltip = true;
+	// 	setTimeout(() => (showCopiedTooltip = false), 1000);
+	// };
 	const openShareMenu = () => {
 		navigator.share({ url: `https://kopy.fyi/${name}` });
 	};
@@ -29,7 +29,6 @@
 <ContentBox
 	prose
 	class="mx-auto flex flex-row place-content-between duration-50 group-hover/list:scale-99 hover:scale-102 "
-	onclick={copyToClipboard}
 >
 	<span title={destination} class="max-w-full overflow-hidden overflow-ellipsis">
 		{`${name} -> `}

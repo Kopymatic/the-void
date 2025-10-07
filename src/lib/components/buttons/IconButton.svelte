@@ -6,6 +6,8 @@
 	import TrashIcon from "../icons/TrashIcon.svelte";
 	import HelpIcon from "../icons/HelpIcon.svelte";
 	import ShareIcon from "../icons/ShareIcon.svelte";
+	import UpIcon from "../icons/UpIcon.svelte";
+	import DownIcon from "../icons/DownIcon.svelte";
 
 	const {
 		text,
@@ -16,7 +18,7 @@
 	}: {
 		text?: string;
 		type?: "button" | "reset" | "submit";
-		icon: "edit" | "cancel" | "check" | "trash" | "share" | "help";
+		icon: "edit" | "cancel" | "check" | "trash" | "share" | "help" | "down" | "up";
 		onclick?: EventHandler;
 		class?: string;
 	} = $props();
@@ -42,6 +44,10 @@
 			<HelpIcon />
 		{:else if icon === "share"}
 			<ShareIcon />
+		{:else if icon === "up"}
+			<UpIcon />
+		{:else if icon === "down"}
+			<DownIcon />
 		{:else}
 			<!-- Using the help icon as a fallback -->
 			<HelpIcon />
