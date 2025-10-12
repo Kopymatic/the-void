@@ -30,6 +30,7 @@
 	class={`hover:border-accent group/icon transition-all duration-300 ease-in-out ${className}`}
 	{onclick}
 	{type}
+	name={type}
 >
 	<div class="mx-auto flex w-min text-nowrap">
 		{#if icon === "edit"}

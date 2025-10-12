@@ -40,7 +40,7 @@
 	<a class="my-2 py-0" href="/">take me home</a>
 	<FunnyText></FunnyText>
 	<p class="text-secondary-text text-sm">
-		v{`${versions.package}`}
+		<a class="text-inherit" href="/login">v</a>{`${versions.package}`}
 		{#if versions.git}- commit
 			<a target="_blank" href={`https://github.com/Kopymatic/the-void/commit/${versions.git}`}
 				>{`${versions.git}`}</a
