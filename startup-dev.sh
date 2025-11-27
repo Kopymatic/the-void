@@ -1,6 +1,6 @@
-docker compose up db -d &&
+#docker compose up db -d &&
 
-bunx prisma migrate dev &&
-bunx prisma generate &&
+#bunx prisma migrate dev &&
+#bunx prisma generate &&
 
-bun dev
+GIT_COMMIT=$(git rev-parse --short HEAD) bun dev

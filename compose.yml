@@ -26,6 +26,7 @@ services:
       secrets:
         - env
       args:
+        GIT_COMMIT: ${GIT_COMMIT}
         DATABASE_URL: ${DATABASE_URL}
     env_file: ".env.deploy"
     ports:

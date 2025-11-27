@@ -9,6 +9,8 @@ export const load: LayoutServerLoad = async (event) => {
 
 	const packageVersion = packagejson.version;
 	const commit = process.env.GIT_COMMIT ? process.env.GIT_COMMIT : undefined;
+	console.log(process.env.GIT_COMMIT);
+	console.log(commit);
 	const versions = { git: commit, package: packageVersion };
 
 	return {
