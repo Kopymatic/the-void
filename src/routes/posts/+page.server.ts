@@ -20,7 +20,7 @@ export const load: PageServerLoad = async () => {
 			return postB.createdAt.getTime() - postA.createdAt.getTime();
 		});
 
-		return { posts: filteredPosts };
+		return { posts: sortedPosts };
 	}
 
 	error(404, "Not found");

@@ -5,7 +5,7 @@ const accent = "#a559d9";
 const darkerAccent = "#6f3c91";
 
 export default {
-	content: ["./src/**/*.{html,js,svelte,ts}"],
+	content: ["./src/**/*.{html,js,svelte,ts,css}"],
 
 	theme: {
 		extend: {

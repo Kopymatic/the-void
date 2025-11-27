@@ -4,7 +4,7 @@
 	const showVoidHeader = $derived(path.pathname.startsWith("/posts"));
 </script>
 
-<header class="mx-auto w-full pt-2 text-center">
+<header class="mx-auto pt-2 text-center">
 	<div>
 		<a
 			class="font-rock-salt text-kopymatic hover:text-kopymatic mx-auto text-4xl no-underline"

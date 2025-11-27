@@ -13,6 +13,7 @@
 
 	let showPostModal = $state(false);
 	let showShortcutModal = $state(false);
+	const today = new Date();
 </script>
 
 <footer class="mx-auto w-full justify-items-center text-center">
@@ -39,6 +40,7 @@
 	<br />
 	<a class="my-2 py-0" href="/">take me home</a>
 	<FunnyText></FunnyText>
+	<p class="text-secondary-text">&copy; {today.getFullYear()} Kopymatic. All rights reserved.</p>
 	<p class="text-secondary-text text-sm">
 		<a class="text-inherit" href="/login">v</a>{`${versions.package}`}
 		{#if versions.git}- commit

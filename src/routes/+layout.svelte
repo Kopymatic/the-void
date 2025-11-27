@@ -16,7 +16,7 @@
 	<meta name="description" content="Silly little thoughts from my silly little head" />
 </svelte:head>
 
-<div class="mx-auto box-border flex h-screen w-screen max-w-6xl flex-col">
+<div class="mx-auto box-border flex h-screen w-[97vw] max-w-6xl flex-col">
 	<Header></Header>
 	<div class="flex-grow">
 		{@render children()}

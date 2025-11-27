@@ -8,7 +8,11 @@ export const load: PageServerLoad = async ({ locals }) => {
 	if (!session || !isAdmin(session.user?.id)) error(401);
 
 	const posts = await prisma.post.findMany();
-	if (posts) return { posts: posts };
 
+	const sortedPosts = posts.sort((postA, postB) => {
+		return postB.createdAt.getTime() - postA.createdAt.getTime();
+	});
+
+	if (posts) return { posts: sortedPosts };
 	error(404, "Not found");
 };

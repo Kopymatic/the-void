@@ -10,7 +10,7 @@
 	const fullUrl = category && url ? `/posts/${category}/${url}` : undefined;
 </script>
 
-<ContentBox prose small>
+<ContentBox prose small class="w-full">
 	<div class="flex flex-row justify-between *:my-auto *:h-full">
 		<b class="text-center align-middle"><a href={fullUrl}>{category}/{url}</a></b>
 		<p class="text-secondary-text text-center">

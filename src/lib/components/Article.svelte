@@ -4,4 +4,6 @@
 	const { children }: { children: Snippet<[]> } = $props();
 </script>
 
-<div class="prose prose-invert mx-auto w-full px-2 sm:px-0 md:w-xl">{@render children()}</div>
+<article class="prose prose-invert mx-auto w-full max-w-none px-2 sm:px-0 lg:w-4xl">
+	{@render children()}
+</article>
