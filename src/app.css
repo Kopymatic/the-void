@@ -59,4 +59,13 @@
 	.error {
 		@apply text-error m-0 p-0 text-sm;
 	}
+	.hover-shrink-div {
+		@apply  *:mx-auto *:box-border *:group-hover:scale-95 *:group-hover:opacity-90 *:hover:z-10 *:hover:scale-105 *:hover:opacity-100 *:transition-all *:duration-300 *:ease-in-out;
+	}
+	.generic-border {
+		@apply border-primary  hover:border-accent rounded-lg border-2;
+	}
+	.generic-border-children {
+		@apply *:border-primary *:hover:border-accent *:rounded-lg *:border-2;
+	}
 }

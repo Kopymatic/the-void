@@ -18,7 +18,7 @@
 
 <div class="mx-auto box-border flex h-screen w-[97vw] max-w-6xl flex-col">
 	<Header></Header>
-	<div class="flex-grow">
+	<div class="grow">
 		{@render children()}
 	</div>
 	<Footer></Footer>
