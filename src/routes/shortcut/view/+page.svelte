@@ -12,7 +12,7 @@
 	let autoCollapsed = $state(false);
 </script>
 
-<div class="group/type mx-auto my-8 grid grid-cols-1 gap-2 md:grid-cols-2">
+<div class="group/type mx-auto my-8 grid grid-cols-1 gap-2">
 	<div
 		class="transition-all duration-200 ease-in-out group-hover/type:scale-99 group-hover/type:opacity-75 hover:scale-100 hover:opacity-100"
 	>
@@ -24,7 +24,10 @@
 				onclick={() => (namedCollapsed = !namedCollapsed)}
 			></IconButton>
 		</div>
-		<div class="group/list mx-2 flex flex-col gap-2 *:w-full md:mr-2" hidden={namedCollapsed}>
+		<div
+			class="group/list mx-2 grid grid-cols-1 gap-2 *:w-full md:mr-2 md:grid-cols-2 lg:grid-cols-3"
+			hidden={namedCollapsed}
+		>
 			{#each manualShortcuts as shortcut (shortcut.shortcut)}
 				<ShortcutBox {shortcut} />
 			{:else}
@@ -43,7 +46,10 @@
 				onclick={() => (autoCollapsed = !autoCollapsed)}
 			></IconButton>
 		</div>
-		<div class="group/list mx-2 flex flex-col gap-2 *:w-full md:mr-2" hidden={autoCollapsed}>
+		<div
+			class="group/list mx-2 grid grid-cols-1 gap-2 *:w-full md:mr-2 md:grid-cols-2 lg:grid-cols-3"
+			hidden={autoCollapsed}
+		>
 			{#each autoShortcuts as shortcut (shortcut.shortcut)}
 				<ShortcutBox {shortcut} />
 			{:else}
