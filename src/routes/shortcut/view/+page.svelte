@@ -20,22 +20,17 @@
 	let autoCollapsed = $state(false);
 </script>
 
-<div class="group/type mx-auto my-8 grid grid-cols-1 gap-2">
-	<div
-		class="transition-all duration-200 ease-in-out group-hover/type:scale-99 group-hover/type:opacity-75 hover:scale-100 hover:opacity-100"
-	>
-		<div class="flex justify-between px-6">
-			<p class="text-center font-bold">Named Shortcuts (alphabetical)</p>
+<div class="outer group/type">
+	<div class="shortcut-group">
+		<div class="shorcut-heading-box">
+			<p class="shortcut-heading-text">Named Shortcuts (alphabetical)</p>
 			<IconButton
 				class="border-0 bg-transparent"
 				icon={namedCollapsed ? "down" : "up"}
 				onclick={() => (namedCollapsed = !namedCollapsed)}
 			></IconButton>
 		</div>
-		<div
-			class="group/list mx-2 grid grid-cols-1 gap-2 *:w-full md:mr-2 md:grid-cols-2 lg:grid-cols-3"
-			hidden={namedCollapsed}
-		>
+		<div class="shortcut-list group/list" hidden={namedCollapsed}>
 			{#each manualShortcuts as shortcut (shortcut.shortcut)}
 				<ShortcutBox {shortcut} />
 			{:else}
@@ -43,21 +38,17 @@
 			{/each}
 		</div>
 	</div>
-	<div
-		class="transition-all duration-200 ease-in-out group-hover/type:scale-99 group-hover/type:opacity-75 hover:scale-100 hover:opacity-100"
-	>
-		<div class="flex justify-between px-6">
-			<p class="text-center font-bold">Auto Shortcuts (newest to oldest)</p>
+
+	<div class="shortcut-group">
+		<div class="shorcut-heading-box">
+			<p class="shortcut-heading-text">Auto Shortcuts (newest to oldest)</p>
 			<IconButton
 				class="border-0 bg-transparent"
 				icon={autoCollapsed ? "down" : "up"}
 				onclick={() => (autoCollapsed = !autoCollapsed)}
 			></IconButton>
 		</div>
-		<div
-			class="group/list mx-2 grid grid-cols-1 gap-2 *:w-full md:mr-2 md:grid-cols-2 lg:grid-cols-3"
-			hidden={autoCollapsed}
-		>
+		<div class="shortcut-list group/list" hidden={autoCollapsed}>
 			{#each autoShortcuts as shortcut (shortcut.shortcut)}
 				<ShortcutBox {shortcut} />
 			{:else}
@@ -66,3 +57,23 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	@reference "tailwindcss";
+
+	.outer {
+		@apply mx-auto my-8 grid grid-cols-1 gap-2;
+	}
+	.shortcut-group {
+		@apply transition-all duration-200 ease-in-out group-hover/type:scale-99 group-hover/type:opacity-75 hover:scale-100 hover:opacity-100;
+	}
+	.shorcut-heading-box {
+		@apply flex justify-between px-6 pt-2;
+	}
+	.shortcut-heading-text {
+		@apply text-center font-bold;
+	}
+	.shortcut-list {
+		@apply mx-2 grid grid-cols-1 gap-2 *:w-full md:mr-2 md:grid-cols-2 lg:grid-cols-3;
+	}
+</style>
