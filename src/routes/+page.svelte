@@ -29,8 +29,8 @@
 			>
 				<p>
 					Well.. programming languages at least. I started out with Java, and quickly moved to
-					Kotlin and then kept learning from there. Currently I'm using in Typescript (and JS),
-					HTML, CSS, and I'm always trying to learn new languages.
+					Kotlin and then kept learning from there. Currently I'm fluent in Typescript (and
+					Javascript), Svelte, HTML, CSS, and I'm always trying to learn new languages.
 				</p>
 			</StoryBox>
 			<StoryBox
@@ -41,8 +41,8 @@
 				<p>
 					I've dabbled in React and Vue, but I've really found enjoyment in <a
 						href="https://svelte.dev/">Svelte and SvelteKit</a
-					>. I use other tools as well, like TailwindCSS, Vite, Prisma + Postgres for my DB, and
-					Docker.
+					>. I use other tools as well, like TailwindCSS, Vite, Prisma + Postgres for my databases,
+					and Docker + Docker compose.
 				</p>
 			</StoryBox>
 
