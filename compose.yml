@@ -42,6 +42,8 @@ services:
         condition: service_healthy
     networks:
       - proxiable
+    environment:
+      - GIT_COMMIT=$GIT_COMMIT
   nginx:
     restart: always
     image: nginx:1-alpine
