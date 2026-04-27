@@ -26,6 +26,7 @@
 
 	const completeUrl = $derived("kopymatic.com/quick/" + shortcutName);
 	const completeFyiUrl = $derived("kopy.fyi/" + shortcutName);
+	const completeWtfUrl = $derived("heyso.wtf/" + shortcutName);
 
 	let error: ShortcutFormError | undefined = $state(undefined);
 
@@ -81,7 +82,8 @@
 			{/if}
 		</label>
 		<p class="text-secondary-text">
-			Your shortcut will be at {completeUrl} <br />and {completeFyiUrl}
+			Your shortcut will be at {completeUrl},<br />
+			{completeFyiUrl},<br /> and {completeWtfUrl}
 		</p>
 		<br />
 		<label>
