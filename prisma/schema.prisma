@@ -36,6 +36,8 @@ model Shortcut {
 
   shortcut    String @unique
   redirectUrl String
+
+  aliases String[] @default([])
   
   // Adding the ability to auto-generate shortcuts. 
   // When a shortcut is generated automatically, it will set the shortcut name automatically

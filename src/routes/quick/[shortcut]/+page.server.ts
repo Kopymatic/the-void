@@ -6,9 +6,12 @@ import { validateShortcutCreateFormServer } from "$lib/server/serverFormValidati
 import { ShortcutFormError } from "$lib";
 
 export const load: PageServerLoad = async ({ params }) => {
-	const shortcut = params.shortcut;
-	console.log(`Getting quick/${shortcut}`);
-	const shortcutEntry = await prisma.shortcut.findFirst({ where: { shortcut: shortcut } });
+	const query = params.shortcut.toLowerCase();
+	console.log(`Getting quick/${query}`);
+	const shortcutEntry = await prisma.shortcut.findFirst({
+		//Find the first where the query is either an alias or the name
+		where: { OR: [{ shortcut: query }, { aliases: { has: query } }] }
+	});
 
 	if (shortcutEntry) {
 		redirect(302, shortcutEntry?.redirectUrl);

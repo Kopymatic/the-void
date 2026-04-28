@@ -28,6 +28,22 @@
 	const completeFyiUrl = $derived("kopy.fyi/" + shortcutName);
 	const completeWtfUrl = $derived("heyso.wtf/" + shortcutName);
 
+	const shortcutCheck = (nameCheck: string): string[] => {
+		let addedAliases: string[] = [];
+
+		let replaceBoth = nameCheck.replaceAll("_", "").replaceAll("-", "");
+		if (replaceBoth !== nameCheck) addedAliases.push(replaceBoth);
+		return addedAliases;
+	};
+
+	let shortcutAliasesString: string = $state("");
+	let shortcutAliases: string[] = $derived([
+		...shortcutAliasesString
+			.split(",")
+			.flatMap((alias) => (alias ? [alias.trim().toLowerCase()] : [])), //mess is to remove the one array if the list is empty
+		...shortcutCheck(shortcutName).flat()
+	]);
+
 	let error: ShortcutFormError | undefined = $state(undefined);
 
 	const copyToClipboard = () => {
@@ -85,6 +101,30 @@
 			Your shortcut will be at {completeUrl},<br />
 			{completeFyiUrl},<br /> and {completeWtfUrl}
 		</p>
+		<label class:hidden={auto}>
+			Any Aliases? (comma seperated)
+			<br />
+			<input
+				class="w-full"
+				name="name"
+				type="text"
+				required={true}
+				maxlength={128}
+				bind:value={shortcutAliasesString}
+			/>
+			<p class="text-secondary-text">
+				{#if shortcutAliases.length > 0}
+					Your shortcut will have {shortcutAliases.length} alias{shortcutAliases.length > 1
+						? "es"
+						: ""}: {#each shortcutAliases as alias, index (alias)}
+						{alias}{shortcutAliases.length - index !== 1 ? "," : ""}
+					{/each}
+				{/if}
+			</p>
+			{#if error === ShortcutFormError.invalidName || error === ShortcutFormError.missingName}
+				<p class="error">{error}</p>
+			{/if}
+		</label>
 		<br />
 		<label>
 			Destination URL

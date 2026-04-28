@@ -21,7 +21,8 @@ export const slogans = [
 	"hey past me Doom: the dark ages was pretty awesome",
 	"now with shortcuts",
 	"i have lost countless hours of my life to docker",
-	"can someone explain six seven to me"
+	"STOP TALKING ABOUT SIX SEVEN",
+	"Why does copilot add itself if as a co-author if you ask it a question"
 ];
 
 export const getRandomSlogan = () => {
