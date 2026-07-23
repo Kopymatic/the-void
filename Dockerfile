@@ -1,17 +1,13 @@
 # Install node and use it for build
 FROM node:24-alpine AS build
 
-
 # Define the workdir
 WORKDIR /app
 
 # Necessary for better-sqlite3
 RUN apk add --no-cache python3 
-# RUN apk add --no-cache build-essential
 
 COPY . . 
-# RUN sh -c '. ./.env.deploy'
-RUN echo $DATABASE_URL
 
 # Copy the package info for install
 COPY package.json .
@@ -19,8 +15,6 @@ COPY package-lock.json .
 
 # Install packages
 RUN npm i
-
-# not sure what this is for exactly...
 
 # Run project setup
 RUN npx prisma generate
