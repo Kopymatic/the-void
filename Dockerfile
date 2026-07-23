@@ -1,7 +1,7 @@
 # Install node and use it for build
 FROM node:24-alpine AS build
 
-RUN --mount=type=secret,id=env,target=./.env.deploy bash -c 'source ./.env.deploy'
+RUN sh -c '. ./.env.deploy'
 
 # Define the workdir
 WORKDIR /app
@@ -29,7 +29,7 @@ RUN npm run build
 
 FROM node:24-alpine AS run
 
-RUN apt-get update -y && apt-get install -y openssl
+RUN apk add --no-cache openssl
 
 WORKDIR /app
 COPY --from=build /app/build ./build
