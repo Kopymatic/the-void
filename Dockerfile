@@ -6,7 +6,8 @@ FROM node:24-alpine AS build
 WORKDIR /app
 
 # Necessary for better-sqlite3
-RUN apk add --no-cache python3 build-essential
+RUN apk add --no-cache python3 
+RUN apk add --no-cache build-essential
 
 COPY . . 
 RUN sh -c '. ./.env.deploy'
