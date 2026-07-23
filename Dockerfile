@@ -5,10 +5,8 @@ FROM node:24-alpine AS build
 # Define the workdir
 WORKDIR /app
 
-# Install packages
-RUN apt-get update
 # Necessary for better-sqlite3
-RUN apt-get install -y python3 build-essential
+RUN apk add --no-cache python3 build-essential
 
 COPY . . 
 RUN sh -c '. ./.env.deploy'
