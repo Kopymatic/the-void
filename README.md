@@ -9,7 +9,7 @@ Here im going to put notes (mostly for me to use later)
 for some reason i forgot this after taking a break so....
 
 to run the project without suffering _too_ much, run the db on its own `docker compose --profile dev up`
-and then just the usual `bun dev`
+and then just the usual `npm run dev`
 
 you should also be able to use startup-dev.sh
 

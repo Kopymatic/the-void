@@ -8,6 +8,7 @@
 	const { shortcut }: { shortcut: Shortcut } = $props();
 	const name = shortcut.shortcut;
 	const destination = shortcut.redirectUrl;
+	const aliases = shortcut.aliases;
 
 	const url = new URL(destination);
 	const destinationTrimmed = `${url.host}${url.pathname}`;
@@ -31,7 +32,7 @@
 	class="mx-auto  place-content-between duration-50 group-hover/list:scale-97 hover:scale-103 "
 >
 	<div class="flex justify-between">
-		<span class="overflow-hidden text-lg overflow-ellipsis">
+		<span class="overflow-hidden text-lg text-ellipsis">
 			{`${name}`}
 		</span>
 		<span class="group flex flex-nowrap gap-1">
@@ -62,8 +63,10 @@
 			/>
 		</span>
 	</div>
-
-	<div title={destination} class="max-w-full overflow-hidden overflow-ellipsis">
+	<div class="text-secondary-text max-w-full overflow-hidden text-sm text-ellipsis">
+		{aliases.join(", ")}
+	</div>
+	<div title={destination} class="max-w-full overflow-hidden text-ellipsis">
 		<a target="_blank" rel="noopener noreferrer" href={destination}>{destinationTrimmed}</a>
 	</div>
 </ContentBox>

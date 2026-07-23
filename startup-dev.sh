@@ -7,10 +7,14 @@ echo "Starting dev environment..."
 # Load environment variables from .env.local, or defaults
 if [ -f .env.local ]; then
     echo "Loading .env.local..."
-    export $(grep -v '^#' .env.local | xargs)
+    set -o allexport
+    source .env.local
+    set +o allexport
 elif [ -f .env ]; then
     echo "Loading .env..."
-    export $(grep -v '^#' .env | xargs)
+    set -o allexport
+    source .env
+    set +o allexport
 else
     echo ".env.local not found. Using defaults..."
 fi
@@ -21,8 +25,8 @@ docker compose -f compose.dev.yml up -d db
 
 # Run prisma migrations
 echo "Running Prisma migrations..."
-bunx prisma migrate dev
+npx prisma migrate dev
 
 # Start the dev server with HMR
 echo "Starting dev server..."
-GIT_COMMIT=$(git rev-parse --short HEAD) bunx vite dev
+GIT_COMMIT=$(git rev-parse --short HEAD) npx vite dev

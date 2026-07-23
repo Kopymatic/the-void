@@ -2,7 +2,7 @@ import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { prisma } from "$lib/server/database/database";
 import { CreateFormError } from "$lib";
-import { validateCreateFormServer } from "$lib/server/serverFormValidation";
+import { validatePostForm } from "$lib/formValidation";
 import { isAdmin } from "$lib/server/isAdmin";
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -55,7 +55,7 @@ export const actions = {
 		console.log("recieved edit request");
 		const formData = await request.formData();
 
-		const result = validateCreateFormServer(formData);
+		const result = validatePostForm(formData);
 		if (result.status || result.error) {
 			fail(result.status, {
 				error: result.error,

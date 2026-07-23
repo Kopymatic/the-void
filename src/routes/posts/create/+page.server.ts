@@ -4,7 +4,7 @@ import { prisma } from "$lib/server/database/database";
 import type { PageServerLoad } from "./$types";
 import { CreateFormError } from "$lib";
 import { defaultCategories } from "$lib/defaultCategories";
-import { validateCreateFormServer } from "$lib/server/serverFormValidation";
+import { validatePostForm } from "$lib/formValidation";
 import { isAdmin } from "$lib/server/isAdmin";
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -23,11 +23,11 @@ export const actions = {
 		if (!session || !isAdmin(session.user?.id)) {
 			error(401);
 		}
-		console.log("recieved post request");
+		console.log("recieved post request at /posts/create");
 		const formData = await request.formData();
 
-		const result = validateCreateFormServer(formData);
-		if (result.status || result.error) {
+		const result = validatePostForm(formData);
+		if (result.error) {
 			fail(result.status, {
 				error: result.error,
 				reconstructedData: result.data

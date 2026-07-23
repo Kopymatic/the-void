@@ -1,5 +1,5 @@
-# Install bun and use it for build
-FROM oven/bun:1 AS build
+# Install node and use it for build
+FROM node:24-alpine AS build
 
 RUN --mount=type=secret,id=env,target=./.env.deploy bash -c 'source ./.env.deploy'
 
@@ -15,19 +15,19 @@ RUN echo $DATABASE_URL
 
 # Copy the package info for install
 COPY package.json .
-COPY bun.lock .
+COPY package-lock.json .
 
 # Install packages
-RUN bun i
+RUN npm i
 
 # not sure what this is for exactly...
 COPY . . 
 
 # Run project setup
-RUN bunx prisma generate
-RUN bun run build
+RUN npx prisma generate
+RUN npm run build
 
-FROM oven/bun:1 AS run
+FROM node:24-alpine AS run
 
 RUN apt-get update -y && apt-get install -y openssl
 

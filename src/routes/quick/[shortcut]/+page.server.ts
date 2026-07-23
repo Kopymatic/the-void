@@ -2,8 +2,8 @@ import { prisma } from "$lib/server/database/database";
 import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { isAdmin } from "$lib/server/isAdmin";
-import { validateShortcutCreateFormServer } from "$lib/server/serverFormValidation";
 import { ShortcutFormError } from "$lib";
+import { validateShortcutForm } from "$lib/formValidation";
 
 export const load: PageServerLoad = async ({ params }) => {
 	const query = params.shortcut.toLowerCase();
@@ -57,7 +57,7 @@ export const actions = {
 		if (!shortcut) error(400, "Invalid request");
 
 		const formData = await request.formData();
-		const result = validateShortcutCreateFormServer(formData);
+		const result = validateShortcutForm(formData);
 		if (result.status || result.error) {
 			fail(result.status, {
 				error: result.error,

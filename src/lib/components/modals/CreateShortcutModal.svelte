@@ -2,7 +2,7 @@
 	import { enhance } from "$app/forms";
 	import { httpRegex, ShortcutFormError, simpleHash } from "$lib";
 	import BaseModal from "./BaseModal.svelte";
-	import { validateShortcutFormClient } from "$lib/formValidation";
+	import { validateShortcutFormEnhanced } from "$lib/formValidation";
 	import ConfirmButton from "../buttons/ConfirmButton.svelte";
 	import CancelButton from "../buttons/CancelButton.svelte";
 	import { invalidateAll } from "$app/navigation";
@@ -57,7 +57,7 @@
 		action="/shortcut/create?/post"
 		class="w-full"
 		use:enhance={({ formData, cancel }) => {
-			const validation = validateShortcutFormClient(formData, cancel);
+			const validation = validateShortcutFormEnhanced(formData, cancel);
 			if (validation.error) error = validation.error;
 			else {
 				//This is jank, but it makes the page update after the form is done. Ill take it
@@ -106,9 +106,8 @@
 			<br />
 			<input
 				class="w-full"
-				name="name"
+				name="aliases"
 				type="text"
-				required={true}
 				maxlength={128}
 				bind:value={shortcutAliasesString}
 			/>

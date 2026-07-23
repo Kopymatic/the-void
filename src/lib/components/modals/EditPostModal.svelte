@@ -4,7 +4,7 @@
 	import type { ActionData } from "../../../routes/posts/[category]/[url]/$types";
 	import BaseModal from "./BaseModal.svelte";
 	import { defaultCategories } from "$lib/defaultCategories";
-	import { validateCreateFormClient } from "$lib/formValidation";
+	import { validatePostForm } from "$lib/formValidation";
 	import type { Post } from "@prisma/client";
 	import { invalidateAll } from "$app/navigation";
 	import { onMount } from "svelte";
@@ -49,7 +49,7 @@
 		action="?/edit"
 		class="w-full"
 		use:enhance={({ formData, cancel }) => {
-			const validation = validateCreateFormClient(formData, cancel);
+			const validation = validatePostForm(formData, cancel);
 			if (validation.error) error = validation.error;
 			else {
 				showModal = false;
