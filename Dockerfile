@@ -7,10 +7,10 @@ WORKDIR /app
 
 # Necessary for better-sqlite3
 RUN apk add --no-cache python3 
-RUN apk add --no-cache build-essential
+# RUN apk add --no-cache build-essential
 
 COPY . . 
-RUN sh -c '. ./.env.deploy'
+# RUN sh -c '. ./.env.deploy'
 RUN echo $DATABASE_URL
 
 # Copy the package info for install

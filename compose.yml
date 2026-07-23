@@ -26,8 +26,9 @@ services:
       secrets:
         - env
       args:
-        GIT_COMMIT: ${GIT_COMMIT}
-        DATABASE_URL: ${DATABASE_URL}
+        - GIT_COMMIT=${GIT_COMMIT}
+        - DATABASE_URL=${DATABASE_URL}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     env_file: ".env.deploy"
     ports:
       - "3000:3000"
