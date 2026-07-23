@@ -33,7 +33,7 @@
 	{#key slogan}
 		<!-- The tailwind classes below are a crime against humanity. I apologize. -->
 		<span
-			class="absolute top-[50%] left-[50%] w-full -translate-[50%] overflow-hidden"
+			class="absolute top-[50%] left-[50%] w-full translate-[-50%] overflow-hidden"
 			transition:fade={{ duration: fadeDuraction }}
 		>
 			{#if slogan}

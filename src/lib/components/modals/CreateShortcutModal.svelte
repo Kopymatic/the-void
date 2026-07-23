@@ -36,11 +36,9 @@
 		return addedAliases;
 	};
 
-	let shortcutAliasesString: string = $state("");
-	let shortcutAliases: string[] = $derived([
-		...shortcutAliasesString
-			.split(",")
-			.flatMap((alias) => (alias ? [alias.trim().toLowerCase()] : [])), //mess is to remove the one array if the list is empty
+	let aliasesInput: string = $state("");
+	let allAliases: string[] = $derived([
+		...aliasesInput.split(",").flatMap((alias) => (alias ? [alias.trim().toLowerCase()] : [])), //mess is to remove the one array if the list is empty
 		...shortcutCheck(shortcutName).flat()
 	]);
 
@@ -106,23 +104,21 @@
 			<br />
 			<input
 				class="w-full"
-				name="aliases"
+				name="aliasesInput"
 				type="text"
 				maxlength={128}
-				bind:value={shortcutAliasesString}
+				bind:value={aliasesInput}
 			/>
 			<p class="text-secondary-text">
-				{#if shortcutAliases.length > 0}
-					Your shortcut will have {shortcutAliases.length} alias{shortcutAliases.length > 1
-						? "es"
-						: ""}: {#each shortcutAliases as alias, index (alias)}
-						{alias}{shortcutAliases.length - index !== 1 ? "," : ""}
+				{#if allAliases.length > 0}
+					Your shortcut will have {allAliases.length} alias{allAliases.length > 1 ? "es" : ""}: {#each allAliases as alias, index (alias)}
+						{alias}{allAliases.length - index !== 1 ? "," : ""}
 					{/each}
 				{/if}
 			</p>
-			{#if error === ShortcutFormError.invalidName || error === ShortcutFormError.missingName}
-				<p class="error">{error}</p>
-			{/if}
+		</label>
+		<label class="hidden">
+			<input name="aliases" bind:value={allAliases} />
 		</label>
 		<br />
 		<label>
