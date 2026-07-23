@@ -1,5 +1,5 @@
 # https://stackoverflow.com/a/67403701
-bunx prisma migrate deploy
-bunx prisma generate
+npx prisma migrate deploy
+npx prisma generate
 
-bun ./build
+node ./build

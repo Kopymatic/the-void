@@ -2,7 +2,7 @@
 	import { enhance } from "$app/forms";
 	import { ShortcutFormError } from "$lib";
 	import BaseModal from "./BaseModal.svelte";
-	import { validateShortcutFormClient } from "$lib/formValidation";
+	import { validateShortcutFormEnhanced } from "$lib/formValidation";
 	import ConfirmButton from "../buttons/ConfirmButton.svelte";
 	import CancelButton from "../buttons/CancelButton.svelte";
 	import type { Shortcut } from "@prisma/client";
@@ -32,7 +32,7 @@
 		action={`/quick/${currentName}?/edit`}
 		class="w-full"
 		use:enhance={({ formData, cancel }) => {
-			const validation = validateShortcutFormClient(formData, cancel);
+			const validation = validateShortcutFormEnhanced(formData, cancel);
 			if (validation.error) error = validation.error;
 			else {
 				showModal = false;

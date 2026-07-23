@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import type { Post } from "@prisma/client";
-	import SvelteMarkdown from "svelte-markdown";
+	import SvelteMarkdown from "@humanspeak/svelte-markdown";
 	import Article from "./Article.svelte";
 	import type { SessionUser } from "$lib/server/types";
 	import DeletePostModal from "./modals/DeletePostModal.svelte";
