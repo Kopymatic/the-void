@@ -15,9 +15,26 @@
 	}: { showModal: boolean; shortcut: Shortcut; currentName: string } = $props();
 
 	let shortcutName = $state(shortcut.shortcut);
+	let destination = $state(shortcut.redirectUrl);
+	let aliases = $state(shortcut.aliases);
+
 	const completeUrl = $derived("kopymatic.com/quick/" + shortcutName);
 	const completeFyiUrl = $derived("kopy.fyi/" + shortcutName);
-	let redirectUrl = $state(shortcut.redirectUrl);
+	const completeWtfUrl = $derived("heyso.wtf/" + shortcutName);
+
+	const shortcutCheck = (nameCheck: string): string[] => {
+		let addedAliases: string[] = [];
+
+		let replaceBoth = nameCheck.replaceAll("_", "").replaceAll("-", "");
+		if (replaceBoth !== nameCheck) addedAliases.push(replaceBoth);
+		return addedAliases;
+	};
+
+	let aliasesInput: string = $state(aliases.join(","));
+	let allAliases: string[] = $derived([
+		...aliasesInput.split(",").flatMap((alias) => (alias ? [alias.trim().toLowerCase()] : [])), //mess is to remove the one array if the list is empty
+		...shortcutCheck(shortcutName).flat()
+	]);
 
 	let error: ShortcutFormError | undefined = $state(undefined);
 
@@ -61,8 +78,30 @@
 			{/if}
 		</label>
 		<p class="text-secondary-text">
-			Your shortcut will be at {completeUrl} <br />and {completeFyiUrl}
+			Your shortcut will be at {completeUrl},<br />
+			{completeFyiUrl},<br /> and {completeWtfUrl}
 		</p>
+		<label>
+			Any Aliases? (comma seperated)
+			<br />
+			<input
+				class="w-full"
+				name="aliasesInput"
+				type="text"
+				maxlength={128}
+				bind:value={aliasesInput}
+			/>
+			<p class="text-secondary-text">
+				{#if allAliases.length > 0}
+					Your shortcut will have {allAliases.length} alias{allAliases.length > 1 ? "es" : ""}: {#each allAliases as alias, index (alias)}
+						{alias}{allAliases.length - index !== 1 ? "," : ""}
+					{/each}
+				{/if}
+			</p>
+		</label>
+		<label class="hidden">
+			<input name="aliases" bind:value={allAliases} />
+		</label>
 		<br />
 		<label>
 			Destination URL
@@ -73,7 +112,7 @@
 				type="text"
 				placeholder="https://www.example.com/"
 				required={true}
-				bind:value={redirectUrl}
+				bind:value={destination}
 			/>
 			{#if error === ShortcutFormError.invalidDestination || error === ShortcutFormError.missingDestination}
 				<p class="error">{error}</p>

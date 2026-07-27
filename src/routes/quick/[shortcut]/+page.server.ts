@@ -58,7 +58,8 @@ export const actions = {
 
 		const formData = await request.formData();
 		const result = validateShortcutForm(formData);
-		if (result.status || result.error) {
+		if (result.error) {
+			console.log(result.status, result.error);
 			fail(result.status, {
 				error: result.error,
 				reconstructedData: result.data
@@ -66,7 +67,7 @@ export const actions = {
 			return;
 		}
 
-		const { shortcutName, destination } = result.data;
+		const { shortcutName, destination, aliases } = result.data;
 		if (!shortcutName || !destination) {
 			console.log("The server validation function fucked up");
 			fail(500, {
@@ -82,7 +83,7 @@ export const actions = {
 
 		const newShortcut = await prisma.shortcut.update({
 			where: { id: toEdit.id },
-			data: { shortcut: shortcutName, redirectUrl: destination }
+			data: { shortcut: shortcutName, redirectUrl: destination, aliases: aliases }
 		});
 
 		if (!newShortcut) {

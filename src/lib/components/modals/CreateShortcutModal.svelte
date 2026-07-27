@@ -9,7 +9,6 @@
 	import { page } from "$app/state";
 
 	let textParams = page.url.searchParams.get("text")?.trim();
-	// let titleParams = page.url.searchParams.get("title")?.trim();
 
 	let { showModal = $bindable() }: { showModal: boolean } = $props();
 

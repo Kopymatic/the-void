@@ -14,7 +14,6 @@ export const actions = {
 
 		console.log("recieved post request at /shortcut/create");
 		const formData = await request.formData();
-		console.log(formData);
 
 		const result = validateShortcutForm(formData);
 		if (result.error) {
