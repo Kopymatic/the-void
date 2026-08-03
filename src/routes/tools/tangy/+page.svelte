@@ -6,9 +6,15 @@
 	let tracesFound = $state(0);
 	let tracesRemoved = $state(undefined);
 	let updateSources = $state("");
+
 	let removedApps = $state("");
 	let removedAppsArr = $derived(removedApps.split(","));
 	let removedAppTotal = $derived(removedAppsArr.length);
+
+	let scannedBrowsers = $state("");
+	let scannedBrowsersArr = $derived(scannedBrowsers.split(","));
+	let scannedBrowsersTotal = $derived(scannedBrowsersArr.length);
+
 	let tempFiles = $state("");
 </script>
 
@@ -24,14 +30,20 @@
 			<input type="number" placeholder="e.g. 2" bind:value={tracesRemoved} />
 		</label>
 	</div>
-	<label>
-		Removed apps? <br />
-		<input
-			type="text"
-			placeholder="Wave Browser, Shift Browser, Driver Support One, etc."
-			bind:value={removedApps}
-		/>
-	</label>
+	<div class="flex gap-2">
+		<label>
+			Removed apps? <br />
+			<input
+				type="text"
+				placeholder="Wave Browser, Shift Browser, Driver Support One, etc."
+				bind:value={removedApps}
+			/>
+		</label>
+		<label>
+			Scanned Browsers? <br />
+			<input type="text" placeholder="Edge, Google Chrome" bind:value={scannedBrowsers} />
+		</label>
+	</div>
 
 	<h3>Diagnostics/Optimizations</h3>
 	<div class="flex gap-2">
@@ -62,31 +74,44 @@
 	<h1>Output</h1>
 	<div>
 		Ran antivirus scans which {#if !tracesFound}
-			came back clean.
+			came back clear.
 		{:else if tracesFound === tracesRemoved || !tracesRemoved}
-			found and removed {tracesFound} {`trace${tracesFound > 1 ? "s" : ""}`} of malware.
+			removed {tracesFound} {`trace${tracesFound > 1 ? "s" : ""}`} of malware.
 		{:else}
 			found {tracesFound} traces, of which {tracesRemoved} were removed.
 		{/if}
 		{#if removedApps}
-			During the scans, we manually removed
+			We removed
 			{#each removedAppsArr as app, i}
 				{#if i + 1 === removedAppTotal && removedAppTotal >= 2}
 					{` and ${app}, `}
+				{:else if removedAppTotal == 2 && i + 1 == 1}
+					{` ${app}`}
 				{:else}
 					{` ${app},`}
 				{/if}
-			{/each} as {removedAppTotal > 1 ? "these are" : "it is"} usually malicious or unwanted.
+			{/each} as {removedAppTotal > 1 ? "these are" : "it is"} often malicious and unwanted.
+		{/if}
+		{#if scannedBrowsers}
+			Removed any suspicious permissions or extensions from {#each scannedBrowsersArr as browser, i}
+				{#if i + 1 === scannedBrowsersTotal && scannedBrowsersTotal >= 2}
+					{` and ${browser}`}
+				{:else if scannedBrowsersTotal == 2 && i + 1 == 1}
+					{` ${browser}`}
+				{:else}
+					{` ${browser}${scannedBrowsersTotal > 1 ? "," : ""}`}
+				{/if}
+			{/each}.
 		{/if}
 		<br /><br />
 		Ran hardware diagnostics, {#if faceTotal}
-			with {facePassed} of our {faceTotal} tests passing.
+			with {facePassed} out of {faceTotal} tests passing.
 		{:else if facePassed}
 			with all {facePassed} of our {`test${facePassed > 1 ? "s" : ""}`} passing.
 		{:else}
 			with all tests passing.
 		{/if}
-		Also ran Windows optimizations, ensuring the system is running its best. Cleared any temporary files{#if tempFiles}
+		Also ran Windows optimizations amd fixes. Cleared any temporary files{#if tempFiles}
 			, freeing {tempFiles} of disk space.
 		{:else}
 			{" "} as well.
