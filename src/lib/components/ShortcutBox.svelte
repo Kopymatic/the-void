@@ -29,7 +29,7 @@
 
 <ContentBox
 	prose
-	class="mx-auto  place-content-between duration-50 group-hover/list:scale-97 hover:scale-103 "
+	class="mx-auto place-content-between duration-50 group-hover/list:scale-97 hover:scale-103 "
 >
 	<div class="flex justify-between">
 		<span class="overflow-hidden text-lg text-ellipsis">
