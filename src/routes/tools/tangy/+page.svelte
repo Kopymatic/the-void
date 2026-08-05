@@ -111,7 +111,7 @@
 		{:else}
 			with all tests passing.
 		{/if}
-		Also ran Windows optimizations amd fixes. Cleared any temporary files{#if tempFiles}
+		Also ran Windows optimizations and fixes. Cleared any temporary files{#if tempFiles}
 			, freeing {tempFiles} of disk space.
 		{:else}
 			{" "} as well.
