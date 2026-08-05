@@ -5,3 +5,5 @@
 [Share Icon](https://www.iconfinder.com/icons/8666696/share_2_icon)
 [Up Icon](https://www.iconfinder.com/icons/8666673/chevron_up_icon) and [Down Icon](https://www.iconfinder.com/icons/8666558/chevron_down_icon) found on Iconfinder under the Feather icon pack,
 lisenced under [Attribution 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+Some Fonts may be from [Chequered Ink All Fonts Pack](https://chequered.ink)

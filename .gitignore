@@ -25,3 +25,5 @@ vite.config.ts.timestamp-*
 /data/
 .vscode
 db.json
+
+*.otf

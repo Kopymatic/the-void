@@ -53,6 +53,31 @@
 	h2 {
 		@apply text-3xl;
 	}
+
+	/* Borrowed largely from https://dev.to/adbutterfield/custom-styling-checkboxes-the-modern-way-3o42 */
+	input[type="checkbox"] {
+		@apply border-primary m-1.5 box-border h-6 w-6 appearance-none border-2 bg-transparent p-0 align-middle outline-0 transition duration-75;
+	}
+	input[type="checkbox"]:checked {
+		@apply bg-cover p-0.5;
+	}
+	input[type="checkbox"]:not(:disabled):checked {
+		@apply border-accent;
+		background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 32 32" xml:space="preserve"><path style="fill: %236f3c91	" d="M11.941,28.877l-11.941-11.942l5.695-5.696l6.246,6.246l14.364-14.364L32,8.818"/></svg>');
+	}
+
+	@media (hover: hover) {
+		input[type="checkbox"]:not(:disabled):hover {
+			background-color: var(--checkbox-hover-color);
+			outline: 6px solid var(--checkbox-hover-color);
+			transform: scale(1.05);
+		}
+	}
+
+	input[type="checkbox"]:focus-visible {
+		outline: 6px solid var(--checkbox-hover-color);
+		transform: scale(1.05);
+	}
 }
 
 @layer utilities {
@@ -60,10 +85,10 @@
 		@apply text-error m-0 p-0 text-sm;
 	}
 	.hover-shrink-div {
-		@apply  *:mx-auto *:box-border *:group-hover:scale-95 *:group-hover:opacity-90 *:hover:z-10 *:hover:scale-105 *:hover:opacity-100 *:transition-all *:duration-300 *:ease-in-out;
+		@apply *:mx-auto *:box-border *:transition-all *:duration-300 *:ease-in-out *:group-hover:scale-95 *:group-hover:opacity-90 *:hover:z-10 *:hover:scale-105 *:hover:opacity-100;
 	}
 	.generic-border {
-		@apply border-primary  hover:border-accent rounded-lg border-2;
+		@apply border-primary hover:border-accent rounded-lg border-2;
 	}
 	.generic-border-children {
 		@apply *:border-primary *:hover:border-accent *:rounded-lg *:border-2;
