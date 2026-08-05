@@ -1,4 +1,6 @@
 <script lang="ts">
+	import ContentBox from "$lib/components/ContentBox.svelte";
+
 	/* eslint-disable svelte/no-useless-mustaches */
 	/* eslint-disable svelte/require-each-key */
 	let facePassed = $state(0);
@@ -16,62 +18,101 @@
 	let scannedBrowsersTotal = $derived(scannedBrowsersArr.length);
 
 	let tempFiles = $state("");
+
+	let cleaned = $state(false);
+	let dusted = $state(false);
+	let restorePoint = $state(false);
+	let supportIcon = $state(false);
+	let missionComplete = $state(false);
+	let initials = $state("");
 </script>
 
-<div class="prose prose-invert flex flex-col">
-	<h3>Virus and PUPs</h3>
-	<div class="flex gap-2">
-		<label>
-			Traces found <br />
-			<input type="number" placeholder="e.g. 3" bind:value={tracesFound} />
-		</label>
-		<label>
-			Traces removed <br />
-			<input type="number" placeholder="e.g. 2" bind:value={tracesRemoved} />
-		</label>
-	</div>
-	<div class="flex gap-2">
-		<label>
-			Removed apps? <br />
+<br />
+<div class="hover-shrink-div group flex flex-col gap-2 *:w-full">
+	<ContentBox prose holepunch collapsible>
+		<h2>Virus and PUPs</h2>
+		<div class="flex flex-col gap-2 md:flex-row">
+			<div>
+				Traces found <br />
+				<input type="number" placeholder="e.g. 3" bind:value={tracesFound} />
+			</div>
+			<div>
+				Traces removed <br />
+				<input type="number" placeholder="e.g. 2" bind:value={tracesRemoved} />
+			</div>
+		</div>
+		<div class="flex flex-col gap-2 md:flex-row">
+			<div>
+				Removed apps? <br />
+				<input
+					type="text"
+					placeholder="Wave Browser, Shift Browser, Driver Support One, etc."
+					bind:value={removedApps}
+				/>
+			</div>
+			<div>
+				Scanned Browsers? <br />
+				<input type="text" placeholder="Edge, Google Chrome" bind:value={scannedBrowsers} />
+			</div>
+		</div>
+	</ContentBox>
+
+	<ContentBox prose holepunch collapsible>
+		<h2>Diagnostics/Optimizations</h2>
+		<div class="flex flex-col gap-2 md:flex-row">
+			<div>
+				FACE passed<br />
+				<input type="number" placeholder="e.g. 32" bind:value={facePassed} />
+			</div>
+			<div>
+				FACE total<br />
+				<input type="number" placeholder="e.g. 32" bind:value={faceTotal} />
+			</div>
+		</div>
+		<div>
+			Temp Files<br />
+			<input type="string" placeholder="e.g. 120MB" bind:value={tempFiles} />
+		</div>
+		<div>
+			Alternate Update Sources? <br />
 			<input
 				type="text"
-				placeholder="Wave Browser, Shift Browser, Driver Support One, etc."
-				bind:value={removedApps}
+				placeholder="HP Support Assist, Lenovo Vantage, Nvidia, AMD, etc."
+				bind:value={updateSources}
 			/>
-		</label>
-		<label>
-			Scanned Browsers? <br />
-			<input type="text" placeholder="Edge, Google Chrome" bind:value={scannedBrowsers} />
-		</label>
-	</div>
-
-	<h3>Diagnostics/Optimizations</h3>
-	<div class="flex gap-2">
-		<label>
-			FACE passed<br />
-			<input type="number" placeholder="e.g. 32" bind:value={facePassed} />
-		</label>
-		<label>
-			FACE total<br />
-			<input type="number" placeholder="e.g. 32" bind:value={faceTotal} />
-		</label>
-	</div>
-	<label>
-		Temp Files<br />
-		<input type="string" placeholder="e.g. 120MB" bind:value={tempFiles} />
-	</label>
-	<label>
-		Alternate Update Sources? <br />
-		<input
-			type="text"
-			placeholder="HP Support Assist, Lenovo Vantage, Nvidia, AMD, etc."
-			bind:value={updateSources}
-		/>
-	</label>
+		</div>
+	</ContentBox>
+	<ContentBox prose holepunch collapsible>
+		<h2>Extra</h2>
+		<div>
+			<input type="checkbox" bind:checked={cleaned} />
+			Cleaned?
+		</div>
+		<div>
+			<input type="checkbox" bind:checked={dusted} />
+			Dusted Internals?
+		</div>
+		<div>
+			<input type="checkbox" bind:checked={restorePoint} />
+			Restore Point?
+		</div>
+		<div>
+			<input type="checkbox" bind:checked={supportIcon} />
+			Added a support icon?
+		</div>
+		<div>
+			<input type="checkbox" bind:checked={missionComplete} />
+			Mission Complete?
+		</div>
+		<div>
+			Initials? <br />
+			<input type="text" placeholder="JD" bind:value={initials} />
+		</div>
+	</ContentBox>
 </div>
 <br />
-<div class="prose prose-invert">
-	<h1>Output</h1>
+<div class="prose prose-invert mx-auto max-w-xl">
+	<h2>Output</h2>
 	<div>
 		Ran antivirus scans which {#if !tracesFound}
 			came back clear.
@@ -114,7 +155,17 @@
 		Also ran Windows optimizations and fixes. Cleared any temporary files{#if tempFiles}
 			, freeing {tempFiles} of disk space.
 		{:else}
-			{" "} as well.
+			.
+		{/if}
+		{#if restorePoint}
+			Created a Windows restore point in case of any future corruption.
+		{/if}
+		{#if cleaned && dusted}
+			Dusted the internals and cleaned the device.
+		{:else if dusted}
+			Dusted the internals of the device.
+		{:else if cleaned}
+			Physically cleaned the device.
 		{/if}
 		<br /><br />
 		Ensured all available updates were run through Windows Update, the Microsoft Store,{#if updateSources}
@@ -122,10 +173,22 @@
 				{" " + updateSource},
 			{/each}
 		{/if} and the Winget Package Manager.
+		<br /><br />
+		{#if supportIcon}
+			Added a Geek Squad support icon to the device's desktop.
+		{/if}
+		<br /><br />
+		{#if missionComplete}
+			Mission Complete!
+		{/if}
+		{#if initials}
+			- {initials}
+		{/if}
 	</div>
 </div>
 
 <style>
+	@reference base
 	br {
 		display: block;
 		content: "";
