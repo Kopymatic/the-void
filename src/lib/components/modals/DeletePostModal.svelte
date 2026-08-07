@@ -15,7 +15,7 @@
 			<button class="bg-warn flex w-full flex-nowrap border-0 border-transparent text-center">
 				<TrashIcon class="mr-1" /> Confirm Deletion
 			</button>
-			<IconButton icon="cancel" type="button" onclick={() => (showModal = false)} />
+			<IconButton icon="cancel" text="Cancel" type="button" onclick={() => (showModal = false)} />
 		</div>
 	</form>
 </BaseModal>

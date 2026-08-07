@@ -138,6 +138,7 @@
 			<IconButton icon="check" class="w-full" text="Create Shortcut"></IconButton>
 			<IconButton
 				icon="cancel"
+				text="Cancel"
 				class="w-full"
 				onclick={() => {
 					showModal = false;

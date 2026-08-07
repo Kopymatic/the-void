@@ -121,6 +121,7 @@
 			<IconButton icon="check" class="w-full" text="Confirm Edit"></IconButton>
 			<IconButton
 				icon="cancel"
+				text="Cancel"
 				class="w-full"
 				onclick={() => {
 					showModal = false;
