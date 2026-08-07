@@ -15,7 +15,6 @@ export const slogans = [
 	"hey future me let me know how Doom: The Dark Ages is",
 	"The light inside has broken but I still work",
 	"Millenials are killing the doorbell industry by texting 'here'",
-	"https://kopymatic.com/mike",
 	"im 20 years old and i've already wasted my entire life",
 	"auth sucks",
 	"hey past me Doom: the dark ages was pretty awesome",

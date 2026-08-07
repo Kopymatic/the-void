@@ -28,7 +28,7 @@
 </script>
 
 <br />
-<div class="hover-shrink-div group flex flex-col gap-2 *:w-full">
+<div class="hover-shrink-div group flex flex-col gap-2 *:w-full md:flex-row">
 	<ContentBox prose holepunch collapsible>
 		<h2>Virus and PUPs</h2>
 		<div class="flex flex-col gap-2 md:flex-row">

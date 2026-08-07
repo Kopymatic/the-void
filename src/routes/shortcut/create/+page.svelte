@@ -1,6 +1,5 @@
 <script>
 	import CreateShortcutModal from "$lib/components/modals/CreateShortcutModal.svelte";
-
 	import { page } from "$app/state";
 
 	let urlParams = page.url.searchParams.get("link");

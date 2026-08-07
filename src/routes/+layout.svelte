@@ -13,13 +13,11 @@
 	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	{@html webManifestLink}
 	<title>Kopymatic</title>
-	<meta name="description" content="Silly little thoughts from my silly little head" />
+	<meta name="description" content="Silly little things from my silly little brain" />
 </svelte:head>
 
 <div class="mx-auto box-border flex h-screen w-[97vw] max-w-6xl flex-col">
 	<Header></Header>
-	<div class="grow">
-		{@render children()}
-	</div>
+	{@render children()}
 	<Footer></Footer>
 </div>

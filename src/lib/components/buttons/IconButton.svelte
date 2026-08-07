@@ -23,7 +23,7 @@
 		class?: string;
 	} = $props();
 
-	const iconOnly = !text;
+	const iconOnly = () => !text;
 </script>
 
 <button
@@ -53,6 +53,6 @@
 			<!-- Using the help icon as a fallback -->
 			<HelpIcon />
 		{/if}
-		<span class:hidden={iconOnly}>{text}</span>
+		<span class:hidden={iconOnly()}>{text}</span>
 	</div>
 </button>

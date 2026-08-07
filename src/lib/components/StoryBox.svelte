@@ -29,7 +29,7 @@
 
 <ContentBox
 	{holepunch}
-	class={`${collapsed ? "line-clamp-1" : ""} relative px-1 pt-2 pb-4 ${className} mx-auto`}
+	class={`${collapsed ? "line-clamp-1" : ""}  w-full px-1 pt-2 pb-4 ${className} mx-auto transition-all duration-150`}
 	prose
 >
 	<!-- svelte-ignore a11y_click_events_have_key_events -->

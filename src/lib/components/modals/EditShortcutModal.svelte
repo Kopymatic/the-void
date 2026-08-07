@@ -3,8 +3,7 @@
 	import { ShortcutFormError } from "$lib";
 	import BaseModal from "./BaseModal.svelte";
 	import { validateShortcutFormEnhanced } from "$lib/formValidation";
-	import ConfirmButton from "../buttons/ConfirmButton.svelte";
-	import CancelButton from "../buttons/CancelButton.svelte";
+	import IconButton from "../buttons/IconButton.svelte";
 	import type { Shortcut } from "@prisma/client";
 	import { invalidateAll } from "$app/navigation";
 
@@ -119,13 +118,14 @@
 			{/if}
 		</label>
 		<div class="mt-5 flex flex-auto gap-2">
-			<ConfirmButton class="w-full" text="Confirm Edit"></ConfirmButton>
-			<CancelButton
+			<IconButton icon="check" class="w-full" text="Confirm Edit"></IconButton>
+			<IconButton
+				icon="cancel"
 				class="w-full"
 				onclick={() => {
 					showModal = false;
 				}}
-			></CancelButton>
+			></IconButton>
 		</div>
 		{#if error === ShortcutFormError.databaseError}
 			<p class="error">{error}</p>

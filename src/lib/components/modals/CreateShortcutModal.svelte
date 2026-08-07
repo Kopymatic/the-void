@@ -3,8 +3,7 @@
 	import { httpRegex, ShortcutFormError, simpleHash } from "$lib";
 	import BaseModal from "./BaseModal.svelte";
 	import { validateShortcutFormEnhanced } from "$lib/formValidation";
-	import ConfirmButton from "../buttons/ConfirmButton.svelte";
-	import CancelButton from "../buttons/CancelButton.svelte";
+	import IconButton from "../buttons/IconButton.svelte";
 	import { invalidateAll } from "$app/navigation";
 	import { page } from "$app/state";
 
@@ -136,13 +135,14 @@
 			{/if}
 		</label>
 		<div class="mt-5 flex flex-auto gap-2">
-			<ConfirmButton class="w-full" text="Create Shortcut"></ConfirmButton>
-			<CancelButton
+			<IconButton icon="check" class="w-full" text="Create Shortcut"></IconButton>
+			<IconButton
+				icon="cancel"
 				class="w-full"
 				onclick={() => {
 					showModal = false;
 				}}
-			></CancelButton>
+			></IconButton>
 		</div>
 		{#if error === ShortcutFormError.databaseError}
 			<p class="error">{error}</p>

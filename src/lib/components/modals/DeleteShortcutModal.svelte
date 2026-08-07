@@ -2,7 +2,7 @@
 	import { applyAction, enhance } from "$app/forms";
 	import { goto, invalidateAll } from "$app/navigation";
 	import type { ActionResult } from "@sveltejs/kit";
-	import CancelButton from "../buttons/CancelButton.svelte";
+	import IconButton from "../buttons/IconButton.svelte";
 	import TrashIcon from "../icons/TrashIcon.svelte";
 	import BaseModal from "./BaseModal.svelte";
 
@@ -37,7 +37,7 @@
 			<button class="bg-warn flex w-full flex-nowrap border-0 border-transparent text-center">
 				<TrashIcon class="mr-1" /> Confirm Deletion
 			</button>
-			<CancelButton type="button" onclick={() => (showModal = false)} />
+			<IconButton icon="cancel" type="button" onclick={() => (showModal = false)} />
 		</div>
 	</form>
 </BaseModal>

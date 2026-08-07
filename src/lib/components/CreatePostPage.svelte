@@ -6,7 +6,7 @@
 	import { validatePostFormEnhanced } from "$lib/formValidation";
 	import { invalidateAll } from "$app/navigation";
 	import { onMount } from "svelte";
-	import ConfirmButton from "$lib/components/buttons/ConfirmButton.svelte";
+	import IconButton from "$lib/components/buttons/IconButton.svelte";
 
 	let { form }: { form?: ActionData } = $props();
 
@@ -98,7 +98,7 @@
 		</div>
 	</div>
 	<div class="w-full p-3">
-		<ConfirmButton type="submit" class="w-full" text="Post!"></ConfirmButton>
+		<IconButton icon="check" type="submit" class="w-full" text="Post!"></IconButton>
 	</div>
 	{#if error === CreateFormError.databaseError}
 		<p class="error">{error}</p>

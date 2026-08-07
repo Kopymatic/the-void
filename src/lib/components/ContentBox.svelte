@@ -45,7 +45,8 @@
 	class:prose-sm={small || collapsed}
 	class:prose-invert={prose}
 	class:not-prose={!prose}
-	class={`border-primary ${holepunch ? "bg-primary-background" : "bg-secondary"} ${collapsed ? "line-clamp-1" : ""} hover:border-accent relative rounded-lg border-2 px-4 py-2  transition-all duration-300 ease-in-out ${className}`}
+	class:line-clamp-1={collapsed}
+	class={`border-primary ${holepunch ? "bg-primary-background" : "bg-secondary"} hover:border-accent relative rounded-lg border-2 px-4 py-2 transition-all duration-300 ease-in-out ${className}`}
 	{onclick}
 >
 	{#if collapsible}
