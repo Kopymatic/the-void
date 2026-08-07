@@ -7,18 +7,26 @@
 	let faceTotal = $state(undefined);
 	let tracesFound = $state(0);
 	let tracesRemoved = $state(undefined);
+
 	let updateSources = $state("");
+	let updateSourceArr = $derived(updateSources.split(","));
+	let updateSourceTotal = $derived(updateSourceArr.length);
 
 	let removedApps = $state("");
 	let removedAppsArr = $derived(removedApps.split(","));
 	let removedAppTotal = $derived(removedAppsArr.length);
 
-	let scannedBrowsers = $state("");
-	let scannedBrowsersArr = $derived(scannedBrowsers.split(","));
-	let scannedBrowsersTotal = $derived(scannedBrowsersArr.length);
-
 	let tempFiles = $state("");
 
+	let installedApps = $state("");
+	let installedAppsArr = $derived(installedApps.split(","));
+	let installedAppTotal = $derived(installedAppsArr.length);
+
+	let installedExtensions = $state("");
+	let installedExtensionsArr = $derived(installedExtensions.split(","));
+	let installedExtensionTotal = $derived(installedExtensionsArr.length);
+
+	let scannedBrowsers = $state(false);
 	let cleaned = $state(false);
 	let dusted = $state(false);
 	let restorePoint = $state(false);
@@ -28,9 +36,11 @@
 </script>
 
 <br />
-<div class="hover-shrink-div group flex flex-col gap-2 *:w-full md:flex-row">
+<div
+	class="hover-shrink-div group flex flex-col flex-wrap items-stretch gap-2 *:w-full *:flex-1 md:flex-row md:*:min-w-sm"
+>
 	<ContentBox prose holepunch collapsible>
-		<h2>Virus and PUPs</h2>
+		<h3>Virus and PUPs</h3>
 		<div class="flex flex-col gap-2 md:flex-row">
 			<div>
 				Traces found <br />
@@ -41,24 +51,24 @@
 				<input type="number" placeholder="e.g. 2" bind:value={tracesRemoved} />
 			</div>
 		</div>
-		<div class="flex flex-col gap-2 md:flex-row">
-			<div>
-				Removed apps? <br />
-				<input
-					type="text"
-					placeholder="Wave Browser, Shift Browser, Driver Support One, etc."
-					bind:value={removedApps}
-				/>
-			</div>
-			<div>
-				Scanned Browsers? <br />
-				<input type="text" placeholder="Edge, Google Chrome" bind:value={scannedBrowsers} />
-			</div>
+		<div>
+			Removed apps? <br />
+			<input
+				type="text"
+				class="w-full"
+				placeholder="Wave Browser, Shift Browser, Driver Support One, etc."
+				bind:value={removedApps}
+			/>
+		</div>
+		<br />
+		<div>
+			Scanned Browsers?
+			<input type="checkbox" placeholder="Edge, Google Chrome" bind:checked={scannedBrowsers} />
 		</div>
 	</ContentBox>
 
 	<ContentBox prose holepunch collapsible>
-		<h2>Diagnostics/Optimizations</h2>
+		<h3 class="m-0 p-0">Diagnostics/Optimizations</h3>
 		<div class="flex flex-col gap-2 md:flex-row">
 			<div>
 				FACE passed<br />
@@ -77,32 +87,63 @@
 			Alternate Update Sources? <br />
 			<input
 				type="text"
+				class="w-full"
 				placeholder="HP Support Assist, Lenovo Vantage, Nvidia, AMD, etc."
 				bind:value={updateSources}
 			/>
 		</div>
 	</ContentBox>
+
 	<ContentBox prose holepunch collapsible>
-		<h2>Extra</h2>
+		<h3 class="m-0 p-0">Data transfer</h3>
+		wip, take notes so i can make this :p
+	</ContentBox>
+
+	<ContentBox prose holepunch collapsible>
+		<h3 class="m-0 p-0">Installs</h3>
 		<div>
-			<input type="checkbox" bind:checked={cleaned} />
-			Cleaned?
+			Installed apps? <br />
+			<input
+				type="text"
+				placeholder="Google Chrome, Acrobat, etc."
+				class="w-full"
+				bind:value={installedApps}
+			/>
 		</div>
 		<div>
-			<input type="checkbox" bind:checked={dusted} />
-			Dusted Internals?
+			Installed extensions? <br />
+			<input
+				type="text"
+				placeholder="Ublock Origin,etc."
+				class="w-full"
+				bind:value={installedExtensions}
+			/>
 		</div>
-		<div>
-			<input type="checkbox" bind:checked={restorePoint} />
-			Restore Point?
-		</div>
-		<div>
-			<input type="checkbox" bind:checked={supportIcon} />
-			Added a support icon?
-		</div>
-		<div>
-			<input type="checkbox" bind:checked={missionComplete} />
-			Mission Complete?
+	</ContentBox>
+
+	<ContentBox prose holepunch collapsible>
+		<h3 class="m-0 p-0">Extra</h3>
+		<div class="grid grid-cols-1 md:grid-cols-2">
+			<div>
+				<input type="checkbox" bind:checked={cleaned} />
+				Cleaned?
+			</div>
+			<div>
+				<input type="checkbox" bind:checked={dusted} />
+				Dusted Internals?
+			</div>
+			<div>
+				<input type="checkbox" bind:checked={restorePoint} />
+				Restore Point?
+			</div>
+			<div>
+				<input type="checkbox" bind:checked={supportIcon} />
+				Added a support icon?
+			</div>
+			<div>
+				<input type="checkbox" bind:checked={missionComplete} />
+				Mission Complete?
+			</div>
 		</div>
 		<div>
 			Initials? <br />
@@ -112,17 +153,17 @@
 </div>
 <br />
 <div class="prose prose-invert mx-auto max-w-xl">
-	<h2>Output</h2>
+	<h3 class="m-0 p-0">Output</h3>
 	<div>
-		Ran antivirus scans which {#if !tracesFound}
+		Ran virus scans which {#if !tracesFound}
 			came back clear.
 		{:else if tracesFound === tracesRemoved || !tracesRemoved}
 			removed {tracesFound} {`trace${tracesFound > 1 ? "s" : ""}`} of malware.
 		{:else}
-			found {tracesFound} traces, of which {tracesRemoved} were removed.
+			removed {tracesRemoved} traces of the {tracesFound} found.
 		{/if}
 		{#if removedApps}
-			We removed
+			Removed
 			{#each removedAppsArr as app, i}
 				{#if i + 1 === removedAppTotal && removedAppTotal >= 2}
 					{` and ${app}, `}
@@ -131,53 +172,74 @@
 				{:else}
 					{` ${app},`}
 				{/if}
-			{/each} as {removedAppTotal > 1 ? "these are" : "it is"} often malicious and unwanted.
+			{/each} as {removedAppTotal > 1 ? "these are" : "it is"} often unwanted.
 		{/if}
 		{#if scannedBrowsers}
-			Removed any suspicious permissions or extensions from {#each scannedBrowsersArr as browser, i}
-				{#if i + 1 === scannedBrowsersTotal && scannedBrowsersTotal >= 2}
-					{` and ${browser}`}
-				{:else if scannedBrowsersTotal == 2 && i + 1 == 1}
-					{` ${browser}`}
-				{:else}
-					{` ${browser}${scannedBrowsersTotal > 1 ? "," : ""}`}
-				{/if}
-			{/each}.
+			Cleared any suspicious settings in the browsers.
 		{/if}
 		<br /><br />
-		Ran hardware diagnostics, {#if faceTotal}
-			with {facePassed} out of {faceTotal} tests passing.
+		{#if faceTotal}
+			{facePassed} of our {faceTotal} hardware tests passed.
 		{:else if facePassed}
-			with all {facePassed} of our {`test${facePassed > 1 ? "s" : ""}`} passing.
+			All {facePassed} hardware tests passed.
 		{:else}
-			with all tests passing.
+			All hardware tests passed.
 		{/if}
-		Also ran Windows optimizations and fixes. Cleared any temporary files{#if tempFiles}
-			, freeing {tempFiles} of disk space.
-		{:else}
-			.
-		{/if}
+		Ran Windows tune-ups and fixes. Cleared {#if tempFiles}
+			{tempFiles} of
+		{/if} temporary files
 		{#if restorePoint}
-			Created a Windows restore point in case of any future corruption.
+			Created a restore point.
 		{/if}
 		{#if cleaned && dusted}
-			Dusted the internals and cleaned the device.
+			Cleaned the device inside and out.
 		{:else if dusted}
 			Dusted the internals of the device.
 		{:else if cleaned}
 			Physically cleaned the device.
 		{/if}
 		<br /><br />
-		Ensured all available updates were run through Windows Update, the Microsoft Store,{#if updateSources}
-			{#each updateSources.split(",") as updateSource}
-				{" " + updateSource},
+		{#if installedApps}
+			Installed {#each installedAppsArr as app, i}
+				{#if i + 1 === installedAppTotal && installedAppTotal >= 2}
+					{` and ${app}, `}
+				{:else if installedAppTotal == 2 && i + 1 == 1}
+					{` ${app}`}
+				{:else}
+					{` ${app},`}
+				{/if}
+			{/each}.
+			<br /><br />
+		{/if}
+		{#if installedExtensions}
+			Added {#each installedExtensionsArr as app, i}
+				{#if i + 1 === installedExtensionTotal && installedExtensionTotal >= 2}
+					{` and ${app}, `}
+				{:else if installedExtensionTotal == 2 && i + 1 == 1}
+					{` ${app}`}
+				{:else}
+					{` ${app},`}
+				{/if}
+			{/each} to the browsers.
+			<br /><br />
+		{/if}
+		Ran all available updates{#if updateSources}
+			{" "}
+			through Windows{#each updateSourceArr as source, i}
+				{#if i + 1 === updateSourceTotal}
+					{`${updateSourceTotal > 1 ? "," : "	"} and ${source}. `}
+				{:else}
+					{`, ${source}`}
+				{/if}
 			{/each}
-		{/if} and the Winget Package Manager.
-		<br /><br />
-		{#if supportIcon}
-			Added a Geek Squad support icon to the device's desktop.
+		{:else}
+			.
 		{/if}
 		<br /><br />
+		{#if supportIcon}
+			Added a Geek Squad support icon to the desktop.
+			<br /><br />
+		{/if}
 		{#if missionComplete}
 			Mission Complete!
 		{/if}
@@ -188,10 +250,14 @@
 </div>
 
 <style>
-	@reference base
+	@reference "tailwindcss";
 	br {
 		display: block;
 		content: "";
 		margin-top: 6rem;
+	}
+
+	h3 {
+		@apply my-2 p-0;
 	}
 </style>
