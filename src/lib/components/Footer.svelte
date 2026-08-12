@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/state";
 	import type { SessionUser } from "$lib/server/types";
-	import FunnyText from "./FunnyText.svelte";
 	import CreateShortcutModal from "./modals/CreateShortcutModal.svelte";
 	const session = page.data.session;
 	const user: SessionUser | undefined = $state(page.data.user);
@@ -18,7 +17,7 @@
 	{#if session && user}
 		you're signed in as {user?.name} - <a href="/login">log out</a> <br />
 		{#if user?.isAdmin}
-    	<a href="/posts/create">create a post</a> - <a href="/posts/all">list all posts</a>
+			<a href="/posts/create">create a post</a> - <a href="/posts/all">list all posts</a>
 			<br />
 			<button
 				class="text-accent inline cursor-pointer border-0 bg-transparent p-0"
@@ -31,7 +30,7 @@
 	{/if}
 	<br />
 	<a class="my-2 py-0" href="/">take me home</a>
-	<FunnyText></FunnyText>
+	<br />
 	<p class="text-secondary-text">&copy; {today.getFullYear()} Kopymatic. All rights reserved.</p>
 	<p class="text-secondary-text text-sm">
 		<a class="text-inherit" href="/login">v</a>{`${versions.package}`}

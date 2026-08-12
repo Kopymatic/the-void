@@ -1,8 +1,7 @@
 <script lang="ts">
+	import { joinWithGrammar } from "$lib";
 	import ContentBox from "$lib/components/ContentBox.svelte";
 
-	/* eslint-disable svelte/no-useless-mustaches */
-	/* eslint-disable svelte/require-each-key */
 	let facePassed = $state(0);
 	let faceTotal = $state(undefined);
 	let tracesFound = $state(0);
@@ -10,7 +9,6 @@
 
 	let updateSources = $state("");
 	let updateSourceArr = $derived(updateSources.split(","));
-	let updateSourceTotal = $derived(updateSourceArr.length);
 
 	let removedApps = $state("");
 	let removedAppsArr = $derived(removedApps.split(","));
@@ -20,11 +18,9 @@
 
 	let installedApps = $state("");
 	let installedAppsArr = $derived(installedApps.split(","));
-	let installedAppTotal = $derived(installedAppsArr.length);
 
 	let installedExtensions = $state("");
 	let installedExtensionsArr = $derived(installedExtensions.split(","));
-	let installedExtensionTotal = $derived(installedExtensionsArr.length);
 
 	let scannedBrowsers = $state(false);
 	let cleaned = $state(false);
@@ -51,7 +47,7 @@
 				<input type="number" placeholder="e.g. 2" bind:value={tracesRemoved} />
 			</div>
 		</div>
-		<div>
+		<div class="items-center text-center">
 			Removed apps? <br />
 			<input
 				type="text"
@@ -62,8 +58,8 @@
 		</div>
 		<br />
 		<div>
-			Scanned Browsers?
 			<input type="checkbox" placeholder="Edge, Google Chrome" bind:checked={scannedBrowsers} />
+			Scanned Browsers?
 		</div>
 	</ContentBox>
 
@@ -163,16 +159,8 @@
 			removed {tracesRemoved} traces of the {tracesFound} found.
 		{/if}
 		{#if removedApps}
-			Removed
-			{#each removedAppsArr as app, i}
-				{#if i + 1 === removedAppTotal && removedAppTotal >= 2}
-					{` and ${app}, `}
-				{:else if removedAppTotal == 2 && i + 1 == 1}
-					{` ${app}`}
-				{:else}
-					{` ${app},`}
-				{/if}
-			{/each} as {removedAppTotal > 1 ? "these are" : "it is"} often unwanted.
+			Removed {joinWithGrammar(removedAppsArr)}, as {removedAppTotal > 1 ? "these are" : "it is"} often
+			unwanted.
 		{/if}
 		{#if scannedBrowsers}
 			Cleared any suspicious settings in the browsers.
@@ -181,60 +169,35 @@
 		{#if faceTotal}
 			{facePassed} of our {faceTotal} hardware tests passed.
 		{:else if facePassed}
-			All {facePassed} hardware tests passed.
+			All {facePassed} of our hardware tests passed.
 		{:else}
-			All hardware tests passed.
+			All of our hardware tests passed.
 		{/if}
 		Ran Windows tune-ups and fixes. Cleared {#if tempFiles}
 			{tempFiles} of
-		{/if} temporary files
+		{/if} temporary files.
 		{#if restorePoint}
 			Created a restore point.
 		{/if}
 		{#if cleaned && dusted}
 			Cleaned the device inside and out.
+			<br /><br />
 		{:else if dusted}
 			Dusted the internals of the device.
+			<br /><br />
 		{:else if cleaned}
 			Physically cleaned the device.
+			<br /><br />
 		{/if}
-		<br /><br />
 		{#if installedApps}
-			Installed {#each installedAppsArr as app, i}
-				{#if i + 1 === installedAppTotal && installedAppTotal >= 2}
-					{` and ${app}, `}
-				{:else if installedAppTotal == 2 && i + 1 == 1}
-					{` ${app}`}
-				{:else}
-					{` ${app},`}
-				{/if}
-			{/each}.
+			Installed {joinWithGrammar(installedAppsArr)}.
 			<br /><br />
 		{/if}
 		{#if installedExtensions}
-			Added {#each installedExtensionsArr as app, i}
-				{#if i + 1 === installedExtensionTotal && installedExtensionTotal >= 2}
-					{` and ${app}, `}
-				{:else if installedExtensionTotal == 2 && i + 1 == 1}
-					{` ${app}`}
-				{:else}
-					{` ${app},`}
-				{/if}
-			{/each} to the browsers.
+			Added {joinWithGrammar(installedExtensionsArr)} to the browsers.
 			<br /><br />
 		{/if}
-		Ran all available updates{#if updateSources}
-			{" "}
-			through Windows{#each updateSourceArr as source, i}
-				{#if i + 1 === updateSourceTotal}
-					{`${updateSourceTotal > 1 ? "," : "	"} and ${source}. `}
-				{:else}
-					{`, ${source}`}
-				{/if}
-			{/each}
-		{:else}
-			.
-		{/if}
+		Ran all available updates through {joinWithGrammar(["Windows"].concat(updateSourceArr).flat())}.
 		<br /><br />
 		{#if supportIcon}
 			Added a Geek Squad support icon to the desktop.
@@ -244,7 +207,7 @@
 			Mission Complete!
 		{/if}
 		{#if initials}
-			- {initials}
+			-{initials}
 		{/if}
 	</div>
 </div>

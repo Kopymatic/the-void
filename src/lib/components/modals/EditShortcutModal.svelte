@@ -3,9 +3,10 @@
 	import { ShortcutFormError } from "$lib";
 	import BaseModal from "./BaseModal.svelte";
 	import { validateShortcutFormEnhanced } from "$lib/formValidation";
-	import IconButton from "../buttons/IconButton.svelte";
 	import type { Shortcut } from "@prisma/client";
 	import { invalidateAll } from "$app/navigation";
+	import PrimaryButton from "../buttons/PrimaryButton.svelte";
+	import SecondaryButton from "../buttons/SecondaryButton.svelte";
 
 	let {
 		showModal = $bindable(),
@@ -118,15 +119,15 @@
 			{/if}
 		</label>
 		<div class="mt-5 flex flex-auto gap-2">
-			<IconButton icon="check" class="w-full" text="Confirm Edit"></IconButton>
-			<IconButton
+			<PrimaryButton type="submit" icon="check" class="w-full" text="Confirm Edit" />
+			<SecondaryButton
 				icon="cancel"
 				text="Cancel"
 				class="w-full"
 				onclick={() => {
 					showModal = false;
 				}}
-			></IconButton>
+			/>
 		</div>
 		{#if error === ShortcutFormError.databaseError}
 			<p class="error">{error}</p>

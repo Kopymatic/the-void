@@ -8,7 +8,8 @@
 	import type { Post } from "@prisma/client";
 	import { invalidateAll } from "$app/navigation";
 	import { onMount } from "svelte";
-	import IconButton from "../buttons/IconButton.svelte";
+	import PrimaryButton from "../buttons/PrimaryButton.svelte";
+	import SecondaryButton from "../buttons/SecondaryButton.svelte";
 
 	let {
 		currentPost,
@@ -111,30 +112,31 @@
 			{/if}
 		</label>
 		<br />
-		<br />
-		<div
-			class="border-primary bg-secondary box-border flex max-h-min items-center rounded-md border-2 px-4 md:w-1/3"
-		>
-			<input
-				id="unlisted"
-				type="checkbox"
-				name="unlisted"
-				class="text-accent focus:ring-accent h-4 w-4 rounded"
-				bind:checked={unlisted}
-			/>
-			<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
+		<div>
+			<div
+				class="border-primary bg-secondary box-border inline-block max-h-min items-center rounded-md border-2 px-4 md:w-1/3"
+			>
+				<input
+					id="unlisted"
+					type="checkbox"
+					name="unlisted"
+					class="text-accent focus:ring-accent h-8 w-8 justify-self-start rounded"
+					bind:checked={unlisted}
+				/>
+				<label for="unlisted" class="ms-2 w-full py-4">Unlisted</label>
+			</div>
 		</div>
 		<br />
 		<div class="flex flex-auto gap-2">
-			<IconButton icon="check" class="w-full" text="Confirm Edit" />
-			<IconButton
+			<PrimaryButton icon="check" type="submit" class="w-full" text="Confirm Edit" />
+			<SecondaryButton
 				icon="cancel"
 				text="Cancel"
 				class="w-full"
 				onclick={() => {
 					showModal = false;
 				}}
-			></IconButton>
+			/>
 		</div>
 		{#if error === CreateFormError.databaseError}
 			<p class="error">{error}</p>
@@ -143,7 +145,7 @@
 </BaseModal>
 
 <style>
-	input,
+	input[type="text"],
 	textarea {
 		@apply w-full;
 	}

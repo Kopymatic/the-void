@@ -35,3 +35,28 @@ export const simpleHash = (str: string) => {
 	}
 	return hash;
 };
+
+export type ButtonIcons =
+	| "edit"
+	| "cancel"
+	| "check"
+	| "trash"
+	| "share"
+	| "help"
+	| "down"
+	| "up"
+	| "externalLink";
+
+export const joinWithGrammar = (array: string[]) => {
+	console.log(array);
+	let newArr = array.filter(Boolean);
+	if (newArr.length == 1) {
+		return newArr[0];
+	}
+	if (newArr.length == 2) {
+		return newArr.join(" and ");
+	}
+	const last = newArr.pop();
+	const result = newArr.join(", ") + ", and " + last;
+	return result;
+};

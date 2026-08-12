@@ -8,19 +8,24 @@
 	import ShareIcon from "../icons/ShareIcon.svelte";
 	import UpIcon from "../icons/UpIcon.svelte";
 	import DownIcon from "../icons/DownIcon.svelte";
+	import type { Snippet } from "svelte";
+	import type { ButtonIcons } from "$lib";
+	import ExternalLinkIcon from "../icons/ExternalLinkIcon.svelte";
 
 	const {
 		text,
 		type = "button",
 		icon,
 		onclick = undefined,
-		class: className = ""
+		class: className = "",
+		children
 	}: {
 		text?: string;
 		type?: "button" | "reset" | "submit";
-		icon: "edit" | "cancel" | "check" | "trash" | "share" | "help" | "down" | "up";
+		icon?: ButtonIcons;
 		onclick?: EventHandler;
 		class?: string;
+		children?: Snippet<[]>;
 	} = $props();
 
 	const iconOnly = () => !text;
@@ -49,10 +54,15 @@
 			<UpIcon />
 		{:else if icon === "down"}
 			<DownIcon />
-		{:else}
-			<!-- Using the help icon as a fallback -->
-			<HelpIcon />
+		{:else if icon === "externalLink"}
+			<ExternalLinkIcon />
 		{/if}
-		<span class:hidden={iconOnly()}>{text}</span>
+		<span class:hidden={iconOnly()}>
+			{#if children}
+				{@render children()}
+			{:else}
+				{text}
+			{/if}
+		</span>
 	</div>
 </button>
