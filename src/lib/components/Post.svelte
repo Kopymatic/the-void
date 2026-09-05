@@ -43,11 +43,7 @@
 		</h2>
 
 		<div class="flex flex-col gap-1 md:flex-row">
-			<IconButton
-				onclick={openShareMenu}
-				icon="share"
-				class="group-hover:scale-90 hover:scale-110"
-			/>
+			<IconButton onclick={openShareMenu} icon="share" />
 			{#if user?.isAdmin && editable}
 				<button
 					class="flex max-h-min flex-nowrap"

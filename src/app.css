@@ -7,21 +7,50 @@
 /* Fixes hover not working on some laptops */
 @custom-variant hover (&:hover);
 
-@theme {
+:root {
 	--color-white-text: #ffffff;
 	--color-secondary-text: #8c8c8c;
 	--color-primary-background: #000000;
 	--color-secondary-background: #121212;
-	--color-primary: #453a57;
+	--color-primary: #a10000;
 	--color-secondary: #272727;
-	--color-accent: #a559d9;
-	--color-darker-accent: #6f3c91;
+	--color-accent: #00a9a9;
+	--color-darker-accent: #007d7d;
 	--color-error: #ff4040;
 	--color-warn: #991b1b;
 	--color-kopymatic: #d4031d;
 	--color-success: #248045;
+}
+/*
+old
+	--color-primary: #453a57;
+	--color-accent: #a559d9;
+	--color-darker-accent: #6f3c91;
 
-	--font-gaegu: "Gaegu", serif;
+*/
+/*
+--primary: #8240E6;
+--accent: #4051E6;
+*/
+/*
+--primary: #A10000;
+--accent: #00a9a9;
+	--color-darker-accent: #007D7D;
+*/
+
+@theme {
+	--color-white-text: var(--color-white-text);
+	--color-secondary-text: var(--color-secondary-text);
+	--color-primary-background: var(--color-primary-background);
+	--color-secondary-background: var(--color-secondary-background);
+	--color-primary: var(--color-primary);
+	--color-secondary: var(--color-secondary);
+	--color-accent: var(--color-accent);
+	--color-darker-accent: var(--color-darker-accent);
+	--color-error: var(--color-error);
+	--color-warn: var(--color-warn);
+	--color-kopymatic:
+		var(--color-kopymatic) --color-success: var(--color-success) --font-gaegu: "Gaegu", serif;
 	--font-rock-salt: "Rock Salt", cursive;
 
 	--animate-funnytext: funnytext 10s ease-in-out infinite;
@@ -73,7 +102,7 @@
 		@apply text-error m-0 p-0 text-sm;
 	}
 	.hover-shrink-div {
-		@apply *:mx-auto *:box-border *:transition-all *:duration-300 *:ease-in-out *:group-hover:scale-95 *:group-hover:opacity-90 *:hover:z-10 *:hover:scale-105 *:hover:opacity-100;
+		@apply *:mx-auto *:box-border *:transition-all *:duration-300 *:ease-in-out *:group-hover:opacity-90 *:hover:z-10 *:hover:opacity-100;
 	}
 	.generic-border {
 		@apply border-primary hover:border-accent rounded-lg border-2;

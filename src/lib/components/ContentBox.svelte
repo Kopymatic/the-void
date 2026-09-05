@@ -2,6 +2,7 @@
 	import type { Snippet } from "svelte";
 	import type { EventHandler } from "svelte/elements";
 	import IconButton from "./buttons/IconButton.svelte";
+	import "../../app.css";
 
 	let {
 		children,
@@ -39,7 +40,9 @@
 	class:prose-invert={prose}
 	class:not-prose={!prose}
 	class:collapsed
-	class={`border-primary ${holepunch ? "bg-primary-background" : "bg-secondary"} hover:border-accent relative rounded-lg border-2 px-4 py-2 transition-all duration-300 ease-in-out ${className}`}
+	class:holepunch
+	class="box"
+	// class={`box border-primary ${holepunch ? "bg-primary-background" : "bg-secondary"} hover:border-accent relative rounded-lg border-2 px-3 py-2 transition-all duration-300 ease-in-out ${className}`}
 	{onclick}
 >
 	{#if collapsible}
@@ -62,4 +65,80 @@
 	.collapsed {
 		@apply h-20 overflow-hidden;
 	}
+
+	/* https://ibelick.com/blog/create-animated-gradient-borders-with-css */
+
+	/* https://codepen.io/thebabydino/pen/jENvVvg */
+
+	.box {
+		border: 4px solid #f00505;
+		padding: 1rem;
+		border-radius: 12px;
+
+		--list: var(--color-darker-accent), var(--color-darker-accent);
+		--grad: linear-gradient(-30deg, var(--list));
+
+		position: relative;
+		isolation: isolate;
+		background: var(--color-secondary-background);
+		transition: background-color 200ms ease;
+	}
+
+	.box::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: var(--grad);
+		filter: blur(1em);
+
+		opacity: 0;
+		transition: opacity 400ms ease;
+
+		will-change: opacity;
+	}
+
+	.box:hover {
+		background: transparent;
+	}
+
+	.box:hover::before {
+		opacity: 1;
+	}
+
+	.box.holepunch {
+		--list: var(--color-primary), var(--color-primary);
+		background: var(--color-primary-background);
+	}
+
+	.box.holepunch:hover {
+		background: transparent;
+	}
+
+	/* @keyframes fade {
+		from {
+			--fader: 0.1em;
+		}
+		to {
+			--fader: 2em;
+		}
+	}
+
+	@property --fader {
+		syntax: "<length>";
+		initial-value: 0.1em;
+		inherits: false; 
+	}*/
+
+	/* @keyframes rotate {
+		to {
+			--angle: 100%;
+		}
+	}
+
+	@property --angle {
+		syntax: "<percentage>";
+		initial-value: 1%;
+		inherits: false;
+	} */
 </style>

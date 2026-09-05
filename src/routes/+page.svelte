@@ -13,7 +13,7 @@
 	</h3>
 
 	<div
-		class="group mx-auto flex flex-col gap-2 px-4 *:box-border *:w-full *:self-center *:group-hover:scale-95 *:group-hover:opacity-75 *:hover:z-10 *:hover:scale-105 *:hover:opacity-100"
+		class="group mx-auto flex flex-col gap-2 px-4 *:box-border *:w-full *:self-center *:group-hover:opacity-75 *:hover:z-10 *:hover:opacity-100"
 	>
 		<StoryBox collapsedText="About me: ..." titleText="About me:" startCollapsed={isAdmin}>
 			<p>

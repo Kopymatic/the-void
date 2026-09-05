@@ -65,7 +65,7 @@
 		@apply mx-auto my-8 grid grid-cols-1 gap-2;
 	}
 	.shortcut-group {
-		@apply transition-all duration-200 ease-in-out group-hover/type:scale-99 group-hover/type:opacity-75 hover:scale-100 hover:opacity-100;
+		@apply transition-all duration-200 ease-in-out group-hover/type:opacity-75 hover:opacity-100;
 	}
 	.shorcut-heading-box {
 		@apply flex justify-between px-6 pt-2;
