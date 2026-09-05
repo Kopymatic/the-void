@@ -14,7 +14,7 @@ COPY package.json .
 COPY package-lock.json .
 
 # Install packages
-RUN npm i
+RUN npm ci
 
 # Run project setup
 RUN npx prisma generate
