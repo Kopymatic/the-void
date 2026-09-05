@@ -1,6 +1,6 @@
 import { error, fail, redirect } from "@sveltejs/kit";
 import type { Actions } from "./$types";
-import { prisma } from "$lib/server/database/database";
+import { prisma } from "$lib/server/database";
 import { ShortcutFormError } from "$lib";
 import { isAdmin } from "$lib/server/isAdmin";
 import { validateShortcutForm } from "$lib/formValidation";

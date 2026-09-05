@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import { prisma } from "$lib/server/database/database";
+import { prisma } from "$lib/server/database";
 
 export const load: PageServerLoad = async () => {
 	const posts = await prisma.post.findMany({ where: { unlisted: false } });

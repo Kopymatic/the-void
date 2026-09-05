@@ -1,4 +1,4 @@
-import { prisma } from "$lib/server/database/database";
+import { prisma } from "$lib/server/database";
 import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { isAdmin } from "$lib/server/isAdmin";

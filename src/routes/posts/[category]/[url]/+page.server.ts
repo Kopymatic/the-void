@@ -1,6 +1,6 @@
 import { error, fail, redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import { prisma } from "$lib/server/database/database";
+import { prisma } from "$lib/server/database";
 import { CreateFormError } from "$lib";
 import { validatePostForm } from "$lib/formValidation";
 import { isAdmin } from "$lib/server/isAdmin";
