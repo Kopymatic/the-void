@@ -67,21 +67,18 @@
 	}
 
 	/* https://ibelick.com/blog/create-animated-gradient-borders-with-css */
-
 	/* https://codepen.io/thebabydino/pen/jENvVvg */
 
 	.box {
-		border: 4px solid #f00505;
+		border: 4px solid purple;
 		padding: 1rem;
 		border-radius: 12px;
 
-		--list: var(--color-darker-accent), var(--color-darker-accent);
+		--list: red, blue;
 		--grad: linear-gradient(-30deg, var(--list));
 
 		position: relative;
-		isolation: isolate;
-		background: var(--color-secondary-background);
-		transition: background-color 200ms ease;
+		background: black;
 	}
 
 	.box::before {
@@ -90,21 +87,47 @@
 		inset: 0;
 		z-index: -1;
 		background: var(--grad);
-		filter: blur(1em);
+		filter: blur(2em);
 
 		opacity: 0;
-		transition: opacity 400ms ease;
+		transition: all 600ms ease;
 
 		will-change: opacity;
-	}
-
-	.box:hover {
-		background: transparent;
 	}
 
 	.box:hover::before {
 		opacity: 1;
 	}
+
+	/* .box {
+		border: 4px solid var(--color-accent);
+		padding: 1rem;
+		border-radius: 12px;
+
+		--list: var(--color-darker-accent), var(--color-darker-accent);
+		--grad: linear-gradient(-30deg, var(--list));
+
+		position: relative;
+		background: var(--color-secondary-background);
+	}
+
+	.box::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: var(--grad);
+		filter: blur(2em);
+
+		opacity: 0;
+		transition: all 600ms ease;
+
+		will-change: opacity;
+	}
+
+	.box:hover::before {
+		opacity: 1;
+	} */
 
 	.box.holepunch {
 		--list: var(--color-primary), var(--color-primary);
@@ -112,7 +135,7 @@
 	}
 
 	.box.holepunch:hover {
-		background: transparent;
+		background: var(--color-secondary-background);
 	}
 
 	/* @keyframes fade {
