@@ -27,6 +27,9 @@ docker compose -f compose.dev.yml up -d db
 echo "Running Prisma migrations..."
 npx prisma migrate dev
 
+echo "Running Prisma generate..."
+npx prisma generate
+
 # Start the dev server with HMR
 echo "Starting dev server..."
 GIT_COMMIT=$(git rev-parse --short HEAD) npx vite dev
