@@ -5,9 +5,7 @@
 
 <div class="flex h-full flex-col pt-3">
 	<Article>
-		<div
-			class="group mx-auto flex flex-col gap-2 px-4 *:box-border *:w-full *:group-hover:opacity-75 *:hover:z-10 *:hover:opacity-100"
-		>
+		<div class=" mx-auto flex flex-col gap-2 px-4 *:box-border *:w-full">
 			<StoryBox titleText="The Void">
 				What started as a silly little blogging site made in SvelteKit, has since turned into my
 				main website. I've been working on it since November 2024 to make it my own toolkit and

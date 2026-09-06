@@ -12,9 +12,7 @@
 		Heyo! welcome to <span class="font-rock-salt">Kopymatic.com</span>
 	</h3>
 
-	<div
-		class="group mx-auto flex flex-col gap-2 px-4 *:box-border *:w-full *:self-center *:group-hover:opacity-75 *:hover:z-10 *:hover:opacity-100"
-	>
+	<div class="mx-auto flex flex-col gap-2 px-4 *:box-border *:w-full *:self-center">
 		<StoryBox collapsedText="About me: ..." titleText="About me:" startCollapsed={isAdmin}>
 			<p>
 				My name is Kopymatic! I've been programming for about 5 years, making a bunch of projects

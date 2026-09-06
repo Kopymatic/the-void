@@ -34,51 +34,52 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div
-	class:prose
-	class:prose-sm={small}
-	class:prose-invert={prose}
-	class:not-prose={!prose}
-	class:collapsed
-	class:holepunch
-	class="box"
-	// class={`box border-primary ${holepunch ? "bg-primary-background" : "bg-secondary"} hover:border-accent relative rounded-lg border-2 px-3 py-2 transition-all duration-300 ease-in-out ${className}`}
-	{onclick}
->
-	{#if collapsible}
-		<IconButton
-			class="absolute top-2 right-2"
-			icon={collapsed ? "down" : "up"}
-			onclick={collapseFunc}
-		/>
-	{/if}
-	{#if children}
-		{@render children()}
-	{/if}
+<div class:holepunch class="box">
+	<div
+		class:prose
+		class:prose-sm={small}
+		class:prose-invert={prose}
+		class:not-prose={!prose}
+		class:collapsed
+		// class={`box border-primary ${holepunch ? "bg-primary-background" : "bg-secondary"} hover:border-accent relative rounded-lg border-2 px-3 py-2 transition-all duration-300 ease-in-out ${className}`}
+		{onclick}
+	>
+		{#if collapsible}
+			<IconButton
+				class="absolute top-2 right-2"
+				icon={collapsed ? "down" : "up"}
+				onclick={collapseFunc}
+			/>
+		{/if}
+		{#if children}
+			{@render children()}
+		{/if}
+	</div>
 </div>
 
 <style>
 	@reference "tailwindcss";
-	* {
-		@apply box-border;
-	}
-	.collapsed {
-		@apply h-20 overflow-hidden;
-	}
-
 	/* https://ibelick.com/blog/create-animated-gradient-borders-with-css */
 	/* https://codepen.io/thebabydino/pen/jENvVvg */
+	* {
+		box-sizing: border-box;
+	}
+	.collapsed {
+		height: 4rem;
+		overflow: hidden;
+	}
 
 	.box {
-		border: 4px solid purple;
+		border: 4px solid var(--color-primary);
 		padding: 1rem;
-		border-radius: 12px;
+		border-radius: var(--border-radius);
 
-		--list: red, blue;
-		--grad: linear-gradient(-30deg, var(--list));
+		--grad: linear-gradient(var(--angle), var(--color-kopymatic), var(--color-accent));
+		--background: var(--color-secondary-background);
 
 		position: relative;
-		background: black;
+
+		background: var(--background);
 	}
 
 	.box::before {
@@ -88,9 +89,10 @@
 		z-index: -1;
 		background: var(--grad);
 		filter: blur(2em);
+		overflow: visible;
 
 		opacity: 0;
-		transition: all 600ms ease;
+		transition: all 400ms ease;
 
 		will-change: opacity;
 	}
@@ -99,35 +101,15 @@
 		opacity: 1;
 	}
 
-	/* .box {
-		border: 4px solid var(--color-accent);
-		padding: 1rem;
-		border-radius: 12px;
+	.box:hover {
+		transition: all 400ms ease;
 
-		--list: var(--color-darker-accent), var(--color-darker-accent);
-		--grad: linear-gradient(-30deg, var(--list));
-
-		position: relative;
-		background: var(--color-secondary-background);
+		animation: 2s rotate linear infinite;
+		border: 4px solid #0000;
+		background:
+			linear-gradient(var(--color-primary-background), var(--color-primary-background)) padding-box,
+			var(--grad) border-box;
 	}
-
-	.box::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		background: var(--grad);
-		filter: blur(2em);
-
-		opacity: 0;
-		transition: all 600ms ease;
-
-		will-change: opacity;
-	}
-
-	.box:hover::before {
-		opacity: 1;
-	} */
 
 	.box.holepunch {
 		--list: var(--color-primary), var(--color-primary);
@@ -138,30 +120,15 @@
 		background: var(--color-secondary-background);
 	}
 
-	/* @keyframes fade {
-		from {
-			--fader: 0.1em;
-		}
+	@keyframes rotate {
 		to {
-			--fader: 2em;
-		}
-	}
-
-	@property --fader {
-		syntax: "<length>";
-		initial-value: 0.1em;
-		inherits: false; 
-	}*/
-
-	/* @keyframes rotate {
-		to {
-			--angle: 100%;
+			--angle: 360deg;
 		}
 	}
 
 	@property --angle {
-		syntax: "<percentage>";
-		initial-value: 1%;
+		syntax: "<angle>";
+		initial-value: 0deg;
 		inherits: false;
-	} */
+	}
 </style>
