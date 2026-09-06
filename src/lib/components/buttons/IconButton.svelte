@@ -18,7 +18,8 @@
 		icon,
 		onclick = undefined,
 		class: className = "",
-		children
+		children,
+		ignoreTab = false
 	}: {
 		text?: string;
 		type?: "button" | "reset" | "submit";
@@ -26,6 +27,7 @@
 		onclick?: EventHandler;
 		class?: string;
 		children?: Snippet<[]>;
+		ignoreTab?: boolean;
 	} = $props();
 
 	const iconOnly = () => !text;
@@ -36,6 +38,7 @@
 	{onclick}
 	{type}
 	name={type}
+	tabindex={ignoreTab ? -1 : undefined}
 >
 	<div class="mx-auto flex w-min text-nowrap">
 		{#if icon === "edit"}

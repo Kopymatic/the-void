@@ -40,7 +40,7 @@
 		class:prose-invert={prose}
 		class:not-prose={!prose}
 		class:collapsed
-		// class={`box border-primary ${holepunch ? "bg-primary-background" : "bg-secondary"} hover:border-accent relative rounded-lg border-2 px-3 py-2 transition-all duration-300 ease-in-out ${className}`}
+		class={`${className}`}
 		{onclick}
 	>
 		{#if collapsible}
@@ -48,6 +48,7 @@
 				class="absolute top-2 right-2"
 				icon={collapsed ? "down" : "up"}
 				onclick={collapseFunc}
+				ignoreTab
 			/>
 		{/if}
 		{#if children}

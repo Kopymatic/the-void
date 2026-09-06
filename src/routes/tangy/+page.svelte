@@ -33,7 +33,7 @@
 
 <br />
 <div
-	class="hover-shrink-div group flex flex-col flex-wrap items-stretch gap-2 *:w-full *:flex-1 md:flex-row md:*:min-w-sm"
+	class=" group flex flex-col flex-wrap items-stretch gap-2 *:w-full *:flex-1 md:flex-row md:*:min-w-sm"
 >
 	<ContentBox prose holepunch collapsible>
 		<h3>Virus and PUPs</h3>

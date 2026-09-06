@@ -27,11 +27,7 @@
 	};
 </script>
 
-<ContentBox
-	{holepunch}
-	class={`${collapsed ? "line-clamp-1" : ""}  w-full px-1 pt-2 pb-4 ${className} mx-auto transition-all duration-150`}
-	prose
->
+<ContentBox {holepunch} class={`${collapsed ? "line-clamp-1" : ""}  ${className}`} prose>
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div class="flex flex-row justify-between *:align-middle" onclick={collapseFunc}>
