@@ -2,7 +2,6 @@
 	import type { Snippet } from "svelte";
 	import type { EventHandler } from "svelte/elements";
 	import IconButton from "./buttons/IconButton.svelte";
-	import "../../app.css";
 
 	let {
 		children,
@@ -34,7 +33,7 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class:holepunch class="box">
+<div class:holepunch class="box glow glow-border">
 	<div
 		class:prose
 		class:prose-sm={small}
@@ -70,65 +69,15 @@
 	}
 
 	.box {
-		border: 4px solid var(--color-primary);
 		padding: 1rem;
+		border: 4px solid var(--color-primary);
 		border-radius: var(--border-radius);
-
-		--grad: linear-gradient(var(--angle), var(--color-kopymatic), var(--color-accent));
-		--background: var(--color-secondary-background);
-
-		position: relative;
-
-		background: var(--background);
-	}
-
-	.box::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		background: var(--grad);
-		filter: blur(2em);
-		overflow: visible;
-
-		opacity: 0;
-		transition: all 400ms ease;
-
-		will-change: opacity;
-	}
-
-	.box:hover::before {
-		opacity: 1;
-	}
-
-	.box:hover {
-		transition: all 400ms ease;
-
-		animation: 2s rotate linear infinite;
-		border: 4px solid #0000;
-		background:
-			linear-gradient(var(--color-primary-background), var(--color-primary-background)) padding-box,
-			var(--grad) border-box;
 	}
 
 	.box.holepunch {
-		--list: var(--color-primary), var(--color-primary);
-		background: var(--color-primary-background);
-	}
-
-	.box.holepunch:hover {
-		background: var(--color-secondary-background);
-	}
-
-	@keyframes rotate {
-		to {
-			--angle: 360deg;
-		}
-	}
-
-	@property --angle {
-		syntax: "<angle>";
-		initial-value: 0deg;
-		inherits: false;
+		background:
+	/* I'm not sure why this has to be a gradient to work.. */
+			linear-gradient(var(--color-primary-background), var(--color-primary-background)) padding-box,
+			var(--grad) border-box;
 	}
 </style>

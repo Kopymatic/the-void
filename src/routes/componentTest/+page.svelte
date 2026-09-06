@@ -62,3 +62,9 @@
 		But collapsible and started collapsed!
 	</ContentBox>
 </div>
+<br />
+<div class="grid grid-cols-2 gap-4 *:h-36">
+	<div class="glow">Hello! i test the glow only!</div>
+	<div class="glow-border">Hello! i test the glow border only!</div>
+	<div class="glow glow-border">Hello! i test the glow and border!</div>
+</div>

@@ -1,6 +1,6 @@
 <header class="mx-auto pt-2 text-center">
 	<div>
-		<a class="logo mx-auto text-4xl no-underline" href="/">Kopymatic</a>
+		<a class="logo glow mx-auto text-4xl no-underline" href="/">Kopymatic</a>
 	</div>
 	<div class="flex justify-between pt-3">
 		<a href="/projects">projects</a>
