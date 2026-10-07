@@ -36,7 +36,6 @@ export const simpleHash = (str: string) => {
 		const char = str.charCodeAt(i);
 		hash.push(char);
 	}
-	console.log(base36.encode(hash));
 	return base36.encode(hash);
 };
 
