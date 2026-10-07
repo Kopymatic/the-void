@@ -17,9 +17,7 @@
 	let destination = $state(textParamsIsValid && textParams ? textParams : "");
 	let auto = $state(textParamsIsValid);
 
-	const shortcutAuto = $derived(
-		btoa(simpleHash(destination).toString()).replaceAll("=", "").toLowerCase()
-	);
+	const shortcutAuto = $derived(simpleHash(destination).slice(0, 6));
 
 	let shortcutName: string = $derived(auto ? shortcutAuto : "");
 

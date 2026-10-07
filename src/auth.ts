@@ -5,6 +5,7 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
 	trustHost: true,
 	providers: [
 		Discord({
+			issuer: "https://discord.com",
 			authorization: { params: { scope: "identify guilds email" } }
 		})
 	],
