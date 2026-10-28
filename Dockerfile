@@ -47,5 +47,9 @@ RUN chmod +x ./startup.sh
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD node -e "require('http').get('http://localhost:3000/', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"
 
+# Forward build args to runtime stage
+ARG GIT_COMMIT
+ENV GIT_COMMIT=$GIT_COMMIT
+
 EXPOSE 3000/tcp
 CMD ["./startup.sh"]
