@@ -1,38 +1,51 @@
-# Install node and use it for build
+#Build stage
 FROM node:24-alpine AS build
 
-# Define the workdir
 WORKDIR /app
 
-# Necessary for better-sqlite3
-RUN apk add --no-cache python3 
+COPY package.json package-lock.json ./
 
-COPY . . 
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci
 
-# Copy the package info for install
-COPY package.json .
-COPY package-lock.json .
-
-# Install packages
-RUN npm ci
-
-# Run project setup
+COPY prisma ./prisma
 ARG DATABASE_URL
 ENV DATABASE_URL=$DATABASE_URL
 RUN npx prisma generate
+
+COPY . .
+
 RUN npm run build
 
+# Runtime
 FROM node:24-alpine AS run
-
-RUN apk add --no-cache openssl
-
 WORKDIR /app
-COPY --from=build /app/build ./build
-COPY --from=build /app/package.json ./package.json
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/prisma ./prisma
-COPY --from=build /app/startup.sh ./startup.sh
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+
+# Copy build artifacts (only what's needed to run)
+COPY --from=build --chown=nodejs:nodejs /app/build ./build
+COPY --from=build --chown=nodejs:nodejs /app/node_modules ./node_modules
+COPY --from=build --chown=nodejs:nodejs /app/package.json ./package.json
+COPY --from=build --chown=nodejs:nodejs /app/prisma ./prisma
+COPY --from=build --chown=nodejs:nodejs /app/startup.sh ./startup.sh
+
+# Copy static files and config
+COPY --chown=nodejs:nodejs ./static ./static
+
+# Expose app port
+EXPOSE 3000/tcp
+
+# Switch to non-root user
+USER nodejs
+
+RUN chmod +x ./startup.sh
+
+# Health check for orchestrator
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD node -e "require('http').get('http://localhost:3000/', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"
 
 EXPOSE 3000/tcp
-RUN chmod +x ./startup.sh
 CMD ["./startup.sh"]
